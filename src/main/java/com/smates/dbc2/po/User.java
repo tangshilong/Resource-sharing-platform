@@ -1,9 +1,15 @@
 package com.smates.dbc2.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private String id;
+public class User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String id;
 
     private String userName;
 

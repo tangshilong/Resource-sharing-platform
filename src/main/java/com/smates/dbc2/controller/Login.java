@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smates.dbc2.dao.UserAdviceDao;
 import com.smates.dbc2.po.UserAdvice;
+import com.smates.dbc2.service.UserService;
 
 @Controller
 public class Login {
@@ -20,9 +21,13 @@ public class Login {
 	@Autowired
 	private UserAdviceDao userAdviceDao;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("login")
 	public String login(){
 		userAdviceDao.insert(new UserAdvice("111", 111, 1111, null, new Date()));
+		userService.getUserById("admin");userService.getUserById("admin");
 		return "Login.ftl";
 	}
 	
