@@ -1,0 +1,75 @@
+package com.smates.dbc2.support.shiro;
+
+import javax.annotation.PostConstruct;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.smates.dbc2.po.User;
+import com.smates.dbc2.service.UserService;
+import com.smates.dbc2.utils.SysConst;
+/**
+ * 用shiro进行权限管理
+ * @author baijw12
+ *
+ */
+public class MyRealm extends AuthorizingRealm {
+	
+	@Autowired
+	private UserService userService;
+
+	/**
+	 * 登录验证
+	 * @param token 用户登录时的账号密码组成的token
+	 * @return
+	 * @throws AuthenticationException
+	 */
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		Object principal = token.getPrincipal();
+		String userId = token.getPrincipal().toString();
+		String credentials = userService.getUserById(userId).getPassword();//根据登录id去数据库中查找密码
+		String realmName = getName();
+		String source = SysConst.SALTSOURCE;
+		ByteSource credentialsSalt = new Md5Hash(source);
+		//密码比对过程由shiro自己完成
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
+		return info;
+	}
+
+	/**
+	 * 用户授予权限
+	 * @param principalCollection
+	 * @return
+	 */
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		User user = (User)principalCollection.getPrimaryPrincipal();
+		//根据用户账号信息,赋予相应权限
+		String[] roles = user.getRole().split(",");
+		for(int i=0;i<roles.length;i++){
+			info.addRole(roles[i]);
+		}
+		return info;
+	}
+	
+	@PostConstruct
+	public void setCredentialMatcher(){
+		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+		credentialsMatcher.setHashAlgorithmName("MD5");
+		credentialsMatcher.setHashIterations(1024);
+		setCredentialsMatcher(credentialsMatcher);
+	}
+
+}
