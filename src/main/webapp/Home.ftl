@@ -24,7 +24,7 @@
 				<!-- LOGO -->
 				<div class="topbar-left">
 					<a
-						href="http://view.jqueryfuns.com/%E9%A2%84%E8%A7%88-/2016/7/8/322317b7d044fb1ebce220dc1e72481e/index.html"
+						href="http://www.smates.cn"
 						class="logo"> <i class="zmdi zmdi-group-work icon-c-logo"></i>
 						<span>麦特智能</span></a>
 				</div>
@@ -54,7 +54,7 @@
 								<!-- item-->
 								<div class="dropdown-item noti-title">
 									<h5 class="text-overflow">
-										<small>Welcome ! John</small>
+										<small>Welcome ! ${userName}</small>
 									</h5>
 								</div>
 	

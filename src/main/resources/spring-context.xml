@@ -87,7 +87,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login.do" />
 		<property name="successUrl" value="/home.do" />
-		<property name="unauthorizedUrl" value="/login.do" />
+		<property name="unauthorizedUrl" value="/logout.do" />
 		<property name="filterChainDefinitions">
 			<value>
 				/test.do=roles[guest]

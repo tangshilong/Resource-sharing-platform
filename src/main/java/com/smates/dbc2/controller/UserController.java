@@ -62,6 +62,7 @@ public class UserController extends BaseController{
 	@RequestMapping("home")
 	public String home(ModelMap modelMap){
 		modelMap.addAttribute("menulist", menuService.getMenuByRoles());
+		modelMap.addAttribute("userName", userService.getUserById(userService.getCurrentUserId()).getUserName());
 		return "Home.ftl";
 	}
 	

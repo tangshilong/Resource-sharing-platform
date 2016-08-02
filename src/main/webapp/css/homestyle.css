@@ -5055,6 +5055,7 @@ body.fixed-left .side-menu.left {
   height: 100%; }
 
 #sidebar-menu, #sidebar-menu ul, #sidebar-menu li, #sidebar-menu a {
+  font-family: "微软雅黑";
   border: 0;
   font-weight: normal;
   line-height: 1;
