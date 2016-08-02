@@ -7,6 +7,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -55,12 +56,16 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		User user = (User)principalCollection.getPrimaryPrincipal();
-		//根据用户账号信息,赋予相应权限
-		String[] roles = user.getRole().split(",");
-		for(int i=0;i<roles.length;i++){
-			info.addRole(roles[i]);
-		}
+		String userId = (String)principalCollection.getPrimaryPrincipal();
+		User user = userService.getUserById(userId);
+		if(user != null){
+			String[] roles = user.getRole().split(",");
+			for(int i=0;i<roles.length;i++){
+				info.addRole(roles[i]);
+			}
+        }else{
+            throw new AuthorizationException();
+        }
 		return info;
 	}
 	

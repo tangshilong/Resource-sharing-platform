@@ -74,6 +74,12 @@
 		<property name="order" value="2" />
 		<property name="requestContextAttribute" value="rc" />
 	</bean>
+	
+	<!-- 如果没有这个redirect:xxx.do将无法被解析 -->
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="suffix" value=".do" />
+	    <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>
+	</bean>
 
 
 </beans>

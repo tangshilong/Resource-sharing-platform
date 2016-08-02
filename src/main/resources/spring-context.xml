@@ -90,6 +90,7 @@
 		<property name="unauthorizedUrl" value="/login.do" />
 		<property name="filterChainDefinitions">
 			<value>
+				/test.do=roles[guest]
 				/logout.do = anon
 				/submit.do = anon
 				/*.do = authc

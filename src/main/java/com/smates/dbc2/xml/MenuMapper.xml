@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smates.dbc2.mapper.MenuDao">
+
+	<resultMap type="menu" id="getAllmenuQueryMap">
+		<id column="menu_id" property="menuId" />
+		<result column="menu_name" property="menuName" />
+		<result column="parent_id" property="parentId" />
+		<result column="menu_url" property="menuUrl" />
+		<result column="menu_icon" property="menuIcon" />
+		<result column="order_no" property="order" />
+
+		<!-- 映射到对象集合中 -->
+		<collection property="submenus" ofType="menu">
+			<id column="sub_menu_id" property="menuId" />
+			<result column="sub_menu_name" property="menuName" />
+			<result column="sub_parent_id" property="parentId" />
+			<result column="sub_menu_url" property="menuUrl" />
+			<result column="sub_menu_icon" property="menuIcon" />
+			<result column="sub_order_no" property="order" />
+		</collection>
+	</resultMap>
+
+	<!-- 
+		des:查找到所有的一级菜单和一级菜单下的二级菜单
+	 	example sql:
+		 	select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME 
+			sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID 
+			sub_menu_parent_id,b.MENU_ICON sub_menu_icon 
+			from s_menu a,s_menu b 
+			where a.menu_id = b.PARENT_ID 
+		-->
+	<select id="getAllMenu" resultMap="getAllmenuQueryMap" parameterType="string">
+			select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME 
+			sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID 
+			sub_menu_parent_id
+			from s_menu a left join s_menu b 
+			on a.MENU_ID = b.PARENT_ID
+			where a.parent_id = '0' and a.permition like '%${value}%'
+	</select>
+	
+	<!--  
+		des:向数据库中添加一条menu记录
+		example sql:
+			insert
+			into s_menu(menu_id,menu_name,parent_id,menu_url,menu_icon,order_no)
+			value('7f68d8c4-c5ff-4221-a534-ca645ebf4eec','个人中心','0','none','zmdi zmdi-format-underlined',1)
+	-->
+	<insert id="addMenu" parameterType="menu">
+		<selectKey keyProperty="menuId" order="BEFORE" resultType="String">
+            select UUID()
+        </selectKey>
+		insert
+		into s_menu(menu_id,menu_name,parent_id,menu_url,menu_icon,order_no)
+		value(#{menuId},#{menuName},#{parentId},#{menuUrl},#{menuIcon},#{order})
+	</insert>
+
+</mapper>
