@@ -1,18 +1,28 @@
 package com.smates.dbc2.controller;
 
+import java.util.Date;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.smates.dbc2.dao.UserAdviceDao;
+import com.smates.dbc2.po.UserAdvice;
+
 @Controller
 public class Login {
 	
+	@Autowired
+	private UserAdviceDao userAdviceDao;
+	
 	@RequestMapping("login")
 	public String login(){
+		userAdviceDao.insert(new UserAdvice("111", 111, 1111, null, new Date()));
 		return "Login.ftl";
 	}
 	
