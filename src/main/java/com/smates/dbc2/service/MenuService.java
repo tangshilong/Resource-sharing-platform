@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.smates.dbc2.po.Menu;
 
+/**
+ * menu相关service
+ * @author baijw12
+ *
+ */
 public interface MenuService {
 	
 	/**

@@ -58,7 +58,7 @@ public class MyRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		String userId = (String)principalCollection.getPrimaryPrincipal();
 		User user = userService.getUserById(userId);
-		if(user != null){
+		if(user != null){//给用户添加角色限制
 			String[] roles = user.getRole().split(",");
 			for(int i=0;i<roles.length;i++){
 				info.addRole(roles[i]);
@@ -69,6 +69,9 @@ public class MyRealm extends AuthorizingRealm {
 		return info;
 	}
 	
+	/**
+	 * 用户的登录的明文密码,先经过md5加密再和数据库比对
+	 */
 	@PostConstruct
 	public void setCredentialMatcher(){
 		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
