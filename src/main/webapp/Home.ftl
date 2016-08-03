@@ -80,11 +80,11 @@
 							<ul>
 								<#list menulist as item>
 									<li class="has_sub">
-										<a href="javascript:void(0);" class="waves-effect active subdrop"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></i> <span> ${item.menuName} </span></a>
-										<ul class="list-unstyled" style="display: block;">
+										<a href="javascript:void(0);" class="waves-effect active"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></i> <span> ${item.menuName} </span></a>
+										<ul class="list-unstyled">
 											<#list item.submenus as record>
 												<li>
-													<a href="#">${record.menuName}</a>
+													<a class="contentlink" href="javascript:void(0)" menuurl="${record.menuUrl}" >${record.menuName}</a>
 												</li>
 											</#list>
 										</ul>
@@ -109,7 +109,7 @@
 				<!-- Start content -->
 				<div class="content">
 					<div class="container">
-						
+						<iframe id="content_frame"></iframe>
 					</div>
 					<!-- container -->
 				</div>
@@ -125,6 +125,19 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/waves.js"></script>
 		<script src="js/jquery.app.js"></script>
+		
+		<script type="text/javascript">
+			$("#content_frame,.container").height($(window).height()-$(".footer").height()-$(".navbar").height()-70).width("88%");
+			$(".contentlink").click(function(){
+				var menuUrl = this.getAttribute("menuurl");
+				$("#content_frame").attr("src",menuUrl);
+				$(".contentlink").parent().attr("class","disactive");
+				$(".contentlink").parent().parent().attr("style","");
+				$(this).parent().attr("class","active");
+				$(this).parent().parent().attr("style","display: block");
+				
+			});
+		</script>
 		
 	</body>
 </html>
