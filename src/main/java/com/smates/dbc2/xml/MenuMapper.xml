@@ -28,9 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	example sql:
 		 	select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME 
 			sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID 
-			sub_menu_parent_id,b.MENU_ICON sub_menu_icon 
-			from s_menu a,s_menu b 
-			where a.menu_id = b.PARENT_ID 
+			sub_menu_parent_id
+			from s_menu a left join s_menu b 
+			on a.MENU_ID = b.PARENT_ID
+			where a.parent_id = '0' and a.permition like 'admin' and (b.PERMITION is null or (b.PERMITION like 'admin'))
 		-->
 	<select id="getAllMenu" resultMap="getAllmenuQueryMap" parameterType="string">
 			select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME 
@@ -38,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			sub_menu_parent_id
 			from s_menu a left join s_menu b 
 			on a.MENU_ID = b.PARENT_ID
-			where a.parent_id = '0' and a.permition like '%${value}%'
+			where a.parent_id = '0' and a.permition like '%${value}%' and (b.PERMITION is null or (b.PERMITION like '%${value}%'))
 	</select>
 	
 	<!--  
