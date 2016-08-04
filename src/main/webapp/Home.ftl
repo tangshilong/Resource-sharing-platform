@@ -5,10 +5,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description"
-			content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-		<meta name="author" content="Coderthemes">
+			content="控制台管理程序">
+		<meta name="author" content="baijw">
 		<!-- App title -->
-		<title>Uplon - Responsive Admin Dashboard Template</title>
+		<title>XXX控制台程序</title>
 		<!-- App CSS -->
 		<link href="css/homestyle.css" rel="stylesheet" type="text/css" />
 	</head>
@@ -109,7 +109,7 @@
 				<!-- Start content -->
 				<div class="content">
 					<div class="container">
-						<iframe id="content_frame"></iframe>
+						<iframe id="content_frame" frameborder="no" ></iframe>
 					</div>
 					<!-- container -->
 				</div>
@@ -130,12 +130,11 @@
 			$("#content_frame,.container").height($(window).height()-$(".footer").height()-$(".navbar").height()-70).width("88%");
 			$(".contentlink").click(function(){
 				var menuUrl = this.getAttribute("menuurl");
-				$("#content_frame").attr("src",menuUrl);
+				$("#content_frame").attr("src","${rc.getContextPath()}"+menuUrl);
 				$(".contentlink").parent().attr("class","disactive");
 				$(".contentlink").parent().parent().attr("style","");
 				$(this).parent().attr("class","active");
 				$(this).parent().parent().attr("style","display: block");
-				
 			});
 		</script>
 		

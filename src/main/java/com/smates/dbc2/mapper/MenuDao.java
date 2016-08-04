@@ -18,4 +18,10 @@ public interface MenuDao {
 	 */
 	public void addMenu(Menu menu);
 	
+	/**
+	 * 得到所有的一级菜单
+	 * @return
+	 */
+	public List<Menu> getParentMenu();
+	
 }

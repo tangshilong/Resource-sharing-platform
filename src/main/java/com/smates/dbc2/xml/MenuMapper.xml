@@ -9,7 +9,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="menu_name" property="menuName" />
 		<result column="parent_id" property="parentId" />
 		<result column="menu_url" property="menuUrl" />
-		<result column="menu_icon" property="menuIcon" />
 		<result column="order_no" property="order" />
 
 		<!-- 映射到对象集合中 -->
@@ -18,44 +17,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="sub_menu_name" property="menuName" />
 			<result column="sub_parent_id" property="parentId" />
 			<result column="sub_menu_url" property="menuUrl" />
-			<result column="sub_menu_icon" property="menuIcon" />
 			<result column="sub_order_no" property="order" />
 		</collection>
 	</resultMap>
 
 	<!-- 
-		des:查找到所有的一级菜单和一级菜单下的二级菜单
-	 	example sql:
-		 	select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME 
-			sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID 
-			sub_menu_parent_id
-			from s_menu a left join s_menu b 
-			on a.MENU_ID = b.PARENT_ID
-			where a.parent_id = '0' and a.permition like 'admin' and (b.PERMITION is null or (b.PERMITION like 'admin'))
+	 	des:查找到所有的一级菜单和一级菜单下的二级菜单,若一级菜单无权限查看,则此一级菜单下所有的二级菜单都无权限查看.
+		example sql: 
+		SELECT a.*, b.MENU_ID sub_menu_id, 
+		b.MENU_NAME sub_menu_name, b.MENU_URL sub_menu_url, b.ORDER_NO sub_menu_order, 
+		b.PARENT_ID sub_menu_parent_id FROM s_menu a LEFT JOIN s_menu b ON a.MENU_ID 
+		= b.PARENT_ID WHERE a.parent_id = '0' AND a.permition LIKE 'admin' AND ( 
+		b.PERMITION IS NULL OR (b.PERMITION LIKE 'admin') ) order by a.ORDER_NO,b.ORDER_NO 
 		-->
-	<select id="getAllMenu" resultMap="getAllmenuQueryMap" parameterType="string">
-			select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME 
-			sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID 
-			sub_menu_parent_id
-			from s_menu a left join s_menu b 
-			on a.MENU_ID = b.PARENT_ID
-			where a.parent_id = '0' and a.permition like '%${value}%' and (b.PERMITION is null or (b.PERMITION like '%${value}%'))
+	<select id="getAllMenu" resultMap="getAllmenuQueryMap"
+		parameterType="string">
+		select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME
+		sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID
+		sub_menu_parent_id
+		from s_menu a left join s_menu b
+		on a.MENU_ID = b.PARENT_ID
+		where a.parent_id = '0' and a.permition like '%${value}%' and (b.PERMITION
+		is null or (b.PERMITION like '%${value}%')) order by a.ORDER_NO,b.ORDER_NO
 	</select>
-	
-	<!--  
-		des:向数据库中添加一条menu记录
-		example sql:
-			insert
-			into s_menu(menu_id,menu_name,parent_id,menu_url,menu_icon,order_no)
-			value('7f68d8c4-c5ff-4221-a534-ca645ebf4eec','个人中心','0','none','zmdi zmdi-format-underlined',1)
-	-->
+
+	<!-- 
+		des:
+			向数据库中添加一条menu记录 
+		example sql: 
+			insert into 
+			s_menu(menu_id,menu_name,parent_id,menu_url,order_no,permition) 
+			value('7f68d8c4-c5ff-4221-a534-ca645ebf4eec1','个人中心','0','none',1,'admin') 
+		-->
 	<insert id="addMenu" parameterType="menu">
 		<selectKey keyProperty="menuId" order="BEFORE" resultType="String">
-            select UUID()
-        </selectKey>
+			select UUID()
+		</selectKey>
 		insert
-		into s_menu(menu_id,menu_name,parent_id,menu_url,menu_icon,order_no)
-		value(#{menuId},#{menuName},#{parentId},#{menuUrl},#{menuIcon},#{order})
+		into
+		s_menu(menu_id,menu_name,parent_id,menu_url,order_no,permition)
+		value(#{menuId},#{menuName},#{parentId},#{menuUrl},#{order},#{permition})
 	</insert>
+	
+	<!-- 
+		des:
+			查找所有的一级菜单
+		example sql:
+			select *
+			from s_menu a
+			where a.PARENT_ID = '0'
+	 -->
+	<select id="getParentMenu" resultType="menu">
+		select *
+		from s_menu a
+		where a.PARENT_ID = '0'
+	</select>
 
 </mapper>

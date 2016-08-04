@@ -27,14 +27,20 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public void addMenu(String menuName, String parentId, String menuUrl,String order) {
+	public void addMenu(String menuName, String parentId, String menuUrl,String order,String permition) {
 		Menu menu = new Menu();
 		menu.setMenuId("111");
 		menu.setMenuName(menuName);
 		menu.setMenuUrl(menuUrl);
 		menu.setOrder(Integer.parseInt(order));
 		menu.setParentId(parentId);
+		menu.setPermition(permition);
 		menuDao.addMenu(menu);
+	}
+
+	@Override
+	public List<Menu> getParentMenu() {
+		return menuDao.getParentMenu();
 	}
 
 }

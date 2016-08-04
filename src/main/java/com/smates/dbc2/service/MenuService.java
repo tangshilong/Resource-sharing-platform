@@ -23,7 +23,14 @@ public interface MenuService {
 	 * @param parentId	所属一级菜单
 	 * @param menuUrl 菜单对应url
 	 * @param order 菜单排列位置
+	 * @param permition 菜单权限
 	 */
-	public void addMenu(String menuName, String parentId, String menuUrl, String order);
+	public void addMenu(String menuName, String parentId, String menuUrl, String order, String permition);
+	
+	/**
+	 * 获取所有所有一级菜单
+	 * @return
+	 */
+	public List<Menu> getParentMenu();
 	
 }
