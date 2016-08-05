@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from s_menu a
 			where a.PARENT_ID = '0'
 	 -->
-	<select id="getParentMenu" resultType="menu">
+	<select id="getParentMenu" resultMap="getAllmenuQueryMap">
 		select *
 		from s_menu a
 		where a.PARENT_ID = '0'

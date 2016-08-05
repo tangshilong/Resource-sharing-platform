@@ -14,7 +14,6 @@ public class MenuController extends BaseController{
 	
 	@RequestMapping(value="addMenu",method=RequestMethod.GET)
 	public String loadAddMenu(ModelMap modelMap){
-		logger.info(menuService.getParentMenu().size());
 		modelMap.addAttribute("parentMenu", menuService.getParentMenu());
 		return "saveMenu.ftl";
 	}
