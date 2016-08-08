@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		= b.PARENT_ID WHERE a.parent_id = '0' AND a.permition LIKE 'admin' AND ( 
 		b.PERMITION IS NULL OR (b.PERMITION LIKE 'admin') ) order by a.ORDER_NO,b.ORDER_NO 
 		-->
-	<select id="getAllMenu" resultMap="getAllmenuQueryMap"
+	<select id="getMenuByRole" resultMap="getAllmenuQueryMap"
 		parameterType="string">
 		select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME
 		sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID
@@ -71,6 +71,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from s_menu a
 		where a.PARENT_ID = '0'
+	</select>
+	
+	<select id="getAllMenu" resultMap="getAllmenuQueryMap" parameterType="com.smates.dbc2.vo.CostumMenu">
+		select * from s_menu
+		<where>
+			<if test="menuName != null">
+				and menu_name like '%${menuName}%'
+			</if>
+			<if test="permition != null">
+				and permition = #{permition}
+			</if>
+		</where>
+		limit #{startCount}, #{pageSize}
 	</select>
 
 </mapper>
