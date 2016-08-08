@@ -10,6 +10,7 @@ import com.smates.dbc2.po.Menu;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.MenuService;
 import com.smates.dbc2.service.UserService;
+import com.smates.dbc2.vo.CostumMenu;
 
 @Service
 public class MenuServiceImpl implements MenuService{
@@ -23,7 +24,7 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public List<Menu> getMenuByRoles() {
 		User user = userService.getUserById(userService.getCurrentUserId());
-		return menuDao.getAllMenu(user.getRole());
+		return menuDao.getMenuByRole(user.getRole());
 	}
 
 	@Override
@@ -41,6 +42,16 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public List<Menu> getParentMenu() {
 		return menuDao.getParentMenu();
+	}
+
+	@Override
+	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize) {
+		CostumMenu costumMenu = new CostumMenu();
+		costumMenu.setPageNo(pageNo);
+		costumMenu.setMenuName(menuName);
+		costumMenu.setPermition(permition);
+		costumMenu.setPageSize(pageSize);
+		return menuDao.getAllMenu(costumMenu);
 	}
 
 }

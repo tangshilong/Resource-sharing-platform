@@ -3,6 +3,7 @@ package com.smates.dbc2.mapper;
 import java.util.List;
 
 import com.smates.dbc2.po.Menu;
+import com.smates.dbc2.vo.CostumMenu;
 
 public interface MenuDao {
 	
@@ -10,7 +11,7 @@ public interface MenuDao {
 	 * 获取所有菜单,一级菜单和二级菜单
 	 * @return
 	 */
-	public List<Menu> getAllMenu(String role);
+	public List<Menu> getMenuByRole(String role);
 	
 	/**
 	 * 向s_menu中插入一条数据
@@ -23,5 +24,11 @@ public interface MenuDao {
 	 * @return
 	 */
 	public List<Menu> getParentMenu();
+	
+	/**
+	 * 获取所有的菜单
+	 * @return
+	 */
+	public List<Menu> getAllMenu(CostumMenu costumMenu);
 	
 }

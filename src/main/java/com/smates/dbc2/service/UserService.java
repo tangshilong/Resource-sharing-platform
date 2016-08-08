@@ -21,4 +21,5 @@ public interface UserService {
 	 * @return
 	 */
 	public String getCurrentUserId();
+
 }

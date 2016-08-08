@@ -33,4 +33,11 @@ public interface MenuService {
 	 */
 	public List<Menu> getParentMenu();
 	
+	
+	/**
+	 * 获取所有的菜单
+	 * @return
+	 */
+	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize);
+	
 }
