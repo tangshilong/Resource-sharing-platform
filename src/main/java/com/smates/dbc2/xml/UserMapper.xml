@@ -17,17 +17,37 @@
   </sql>
   
   <!--
- 	 des:根据accountNumber查找user
+ 	 des:
+ 	 	根据accountNumber查找user
  	 example sql:
- 	 select *
- 	 from s_user
-	 where accountNumber = admin
- 	 -->
+	 	 select *
+	 	 from s_user
+		 where accountNumber = admin
+  -->
   <select id="selectByAccountNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
   select *
   from s_user
   where accountNumber = #{accountNumber}
   </select>
+  
+  
+  <insert id = "insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+  insert into s_user 
+  (accountNumber,nickName, password, role, enable, createDate, e_mail)
+  values 
+  (#{accountNumber},N#{nickName},#{password},#{role},#{enable},#{createDate},#{eMail})
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

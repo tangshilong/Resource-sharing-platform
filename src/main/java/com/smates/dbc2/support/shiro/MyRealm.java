@@ -44,7 +44,6 @@ public class MyRealm extends AuthorizingRealm {
 		Object principal = token.getPrincipal();
 		String accountNumber = token.getPrincipal().toString();
 		String credentials = userService.getUserByAccountNumber(accountNumber).getPassword();// 根据登录accountNumber去数据库中查找密码
-		System.out.println("***********************************"+credentials);
 		String realmName = getName();
 		String source = SysConst.SALTSOURCE;
 		ByteSource credentialsSalt = new Md5Hash(source);

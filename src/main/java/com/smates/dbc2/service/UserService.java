@@ -29,4 +29,10 @@ public interface UserService {
 	 */
 	public User getUserByAccountNumber(String accountNumber);
 
+	/**
+	 * 创建用户
+	 * @param user
+	 */
+	public void createUser(User user);
+
 }

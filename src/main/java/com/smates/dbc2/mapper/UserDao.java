@@ -9,6 +9,13 @@ public interface UserDao {
 	 * @return user
 	 */
 	public User selectByAccountNumber(String accountNumber);
+
+	/**
+	 * 插入新用户
+	 * @param user
+	 * @return
+	 */
+	public void insertUser(User user);
 	
 //	int deleteByPrimaryKey(String id);
 //
