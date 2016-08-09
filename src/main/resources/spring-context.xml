@@ -90,7 +90,7 @@
 		<property name="unauthorizedUrl" value="/logout.do" />
 		<property name="filterChainDefinitions">
 			<value>
-				/admin/*.do = roles[admin]
+				/admin/*.do = roles[1]
 				/logout.do = anon
 				/submit.do = anon
 				/*.do = authc

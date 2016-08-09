@@ -1,5 +1,6 @@
 package com.smates.dbc2.controller;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -11,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 用户相关的请求
- * @author baijw12
+ * @author tangShilong
  *
  */
 @Controller
 public class UserController extends BaseController{
+	private static Logger logger = Logger.getLogger(UserController.class);
+
 	
 	/**
 	 * 返回登录界面
@@ -27,26 +30,31 @@ public class UserController extends BaseController{
 	}
 	
 	/**
-	 * 处理登录请求
-	 * @param userid 用户登录的userid
+	 * TODO 处理登录请求
+	 * @param userid 用户登录的accountNumber
 	 * @param userpwd 用户登录的明文密码
 	 * @return
+	 * TODO tangShilong 未完成
 	 */
 	@RequestMapping(value="login",method=RequestMethod.POST)
-	public String submit(String userid,String userpwd){
+	public String submit(String accountNumber,String userpwd){
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(userid, userpwd);
+		logger.info(accountNumber+ "," + userpwd);
+		UsernamePasswordToken token = new UsernamePasswordToken(accountNumber, userpwd);
 		try{
 			subject.login(token);
 		}catch(AuthenticationException ae){
+			logger.info("密码错误");
 			return "Login.ftl";
 		}
+		logger.info("test2");
 		return "redirect:home.do";
 	}
 	
 	/**
-	 * 登出
+	 * TODO 登出
 	 * @return
+	 * TODO tangShilong 未完成
 	 */
 	@RequestMapping("logout")
     public String logout() {
@@ -55,14 +63,16 @@ public class UserController extends BaseController{
     }
 	
 	/**
-	 * 登录成功后,显示主界面,根据用户不同的权限,显示不同的菜单
+	 * TODO 登录成功后,显示主界面,根据用户不同的权限,显示不同的菜单
 	 * @param modelMap
 	 * @return
+	 * TODO tangShilong 未完成
 	 */
 	@RequestMapping("home")
 	public String home(ModelMap modelMap){
+		logger.info(menuService.getMenuByRoles().size());
 		modelMap.addAttribute("menulist", menuService.getMenuByRoles());
-		modelMap.addAttribute("userName", userService.getUserById(userService.getCurrentUserId()).getUserName());
+		modelMap.addAttribute("userName", userService.getUserByAccountNumber(userService.getCurrentUserId()).getNickName());
 		return "Home.ftl";
 	}
 	
@@ -71,4 +81,6 @@ public class UserController extends BaseController{
 		return "Home.ftl";
 	}
 
+	
+	
 }

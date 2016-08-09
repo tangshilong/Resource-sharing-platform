@@ -27,18 +27,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT a.*, b.MENU_ID sub_menu_id, 
 		b.MENU_NAME sub_menu_name, b.MENU_URL sub_menu_url, b.ORDER_NO sub_menu_order, 
 		b.PARENT_ID sub_menu_parent_id FROM s_menu a LEFT JOIN s_menu b ON a.MENU_ID 
-		= b.PARENT_ID WHERE a.parent_id = '0' AND a.permition LIKE 'admin' AND ( 
-		b.PERMITION IS NULL OR (b.PERMITION LIKE 'admin') ) order by a.ORDER_NO,b.ORDER_NO 
+		= b.PARENT_ID WHERE a.parent_id = '0' AND a.permition LIKE 1 AND ( 
+		b.PERMITION IS NULL OR (b.PERMITION LIKE 1) ) order by a.ORDER_NO,b.ORDER_NO 
 		-->
 	<select id="getMenuByRole" resultMap="getAllmenuQueryMap"
-		parameterType="string">
+		parameterType="int">
 		select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME
 		sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO sub_menu_order,b.PARENT_ID
 		sub_menu_parent_id
 		from s_menu a left join s_menu b
 		on a.MENU_ID = b.PARENT_ID
-		where a.parent_id = '0' and a.permition like '%${value}%' and (b.PERMITION
-		is null or (b.PERMITION like '%${value}%')) order by a.ORDER_NO,b.ORDER_NO
+		where a.parent_id = '0' and a.permition = #{value} and (b.PERMITION
+		is null or (b.PERMITION = #{value})) order by a.ORDER_NO,b.ORDER_NO
 	</select>
 
 	<!-- 
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		example sql: 
 			insert into 
 			s_menu(menu_id,menu_name,parent_id,menu_url,order_no,permition) 
-			value('7f68d8c4-c5ff-4221-a534-ca645ebf4eec1','个人中心','0','none',1,'admin') 
+			value('7f68d8c4-c5ff-4221-a534-ca645ebf4eec1','个人中心','0','none',1,1) 
 		-->
 	<insert id="addMenu" parameterType="menu">
 		<selectKey keyProperty="menuId" order="BEFORE" resultType="String">

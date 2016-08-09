@@ -11,11 +11,11 @@
 			<form action="login.do" method="post">
 				<h1>智慧家庭数据库管理</h1>
 				<div>
-					<input type="text" placeholder="Username" required=""
-						id="username" name="userid" />
+					<input type="text" placeholder="用户名" required=""
+						id="accountNumber" name="accountNumber" />
 				</div>
 				<div>
-					<input type="password" placeholder="Password" required=""
+					<input type="password" placeholder="密码" required=""
 						id="password" name="userpwd" />
 				</div>
 				<div>

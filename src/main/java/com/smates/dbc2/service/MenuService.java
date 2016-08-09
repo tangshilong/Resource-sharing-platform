@@ -25,7 +25,7 @@ public interface MenuService {
 	 * @param order 菜单排列位置
 	 * @param permition 菜单权限
 	 */
-	public void addMenu(String menuName, String parentId, String menuUrl, String order, String permition);
+	public void addMenu(String menuName, String parentId, String menuUrl, String order, Integer permition);
 	
 	/**
 	 * 获取所有所有一级菜单
@@ -38,6 +38,6 @@ public interface MenuService {
 	 * 获取所有的菜单
 	 * @return
 	 */
-	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize);
+	public List<Menu> getAllMenu(int pageNo, String menuName, Integer permition, int pageSize);
 	
 }

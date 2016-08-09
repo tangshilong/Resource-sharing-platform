@@ -43,7 +43,7 @@ public class MenuController extends BaseController{
 	 */
 	@RequestMapping(value="addMenu",method=RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg addMenu(String menuName, String menuUrl, String parentId, String orderNo, String permition){
+	public BaseMsg addMenu(String menuName, String menuUrl, String parentId, String orderNo, Integer permition){
 		logger.info("添加菜单项");
 		menuService.addMenu(menuName, parentId, menuUrl, orderNo, permition);
 		logger.info("添加菜单项成功");
@@ -56,7 +56,7 @@ public class MenuController extends BaseController{
 	 */
 	@RequestMapping(value="getAllMenu",method=RequestMethod.GET)
 	@ResponseBody
-	public List<Menu> getAllMenu(@RequestParam(defaultValue = "1") int pageNo, String menuName, String permition){
+	public List<Menu> getAllMenu(@RequestParam(defaultValue = "1") int pageNo, String menuName, Integer permition){
 		logger.info("获取所有菜单项");
 		return menuService.getAllMenu(pageNo,menuName,permition,SysConst.PAGESIZE);
 	}

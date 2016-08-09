@@ -14,12 +14,19 @@ public interface UserService {
 	 * @param userId 用户id
  	 * @return
 	 */
-	public User getUserById(String userId);
+//	public User getUserById(String userId);
 	
 	/**
 	 * 获取当前登录的用户
 	 * @return
 	 */
 	public String getCurrentUserId();
+	
+	/**
+	 * 根据accountNumber查找user
+	 * @param accountNumber
+	 * @return
+	 */
+	public User getUserByAccountNumber(String accountNumber);
 
 }
