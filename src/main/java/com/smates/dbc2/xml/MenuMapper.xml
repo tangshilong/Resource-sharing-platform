@@ -22,13 +22,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<!-- 
-	 	des:查找到所有的一级菜单和一级菜单下的二级菜单,若一级菜单无权限查看,则此一级菜单下所有的二级菜单都无权限查看.
+	 	des:查找到所有的一级菜单和一级菜单下的二级菜单,若一级菜单无权限查看,则此一级菜单下所有的二级菜单都无权限查看.当二级菜单为空时,一级菜单可以显示.但是
+	 		二级菜单都没有权限查看时,一级菜单不显示
 		example sql: 
-		SELECT a.*, b.MENU_ID sub_menu_id, 
-		b.MENU_NAME sub_menu_name, b.MENU_URL sub_menu_url, b.ORDER_NO sub_menu_order, 
-		b.PARENT_ID sub_menu_parent_id FROM s_menu a LEFT JOIN s_menu b ON a.MENU_ID 
-		= b.PARENT_ID WHERE a.parent_id = '0' AND a.permition LIKE 'admin' AND ( 
-		b.PERMITION IS NULL OR (b.PERMITION LIKE 'admin') ) order by a.ORDER_NO,b.ORDER_NO 
+			SELECT
+				a.*, b.MENU_ID sub_menu_id,
+				b.MENU_NAME sub_menu_name,
+				b.MENU_URL sub_menu_url,
+				b.ORDER_NO sub_menu_order,
+				b.PARENT_ID sub_menu_parent_id
+			FROM
+				s_menu a
+			LEFT JOIN s_menu b ON a.MENU_ID = b.PARENT_ID
+			WHERE
+				a.parent_id = '0'
+			AND a.permition LIKE 'admin'
+			AND (
+				b.PERMITION IS NULL
+				OR (b.PERMITION LIKE 'admin')
+			)
+			ORDER BY
+				a.ORDER_NO,
+				b.ORDER_NO
 		-->
 	<select id="getMenuByRole" resultMap="getAllmenuQueryMap"
 		parameterType="string">
@@ -63,16 +78,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		des:
 			查找所有的一级菜单
 		example sql:
-			select *
+			select menu_id,menu_name
 			from s_menu a
 			where a.PARENT_ID = '0'
 	 -->
 	<select id="getParentMenu" resultMap="getAllmenuQueryMap">
-		select *
+		select menu_id,menu_name
 		from s_menu a
 		where a.PARENT_ID = '0'
 	</select>
 	
+	<!-- 
+		desc:
+			根据条件查询菜单列表
+		example sql:
+		SELECT
+			*
+		FROM
+			s_menu
+		WHERE
+			menu_name LIKE '%管理%'
+		AND permition = 'admin'
+		LIMIT 0,
+		 5
+	 -->	
 	<select id="getAllMenu" resultMap="getAllmenuQueryMap" parameterType="com.smates.dbc2.vo.CostumMenu">
 		select * from s_menu
 		<where>
@@ -84,6 +113,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 		limit #{startCount}, #{pageSize}
+	</select>
+	
+	<select id="countSum" resultType="int">
+		select count(*)
+		from s_menu
 	</select>
 
 </mapper>

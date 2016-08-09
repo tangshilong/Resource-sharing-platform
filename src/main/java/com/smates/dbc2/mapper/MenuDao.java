@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.smates.dbc2.po.Menu;
 import com.smates.dbc2.vo.CostumMenu;
+import com.smates.dbc2.vo.ParentMenuVo;
 
 public interface MenuDao {
 	
@@ -23,12 +24,18 @@ public interface MenuDao {
 	 * 得到所有的一级菜单
 	 * @return
 	 */
-	public List<Menu> getParentMenu();
+	public List<ParentMenuVo> getParentMenu();
 	
 	/**
 	 * 获取所有的菜单
 	 * @return
 	 */
 	public List<Menu> getAllMenu(CostumMenu costumMenu);
+	
+	/**
+	 * 统计menu表中的记录总数
+	 * @return
+	 */
+	public int countSum();
 	
 }

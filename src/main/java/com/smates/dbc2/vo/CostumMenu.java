@@ -22,7 +22,6 @@ public class CostumMenu extends Menu {
 
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
-		setStartCount((pageNo-1)*(SysConst.PAGESIZE));
 	}
 
 	public int getPageSize() {

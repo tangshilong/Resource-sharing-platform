@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basic Tabs - jQuery EasyUI Demo</title>
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
+<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<div style="margin: 20px 0 10px 0;"></div>
+	<div class="easyui-tabs" style="width: auto;">
+		<div title="菜单列表" style="padding: 10px">
+			<div>
+				<div style="margin-bottom: 20px; display: inline;">
+					菜单名称: <input class="easyui-textbox" id="menuName" name="menuName"
+						style="width: 150px; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px; display: inline;">
+					菜单权限: <input class="easyui-textbox" id="permition" name="permition"
+						style="width: 150px; height: 32px">
+				</div>
+				<a href="#" id="search_btn" class="easyui-linkbutton"
+					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
+			</div>
+			<div style="height: 10px;"></div>
+			<table id="dg" style="width: auto; height: auto; margin-top: 20px;"
+				data-options="pagesize:15,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllMenu.do',method:'get'">
+				<thead>
+					<tr>
+						<th data-options="field:'menuName',width:100">菜单名称</th>
+						<th data-options="field:'menuUrl',width:80,align:'right'">菜单链接</th>
+						<th data-options="field:'permition',width:80,align:'right'">菜单权限</th>
+						<th data-options="field:'parentId',width:60,align:'center'">父菜单</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div title="菜单新增" style="padding: 10px">
+			<div style="text-align: center;">
+				<div style="margin-bottom: 20px;">
+					菜单名称: <input class="easyui-textbox" id="menuName" name="menuName"
+						style="width: 200px; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px;">
+					上级菜单:<input id="cc" style="width: 200px;margin-left:5px;"
+						url="admin/getParentMenu.do" valueField="id" textField="text">
+					</input>
+				</div>
+				<div style="margin-bottom: 20px;">
+					菜单链接: <input class="easyui-textbox" id="menuName" name="menuUrl"
+						style="width: 200px; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px;">
+					菜单序号: <input class="easyui-textbox" id="menuName" name="order"
+						style="width: 200px; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px;">
+					菜单权限: <input class="easyui-textbox" id="menuName" name="permition"
+						style="width: 200px; height: 32px">
+				</div>
+				<a href="#" class="easyui-linkbutton" style="width: 15%">确认</a>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#search_btn").click(function() {
+				$('#dg').datagrid('load', {
+					menuName : $('#menuName').val(),
+					permiton : $('#permition').val()
+				});
+			})
+		})
+		
+		$('#cc').combobox({
+		formatter:function(row){
+			return '<span class="item-text">'+row.text+'</span>';
+		}
+	});
+
+		$(function() {
+			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+			pager.pagination({
+				buttons : [ {
+					iconCls : 'icon-search',
+					handler : function() {
+						alert('search');
+					}
+				}, {
+					iconCls : 'icon-add',
+					handler : function() {
+						alert('add');
+					}
+				}, {
+					iconCls : 'icon-edit',
+					handler : function() {
+						alert('edit');
+					}
+				}, {
+					iconCls : 'icon-load',
+					handler : function() {
+						alert('load');
+					}
+				} ]
+			});
+		})
+	</script>
+</body>
+</html>

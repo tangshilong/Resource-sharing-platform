@@ -56,7 +56,7 @@
 				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
 				<prop key="number_format">0.###############</prop>
 				<prop key="classic_compatible">true</prop>
-				<prop key="auto_include">templates/Form.ftl,templates/Page.ftl</prop>
+				<prop key="auto_include">templates/Page.ftl</prop>
 			</props>
 		</property>
 	</bean>

@@ -127,6 +127,7 @@
 		<script src="js/jquery.app.js"></script>
 		
 		<script type="text/javascript">
+			
 			$("#content_frame,.container").height($(window).height()-$(".footer").height()-$(".navbar").height()-70).width("90%");
 			$(".contentlink").click(function(){
 				var menuUrl = this.getAttribute("menuurl");

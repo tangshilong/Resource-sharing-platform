@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smates.dbc2.po.Menu;
-import com.smates.dbc2.utils.SysConst;
 import com.smates.dbc2.vo.BaseMsg;
+import com.smates.dbc2.vo.Rows;
 
 @RequestMapping("admin")
 @Controller
@@ -51,14 +51,32 @@ public class MenuController extends BaseController{
 	}
 	
 	/**
-	 * 获取所有的菜单信息
-	 * @return 菜单list(json格式)
+	 * 按条件查询菜单
+	 * @param page 当前页数
+	 * @param menuName 菜单名称
+	 * @param permition 菜单权限
+	 * @param rows 每页的记录条数
+	 * @return easyUI格式的json
 	 */
 	@RequestMapping(value="getAllMenu",method=RequestMethod.GET)
 	@ResponseBody
-	public List<Menu> getAllMenu(@RequestParam(defaultValue = "1") int pageNo, String menuName, String permition){
+	public Rows getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition, int rows){
+		logger.info(page+","+rows);
 		logger.info("获取所有菜单项");
-		return menuService.getAllMenu(pageNo,menuName,permition,SysConst.PAGESIZE);
+		List<Menu> menus = menuService.getAllMenu(page,menuName,permition,rows);
+		logger.info(menus.size());
+		return new Rows(menuService.countSum(), menus);
 	}
+	
+	/**
+	 * 获取所有一级菜单
+	 * @return
+	 */
+//	@RequestMapping("getParentMenu")
+//	@ResponseBody
+//	public Rows getParentMenu(){
+//		logger.info("获取所有一级菜单");
+//		return rows;
+//	}
 	
 }

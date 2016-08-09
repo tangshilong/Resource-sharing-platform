@@ -3,6 +3,7 @@ package com.smates.dbc2.service;
 import java.util.List;
 
 import com.smates.dbc2.po.Menu;
+import com.smates.dbc2.vo.ParentMenuVo;
 
 /**
  * menu相关service
@@ -31,7 +32,7 @@ public interface MenuService {
 	 * 获取所有所有一级菜单
 	 * @return
 	 */
-	public List<Menu> getParentMenu();
+	public List<ParentMenuVo> getParentMenu();
 	
 	
 	/**
@@ -39,5 +40,11 @@ public interface MenuService {
 	 * @return
 	 */
 	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize);
+	
+	/**
+	 * 获取到menu的总数
+	 * @return
+	 */
+	public int countSum();
 	
 }

@@ -11,6 +11,7 @@ import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.MenuService;
 import com.smates.dbc2.service.UserService;
 import com.smates.dbc2.vo.CostumMenu;
+import com.smates.dbc2.vo.ParentMenuVo;
 
 @Service
 public class MenuServiceImpl implements MenuService{
@@ -40,18 +41,23 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getParentMenu() {
+	public List<ParentMenuVo> getParentMenu() {
 		return menuDao.getParentMenu();
 	}
 
 	@Override
 	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize) {
 		CostumMenu costumMenu = new CostumMenu();
-		costumMenu.setPageNo(pageNo);
+		costumMenu.setStartCount((pageNo-1)*pageSize);
 		costumMenu.setMenuName(menuName);
 		costumMenu.setPermition(permition);
 		costumMenu.setPageSize(pageSize);
 		return menuDao.getAllMenu(costumMenu);
+	}
+
+	@Override
+	public int countSum() {
+		return menuDao.countSum();
 	}
 
 }
