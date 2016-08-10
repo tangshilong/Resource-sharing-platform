@@ -3,8 +3,8 @@ package com.smates.dbc2.mapper;
 import java.util.List;
 
 import com.smates.dbc2.po.Menu;
+import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.CostumMenu;
-import com.smates.dbc2.vo.ParentMenuVo;
 
 public interface MenuDao {
 	
@@ -24,7 +24,7 @@ public interface MenuDao {
 	 * 得到所有的一级菜单
 	 * @return
 	 */
-	public List<ParentMenuVo> getParentMenu();
+	public List<ComboBoxRow> getParentMenu();
 	
 	/**
 	 * 获取所有的菜单

@@ -1,7 +1,6 @@
 package com.smates.dbc2.vo;
 
 import com.smates.dbc2.po.Menu;
-import com.smates.dbc2.utils.SysConst;
 
 public class CostumMenu extends Menu {
 	private int pageNo;

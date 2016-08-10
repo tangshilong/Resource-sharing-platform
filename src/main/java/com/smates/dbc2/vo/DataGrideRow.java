@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.smates.dbc2.po.Menu;
 
-public class Rows {
+public class DataGrideRow {
 	private int total;
 	private List<Menu> rows;
 	
-	public Rows(int total, List<Menu> rows) {
+	public DataGrideRow(int total, List<Menu> rows) {
 		this.total = total;
 		this.rows = rows;
 	}

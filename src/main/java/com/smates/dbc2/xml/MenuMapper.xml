@@ -4,6 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smates.dbc2.mapper.MenuDao">
 
+	<resultMap type="com.smates.dbc2.vo.ComboBoxRow" id="ComboBoxRowMap">
+		<id column="menu_id" property="id" />
+		<result column="menu_name" property="text" />
+	</resultMap>
+
 	<resultMap type="menu" id="getAllmenuQueryMap">
 		<id column="menu_id" property="menuId" />
 		<result column="menu_name" property="menuName" />
@@ -82,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from s_menu a
 			where a.PARENT_ID = '0'
 	 -->
-	<select id="getParentMenu" resultMap="getAllmenuQueryMap">
+	<select id="getParentMenu" resultMap="ComboBoxRowMap">
 		select menu_id,menu_name
 		from s_menu a
 		where a.PARENT_ID = '0'

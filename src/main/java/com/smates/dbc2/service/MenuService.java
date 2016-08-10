@@ -3,7 +3,7 @@ package com.smates.dbc2.service;
 import java.util.List;
 
 import com.smates.dbc2.po.Menu;
-import com.smates.dbc2.vo.ParentMenuVo;
+import com.smates.dbc2.vo.ComboBoxRow;
 
 /**
  * menu相关service
@@ -32,7 +32,7 @@ public interface MenuService {
 	 * 获取所有所有一级菜单
 	 * @return
 	 */
-	public List<ParentMenuVo> getParentMenu();
+	public List<ComboBoxRow> getParentMenu();
 	
 	
 	/**
