@@ -68,4 +68,12 @@ public class MenuController extends BaseController{
 		return comboBoxRows;
 	}
 	
+	@RequestMapping("deleteMenu")
+	@ResponseBody
+	public BaseMsg deleteMenu(String menuId){
+		logger.info("删除一个菜单,菜单ID:"+menuId);
+		menuService.deleteMenuById(menuId);
+		return new BaseMsg(true, "删除成功");
+	}
+	
 }

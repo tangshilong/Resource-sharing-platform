@@ -30,6 +30,7 @@
 				data-options="pagesize:15,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllMenu.do',method:'get'">
 				<thead>
 					<tr>
+						<th data-options="field:'menuId',width:100">菜单ID</th>
 						<th data-options="field:'menuName',width:100">菜单名称</th>
 						<th data-options="field:'menuUrl',width:80,align:'right'">菜单链接</th>
 						<th data-options="field:'permition',width:80,align:'right'">菜单权限</th>
@@ -43,36 +44,43 @@
 				<table>
 					<tr>
 						<td>菜单名称:</td>
-						<td><input class="easyui-textbox" id="menuName" data-options="required:true"
-							name="menuName" style="width: 200px; height: 32px"></td>
+						<td><input class="easyui-textbox" id="menuName"
+							data-options="required:true" name="menuName"
+							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>上级菜单:</td>
 						<td><input class="easyui-combobox" name="parentId"
-							style="width: 200px; height: 32px;"
+							id="parentId" style="width: 200px; height: 32px;"
 							data-options="
 							url: 'admin/getParentMenu.do',
 							required:true,
 							method: 'get',
 							valueField:'id',
 							textField:'text',
-							groupField:'group'
+							groupField:'group',
+							onLoadSuccess:function(){
+                                            $('#parentId').combobox('setValue','0');
+                                        }
 						"></td>
 					</tr>
 					<tr>
 						<td>菜单链接:</td>
-						<td><input class="easyui-textbox" id="menuUrl" data-options="required:true"
-							name="menuUrl" style="width: 200px; height: 32px"></td>
+						<td><input class="easyui-textbox" id="menuUrl"
+							data-options="required:true" name="menuUrl"
+							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>菜单序号:</td>
-						<td><input class="easyui-textbox" id="order" name="order" data-options="required:true,validType:'isNumber'"
+						<td><input class="easyui-textbox" id="order" name="order"
+							data-options="required:true,validType:'isNumber'"
 							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>菜单权限:</td>
-						<td><input class="easyui-textbox" id="permition"  data-options="required:true"
-							name="permition" style="width: 200px; height: 32px"></td>
+						<td><input class="easyui-textbox" id="permition"
+							data-options="required:true" name="permition"
+							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -85,53 +93,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		$('#ff').form({
-			url:'admin/addMenu.do',
-			onSubmit:function(){
-				return $(this).form('validate');
-			},
-			success : function(data) {
-				$.messager.alert('Info', data.content, 'info');
-			}
-		});
-
-		$(function() {
-			$("#search_btn").click(function() {
-				$('#dg').datagrid('load', {
-					menuName : $('#menuName').val(),
-					permiton : $('#permition').val()
-				});
-			})
-		})
-
-		$(function() {
-			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
-			pager.pagination({
-				buttons : [ {
-					iconCls : 'icon-search',
-					handler : function() {
-						alert('search');
-					}
-				}, {
-					iconCls : 'icon-add',
-					handler : function() {
-						alert('add');
-					}
-				}, {
-					iconCls : 'icon-edit',
-					handler : function() {
-						alert('edit');
-					}
-				}, {
-					iconCls : 'icon-load',
-					handler : function() {
-						alert('load');
-					}
-				} ]
-			});
-		})
-	</script>
+	<script type="text/javascript" src="easyUI/web.js"></script>
 	<script type="text/javascript" src="easyUI/validate.js"></script>
 
 </body>

@@ -60,4 +60,9 @@ public class MenuServiceImpl implements MenuService{
 		return menuDao.countSum();
 	}
 
+	@Override
+	public void deleteMenuById(String menuId) {
+		menuDao.deleteMenuById(menuId);
+	}
+
 }

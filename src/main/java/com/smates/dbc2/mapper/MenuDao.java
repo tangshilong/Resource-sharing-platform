@@ -38,4 +38,10 @@ public interface MenuDao {
 	 */
 	public int countSum();
 	
+	/**
+	 * 删除s_menu表中的一条记录
+	 * @param menuId
+	 */
+	public void deleteMenuById(String menuId);
+	
 }

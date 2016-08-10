@@ -47,4 +47,10 @@ public interface MenuService {
 	 */
 	public int countSum();
 	
+	/**
+	 * 根据menuId删除菜单项
+	 * @param menuId
+	 */
+	public void deleteMenuById(String menuId);
+	
 }
