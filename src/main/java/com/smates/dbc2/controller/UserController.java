@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.utils.ShiroUtils;
+import com.smates.dbc2.utils.ValidaterUtil;
 import com.smates.dbc2.vo.BaseMsg;
 
 /**
