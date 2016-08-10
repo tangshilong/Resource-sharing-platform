@@ -4,33 +4,21 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smates.dbc2.po.Menu;
-import com.smates.dbc2.utils.SysConst;
 import com.smates.dbc2.vo.BaseMsg;
+import com.smates.dbc2.vo.ComboBoxRow;
+import com.smates.dbc2.vo.DataGrideRow;
 
 @RequestMapping("admin")
 @Controller
 public class MenuController extends BaseController{
 	
 	public Logger logger = Logger.getLogger(MenuController.class);
-	
-	/**
-	 * 访问此uri,返回menu页面
-	 * @param modelMap
-	 * @return
-	 */
-	@RequestMapping(value="addMenu",method=RequestMethod.GET)
-	public String loadAddMenu(ModelMap modelMap){
-		logger.info("加载menu页面");
-		modelMap.addAttribute("parentMenu", menuService.getParentMenu());
-		return "Menu.ftl";
-	}
 	
 	/**
 	 * 添加菜单项
@@ -43,22 +31,49 @@ public class MenuController extends BaseController{
 	 */
 	@RequestMapping(value="addMenu",method=RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg addMenu(String menuName, String menuUrl, String parentId, String orderNo, Integer permition){
+	public BaseMsg addMenu(String menuName, String menuUrl, String parentId, String order, Integer permition){
+		logger.info("父菜单ID:"+parentId);
 		logger.info("添加菜单项");
-		menuService.addMenu(menuName, parentId, menuUrl, orderNo, permition);
+		menuService.addMenu(menuName, parentId, menuUrl, order, permition);
 		logger.info("添加菜单项成功");
-		return new BaseMsg(true, "success");
+		return new BaseMsg(true, "菜单添加成功");
 	}
 	
 	/**
-	 * 获取所有的菜单信息
-	 * @return 菜单list(json格式)
+	 * 按条件查询菜单
+	 * @param page 当前页数
+	 * @param menuName 菜单名称
+	 * @param permition 菜单权限
+	 * @param rows 每页的记录条数
+	 * @return easyUI格式的json
 	 */
 	@RequestMapping(value="getAllMenu",method=RequestMethod.GET)
 	@ResponseBody
-	public List<Menu> getAllMenu(@RequestParam(defaultValue = "1") int pageNo, String menuName, Integer permition){
+	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, Integer permition, int rows){
 		logger.info("获取所有菜单项");
-		return menuService.getAllMenu(pageNo,menuName,permition,SysConst.PAGESIZE);
+		List<Menu> menus = menuService.getAllMenu(page,menuName,permition,rows);
+		return new DataGrideRow(menuService.countSum(), menus);
+	}
+	
+	/**
+	 * 获取所有一级菜单
+	 * @return
+	 */
+	@RequestMapping("getParentMenu")
+	@ResponseBody
+	public List<ComboBoxRow> getParentMenu(){
+		logger.info("获取所有一级菜单");
+		List<ComboBoxRow> comboBoxRows =  menuService.getParentMenu();
+		comboBoxRows.add(new ComboBoxRow("0","无"));//添加无上级菜单选项
+		return comboBoxRows;
+	}
+	
+	@RequestMapping("deleteMenu")
+	@ResponseBody
+	public BaseMsg deleteMenu(String menuId){
+		logger.info("删除一个菜单,菜单ID:"+menuId);
+		menuService.deleteMenuById(menuId);
+		return new BaseMsg(true, "删除成功");
 	}
 	
 }

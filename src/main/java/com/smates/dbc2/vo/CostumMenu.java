@@ -1,7 +1,6 @@
 package com.smates.dbc2.vo;
 
 import com.smates.dbc2.po.Menu;
-import com.smates.dbc2.utils.SysConst;
 
 public class CostumMenu extends Menu {
 	private int pageNo;
@@ -22,7 +21,6 @@ public class CostumMenu extends Menu {
 
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
-		setStartCount((pageNo-1)*(SysConst.PAGESIZE));
 	}
 
 	public int getPageSize() {

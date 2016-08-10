@@ -6,6 +6,6 @@ public class SysConst {
 	public static final String SALTSOURCE = "baijw";
 	
 	//页面相关
-	public static final int PAGESIZE = 3;
+	public static final int PAGESIZE = 15;
 	
 }

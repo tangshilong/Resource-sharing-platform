@@ -127,16 +127,5 @@ public class UserController extends BaseController{
 		logger.info("test");
 		return new BaseMsg(true, "success");
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

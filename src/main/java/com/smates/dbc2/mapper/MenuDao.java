@@ -3,6 +3,7 @@ package com.smates.dbc2.mapper;
 import java.util.List;
 
 import com.smates.dbc2.po.Menu;
+import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.CostumMenu;
 
 public interface MenuDao {
@@ -23,12 +24,24 @@ public interface MenuDao {
 	 * 得到所有的一级菜单
 	 * @return
 	 */
-	public List<Menu> getParentMenu();
+	public List<ComboBoxRow> getParentMenu();
 	
 	/**
 	 * 获取所有的菜单
 	 * @return
 	 */
 	public List<Menu> getAllMenu(CostumMenu costumMenu);
+	
+	/**
+	 * 统计menu表中的记录总数
+	 * @return
+	 */
+	public int countSum();
+	
+	/**
+	 * 删除s_menu表中的一条记录
+	 * @param menuId
+	 */
+	public void deleteMenuById(String menuId);
 	
 }
