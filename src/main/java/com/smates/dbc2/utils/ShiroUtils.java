@@ -20,4 +20,8 @@ public class ShiroUtils {
 		return result.toString();
 	}
 	
+	public static void main(String[] args){
+		System.out.println(passwdMD5("123456"));
+	}
+	
 }

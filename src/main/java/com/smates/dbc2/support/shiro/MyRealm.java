@@ -42,8 +42,8 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		Object principal = token.getPrincipal();
-		String userId = token.getPrincipal().toString();
-		String credentials = userService.getUserById(userId).getPassword();// 根据登录id去数据库中查找密码
+		String accountNumber = token.getPrincipal().toString();
+		String credentials = userService.getUserByAccountNumber(accountNumber).getPassword();// 根据登录accountNumber去数据库中查找密码
 		String realmName = getName();
 		String source = SysConst.SALTSOURCE;
 		ByteSource credentialsSalt = new Md5Hash(source);
@@ -62,10 +62,10 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		String userId = (String) principalCollection.getPrimaryPrincipal();
-		User user = userService.getUserById(userId);
+		String accountNumber = (String) principalCollection.getPrimaryPrincipal();
+		User user = userService.getUserByAccountNumber(accountNumber);
 		if (user != null) {// 给用户添加角色限制
-			info.addRole(user.getRole());
+			info.addRole(user.getRole().toString());
 		} else {
 			SecurityUtils.getSubject().logout();
 		}

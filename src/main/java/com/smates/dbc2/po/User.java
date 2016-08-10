@@ -9,81 +9,98 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	private Integer id;
 
-    private String userName;
+	private String accountNumber;
+	
+    private String nickName;
 
     private String password;
 
-    private String role;
+    private Integer role;
 
     private String enable;
 
-    private Date createdate;
+    private Date createDate;
 
     private String eMail;
 
-    public String getId() {
-        return id;
-    }
+   
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getAccountNumber() {
+		return accountNumber;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getNickName() {
+		return nickName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getEnable() {
-        return enable;
-    }
+	public Integer getRole() {
+		return role;
+	}
 
-    public void setEnable(String enable) {
-        this.enable = enable;
-    }
+	public void setRole(Integer role) {
+		this.role = role;
+	}
 
-    public Date getCreatedate() {
-        return createdate;
-    }
+	public String getEnable() {
+		return enable;
+	}
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+	public void setEnable(String enable) {
+		this.enable = enable;
+	}
 
-    public String geteMail() {
-        return eMail;
-    }
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", role=" + role + ", enable="
-				+ enable + ", createdate=" + createdate + ", eMail=" + eMail + "]";
+	public String geteMail() {
+		return eMail;
+	}
+
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public User() {
 	}
     
-    
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", accountNumber=" + accountNumber + ", nickName=" + nickName + ", password="
+				+ password + ", role=" + role + ", enable=" + enable + ", createDate=" + createDate + ", eMail=" + eMail
+				+ "]";
+	}
 }

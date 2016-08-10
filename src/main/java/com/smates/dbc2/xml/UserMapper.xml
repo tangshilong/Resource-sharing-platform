@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.smates.dbc2.mapper.UserDao" >
+
   <resultMap id="BaseResultMap" type="user" >
-    <id column="id" property="id" jdbcType="CHAR" />
-    <result column="user_name" property="userName" jdbcType="CHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="accountNumber" property="accountNumber" jdbcType="CHAR" />
+    <result column="nickName" property="nickName" jdbcType="CHAR" />
     <result column="password" property="password" jdbcType="CHAR" />
-    <result column="role" property="role" jdbcType="CHAR" />
+    <result column="role" property="role" jdbcType="INTEGER" />
     <result column="enable" property="enable" jdbcType="CHAR" />
-    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="createDate" property="createDate" jdbcType="DATE" />
     <result column="e_mail" property="eMail" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, password, role, enable, createdate, e_mail
+    id, accountNumber,nickName, password, role, enable, createDate, e_mail
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  
+  <!--
+ 	 des:
+ 	 	根据accountNumber查找user
+ 	 example sql:
+	 	 select *
+	 	 from s_user
+		 where accountNumber = admin
+  -->
+  <select id="selectByAccountNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select *
+  from s_user
+  where accountNumber = #{accountNumber}
+  </select>
+  
+  
+  <insert id = "insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+  insert into s_user 
+  (accountNumber,nickName, password, role, enable, createDate, e_mail)
+  values 
+  (#{accountNumber},N#{nickName},#{password},#{role},#{enable},#{createDate},#{eMail})
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!--  自动生成
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
+   
     from s_user
     where id = #{id,jdbcType=CHAR}
   </select>
@@ -114,4 +154,11 @@
       e_mail = #{eMail,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  
+  <select id="findAllUser" resultType="user" >
+  	select user_id,
+  	from s_user
+  </select>
+  -->
+  
 </mapper>

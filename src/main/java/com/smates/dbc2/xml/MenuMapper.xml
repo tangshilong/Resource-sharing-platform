@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE a.parent_id = '0' AND a.permition LIKE 'admin' AND ( b.PERMITION IS 
 		NULL OR (b.PERMITION LIKE 'admin') ) ORDER BY a.ORDER_NO, b.ORDER_NO -->
 	<select id="getMenuByRole" resultMap="getAllmenuQueryMap"
-		parameterType="string">
+		parameterType="int">
 		select a.*,b.MENU_ID sub_menu_id,b.MENU_NAME
 		sub_menu_name,b.MENU_URL sub_menu_url,b.ORDER_NO
 		sub_menu_order,b.PARENT_ID
@@ -45,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		a.permition like '%${value}%' and (b.PERMITION
 		is null or (b.PERMITION
 		like '%${value}%')) order by a.ORDER_NO,b.ORDER_NO
+
 	</select>
 
 	<!-- des: 向数据库中添加一条menu记录 example sql: insert into s_menu(menu_id,menu_name,parent_id,menu_url,order_no,permition) 

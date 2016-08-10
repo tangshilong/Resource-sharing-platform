@@ -31,7 +31,7 @@ public class MenuController extends BaseController{
 	 */
 	@RequestMapping(value="addMenu",method=RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg addMenu(String menuName, String menuUrl, String parentId, String order, String permition){
+	public BaseMsg addMenu(String menuName, String menuUrl, String parentId, String order, Integer permition){
 		logger.info("父菜单ID:"+parentId);
 		logger.info("添加菜单项");
 		menuService.addMenu(menuName, parentId, menuUrl, order, permition);
@@ -49,7 +49,7 @@ public class MenuController extends BaseController{
 	 */
 	@RequestMapping(value="getAllMenu",method=RequestMethod.GET)
 	@ResponseBody
-	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition, int rows){
+	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, Integer permition, int rows){
 		logger.info("获取所有菜单项");
 		List<Menu> menus = menuService.getAllMenu(page,menuName,permition,rows);
 		return new DataGrideRow(menuService.countSum(), menus);

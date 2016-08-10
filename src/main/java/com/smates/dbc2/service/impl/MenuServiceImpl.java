@@ -24,12 +24,12 @@ public class MenuServiceImpl implements MenuService{
 	
 	@Override
 	public List<Menu> getMenuByRoles() {
-		User user = userService.getUserById(userService.getCurrentUserId());
+		User user = userService.getUserByAccountNumber(userService.getCurrentUserId());
 		return menuDao.getMenuByRole(user.getRole());
 	}
 
 	@Override
-	public void addMenu(String menuName, String parentId, String menuUrl,String order,String permition) {
+	public void addMenu(String menuName, String parentId, String menuUrl,String order,Integer permition) {
 		Menu menu = new Menu();
 		menu.setMenuId("111");
 		menu.setMenuName(menuName);
@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize) {
+	public List<Menu> getAllMenu(int pageNo, String menuName, Integer permition, int pageSize) {
 		CostumMenu costumMenu = new CostumMenu();
 		costumMenu.setStartCount((pageNo-1)*pageSize);
 		costumMenu.setMenuName(menuName);
