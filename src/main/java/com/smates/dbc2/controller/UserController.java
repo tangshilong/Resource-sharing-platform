@@ -95,15 +95,9 @@ public class UserController extends BaseController{
 	@RequestMapping(value = "createUser",method=RequestMethod.GET)
 	@ResponseBody
 	public BaseMsg createtUser(String accountNumber,String nickName,String password1,String password2 ,String eMail){
-		accountNumber = "yangshilong";
-		nickName = "汤士龙";
-		password1 = "123456";
-		password2 = "123456";
-		eMail = "834848102@qq.com";
-		
 		User user = userService.getUserByAccountNumber(accountNumber);
 		if(!ValidaterUtil.checkAccountNumber(accountNumber)){
-			logger.info("accountNumber wrong");
+			logger.info("账号格式错误");
 			return new BaseMsg(false, "wrong accountNumber");
 		}
 		if(user!=null){
@@ -133,6 +127,8 @@ public class UserController extends BaseController{
 		logger.info("test");
 		return new BaseMsg(true, "success");
 	}
+	
+
 	
 	
 	
