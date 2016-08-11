@@ -1,5 +1,7 @@
 package com.smates.dbc2.controller;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,7 +26,6 @@ import com.smates.dbc2.vo.BaseMsg;
 @Controller
 public class UserController extends BaseController{
 	private static Logger logger = Logger.getLogger(UserController.class);
-
 	
 	/**
 	 * 返回登录界面
@@ -92,9 +93,11 @@ public class UserController extends BaseController{
 	 * @return 创建是否成功
 	 * TODO tangShilong 未完成
 	 */
-	@RequestMapping(value = "createUser",method=RequestMethod.GET)
+	@RequestMapping(value = "createUser",method=RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg createtUser(String accountNumber,String nickName,String password1,String password2 ,String eMail){
+	public BaseMsg createtUser(String accountNumber,String nickName,String password,
+	    String eMail,Integer role, String enable){
+		logger.info("add user");
 		User user = userService.getUserByAccountNumber(accountNumber);
 		if(!ValidaterUtil.checkAccountNumber(accountNumber)){
 			logger.info("账号格式错误");
@@ -104,7 +107,7 @@ public class UserController extends BaseController{
 			logger.info("账号已存在，注册失败");
 			return new BaseMsg(false, "accountNumber already exist");
 		}
-		if(!ValidaterUtil.checkPassWord(password1)){
+		if(!ValidaterUtil.checkPassWord(password)){
 			logger.info("密码格式错误");
 			return new BaseMsg(false, "password wrong");
 		}
@@ -114,18 +117,18 @@ public class UserController extends BaseController{
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
-		if(!password1.equals(password2)){
-			logger.info("两次密码输入不一致请重新输入");
-			return new BaseMsg(false, "two password wrong");
-		}
 		User user2 = new User();
 		user2.setAccountNumber(accountNumber);
 		user2.setNickName(nickName);
-		user2.setPassword(ShiroUtils.passwdMD5(password1));
+		user2.setPassword(ShiroUtils.passwdMD5(password));
 		user2.seteMail(eMail);
+		user2.setRole(role);
+		user2.setEnable(enable);
+		user2.setCreateDate(new Date());
+		logger.info(user2.toString());
 		userService.createUser(user2);
-		logger.info("test");
-		return new BaseMsg(true, "success");
+		logger.info("用户创建成功");
+		return new BaseMsg(true, "创建用户成功");
 	}
 		
 }

@@ -1,7 +1,5 @@
 package com.smates.dbc2.service.impl;
 
-import java.util.Date;
-
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +31,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void createUser(User user) {
-		user.setCreateDate(new Date());
-		user.setEnable("0");
-		user.setRole(0);
 		userMapper.insertUser(user);
 	}
 
