@@ -7,11 +7,22 @@ public class Menu {
 	private String menuName;
 	private String parentId;
 	private String menuUrl;
-	private int order;
-	private Integer permition;
+	private Integer order;
+	private String permition;
 	private List<Menu> submenus;
 
 	public Menu() {
+	}
+
+	public Menu(String menuId, String menuName, String parentId, String menuUrl, Integer order, String permition,
+			List<Menu> submenus) {
+		this.menuId = menuId;
+		this.menuName = menuName;
+		this.parentId = parentId;
+		this.menuUrl = menuUrl;
+		this.order = order;
+		this.permition = permition;
+		this.submenus = submenus;
 	}
 
 	public String getMenuId() {
@@ -46,11 +57,11 @@ public class Menu {
 		this.menuUrl = menuUrl;
 	}
 
-	public int getOrder() {
+	public Integer getOrder() {
 		return order;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(Integer order) {
 		this.order = order;
 	}
 
@@ -62,11 +73,11 @@ public class Menu {
 		this.submenus = submenus;
 	}
 
-	public Integer getPermition() {
+	public String getPermition() {
 		return permition;
 	}
 
-	public void setPermition(Integer permition) {
+	public void setPermition(String permition) {
 		this.permition = permition;
 	}
 
@@ -75,5 +86,5 @@ public class Menu {
 		return "Menu [menuId=" + menuId + ", menuName=" + menuName + ", parentId=" + parentId + ", menuUrl=" + menuUrl
 				+ ", order=" + order + ", submenus=" + submenus + "]";
 	}
-	
+
 }

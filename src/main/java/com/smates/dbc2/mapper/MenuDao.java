@@ -44,4 +44,17 @@ public interface MenuDao {
 	 */
 	public void deleteMenuById(String menuId);
 	
+	/**
+	 * 根据menuId查找menu记录
+	 * @return
+	 */
+	public Menu getMenuById(String menuId);
+	
+	/**
+	 * 更新menu记录
+	 * @param menu
+	 * @return
+	 */
+	public void updateMenu(Menu menu);
+	
 }

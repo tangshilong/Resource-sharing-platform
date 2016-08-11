@@ -3,6 +3,7 @@ package com.smates.dbc2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.smates.dbc2.service.MenuService;
+import com.smates.dbc2.service.RoleService;
 import com.smates.dbc2.service.UserService;
 
 public class BaseController {
@@ -12,5 +13,8 @@ public class BaseController {
 	
 	@Autowired
 	public MenuService menuService;
+	
+	@Autowired
+	public RoleService roleService;
 	
 }

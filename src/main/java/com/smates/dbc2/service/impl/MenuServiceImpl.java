@@ -29,12 +29,12 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public void addMenu(String menuName, String parentId, String menuUrl,String order,Integer permition) {
+	public void addMenu(String menuName, String parentId, String menuUrl,Integer order,String permition) {
 		Menu menu = new Menu();
 		menu.setMenuId("111");
 		menu.setMenuName(menuName);
 		menu.setMenuUrl(menuUrl);
-		menu.setOrder(Integer.parseInt(order));
+		menu.setOrder(order);
 		menu.setParentId(parentId);
 		menu.setPermition(permition);
 		menuDao.addMenu(menu);
@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getAllMenu(int pageNo, String menuName, Integer permition, int pageSize) {
+	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize) {
 		CostumMenu costumMenu = new CostumMenu();
 		costumMenu.setStartCount((pageNo-1)*pageSize);
 		costumMenu.setMenuName(menuName);
@@ -63,6 +63,17 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void deleteMenuById(String menuId) {
 		menuDao.deleteMenuById(menuId);
+	}
+
+	@Override
+	public Menu getMenuById(String menuId) {
+		return menuDao.getMenuById(menuId);
+	}
+
+	@Override
+	public void updateMenu(String menuId, String menuName, String menuUrl, String parentId, Integer order,
+			String permition) {
+		menuDao.updateMenu(new Menu(menuId, menuName, parentId, menuUrl, order, permition, null));
 	}
 
 }

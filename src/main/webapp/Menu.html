@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div style="margin: 20px 0 10px 0;"></div>
-	<div class="easyui-tabs" style="width: auto;">
+	<div id="menu_tab" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width: auto;">
 		<div title="菜单列表" style="padding: 10px">
 			<div>
 				<div style="margin-bottom: 20px; display: inline;">
@@ -27,7 +27,7 @@
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="dg" style="width: auto; height: auto; margin-top: 20px;"
-				data-options="pagesize:15,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllMenu.do',method:'get'">
+				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllMenu.do',method:'get'">
 				<thead>
 					<tr>
 						<th data-options="field:'menuId',width:100">菜单ID</th>
@@ -41,6 +41,7 @@
 		</div>
 		<div title="菜单新增" style="padding: 10px">
 			<form id="ff" method="post">
+				<input type="hidden" id="menuId" name="menuId">
 				<table>
 					<tr>
 						<td>菜单名称:</td>
@@ -78,9 +79,10 @@
 					</tr>
 					<tr>
 						<td>菜单权限:</td>
-						<td><input class="easyui-textbox" id="permition"
-							data-options="required:true" name="permition"
-							style="width: 200px; height: 32px"></td>
+						<td><span class="radioSpan" style="height: 32px;"> <input
+								type="checkbox" name="permition" value="0">普通用户</input> <input
+								type="checkbox" name="permition" value="1">管理员</input>
+						</span></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -88,6 +90,7 @@
 							style="width: 100px; height: 32px;" /></td>
 					</tr>
 				</table>
+				
 			</form>
 
 		</div>

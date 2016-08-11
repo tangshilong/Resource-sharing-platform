@@ -130,5 +130,4 @@ public class UserController extends BaseController{
 		logger.info("用户创建成功");
 		return new BaseMsg(true, "创建用户成功");
 	}
-		
 }
