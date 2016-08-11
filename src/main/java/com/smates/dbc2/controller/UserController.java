@@ -77,11 +77,6 @@ public class UserController extends BaseController{
 		modelMap.addAttribute("userName", userService.getUserByAccountNumber(userService.getCurrentUserId()).getNickName());
 		return "Home.ftl";
 	}
-	
-//	@RequestMapping("test")
-//	public String test(ModelMap modelMap){
-//		return "Home.ftl";
-//	}
 
 	/**
 	 * TODO 创建用户

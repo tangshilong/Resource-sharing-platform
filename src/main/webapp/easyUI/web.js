@@ -34,13 +34,21 @@ $(function() {
 			handler : function() {
 				var row = $('#dg').datagrid('getSelected');
 				if (row) {
-					$.get('admin/deleteMenu.do', {
-						menuId : row.menuId
-					}, function(data) {
-						$.messager.alert('Info', data.content, 'info');
-						$(".pagination-load").trigger("click");
-					})
-
+					$.messager.confirm("操作提示", "您确定要删除这条记录吗？", function (data) {
+			            if (data) {
+			            	$.get('admin/deleteMenu.do', {
+								menuId : row.menuId
+							}, function(data) {
+								$.messager.alert('提示', data.content, 'info');
+								$(".pagination-load").trigger("click");
+							})
+			            }
+			            else {
+			                
+			            }
+			        });
+				}else{
+					$.messager.alert('提示', "请选中要删除删除的行" , 'info');
 				}
 
 			}
