@@ -29,7 +29,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public void addMenu(String menuName, String parentId, String menuUrl,String order,Integer permition) {
+	public void addMenu(String menuName, String parentId, String menuUrl,String order,String permition) {
 		Menu menu = new Menu();
 		menu.setMenuId("111");
 		menu.setMenuName(menuName);
@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getAllMenu(int pageNo, String menuName, Integer permition, int pageSize) {
+	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize) {
 		CostumMenu costumMenu = new CostumMenu();
 		costumMenu.setStartCount((pageNo-1)*pageSize);
 		costumMenu.setMenuName(menuName);

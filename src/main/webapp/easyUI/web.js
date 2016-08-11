@@ -69,5 +69,3 @@ $(function() {
 $(document).ready(function() {
    $("#parentId").val("0");
 });
-
-

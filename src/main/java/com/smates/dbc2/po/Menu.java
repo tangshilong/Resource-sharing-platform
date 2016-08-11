@@ -8,7 +8,7 @@ public class Menu {
 	private String parentId;
 	private String menuUrl;
 	private int order;
-	private Integer permition;
+	private String permition;
 	private List<Menu> submenus;
 
 	public Menu() {
@@ -62,11 +62,11 @@ public class Menu {
 		this.submenus = submenus;
 	}
 
-	public Integer getPermition() {
+	public String getPermition() {
 		return permition;
 	}
 
-	public void setPermition(Integer permition) {
+	public void setPermition(String permition) {
 		this.permition = permition;
 	}
 
