@@ -15,6 +15,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="parent_id" property="parentId" />
 		<result column="menu_url" property="menuUrl" />
 		<result column="order_no" property="order" />
+		<result column="permition" property="permition" />
+
 
 		<!-- 映射到对象集合中 -->
 		<collection property="submenus" ofType="menu">
@@ -89,13 +91,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from s_menu
 	</select>
-	
-	<!--
-		desc:删除s_menu表中的一个记录
-		example sql:delete from s_menu where menu_id = #{value}
-	 -->
+
+	<!-- desc:删除s_menu表中的一个记录 example sql:delete from s_menu where menu_id = 
+		#{value} -->
 	<delete id="deleteMenuById" parameterType="String">
-		delete from s_menu where menu_id = #{value}
+		delete from s_menu
+		where menu_id = #{value}
 	</delete>
+
+	<!-- desc:查找s_menu中一条记录 example sql:select * from s_menu where menu_id = 
+		'1000' -->
+	<select id="getMenuById" parameterType="string" resultMap="getAllmenuQueryMap">
+		select * from s_menu where menu_id = #{value}
+	</select>
+
+	<!-- desc更新s_menu记录 example sql: UPDATE s_menu SET MENU_NAME = "测试修改" WHERE 
+		MENU_ID = "2f248162-b0e8-1034-8831-320ba20b5071" -->
+	<update id="updateMenu" parameterType="menu">
+		update s_menu
+		<set>
+			<if test="menuName != null">
+				menu_name = #{menuName},
+			</if>
+			<if test="menuUrl != null">
+				menu_url = #{menuUrl},
+			</if>
+			<if test="parentId != null">
+				parent_id = #{parentId},
+			</if>
+			<if test="order != null">
+				order_no = #{order},
+			</if>
+			<if test="permition != null">
+				permition = #{permition},
+			</if>
+		</set>
+		where menu_id = #{menuId}
+	</update>
 
 </mapper>
