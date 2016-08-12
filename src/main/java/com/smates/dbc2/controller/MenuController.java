@@ -14,6 +14,7 @@ import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.vo.BaseMsg;
 import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.DataGrideRow;
+import com.smates.dbc2.vo.MenuCheckboxVo;
 
 @RequestMapping("admin")
 @Controller
@@ -111,9 +112,11 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping("getMenuById")
 	@ResponseBody
-	public Menu getMenuById(String menuId) {
+	public MenuCheckboxVo getMenuById(String menuId) {
 		logger.info("获取一个菜单,menuId:" + menuId);
-		return menuService.getMenuById(menuId);
+		Menu menu = menuService.getMenuById(menuId);
+		MenuCheckboxVo menuCheckboxVo = menuService.formatePo(menu);
+		return menuCheckboxVo;
 	}
 
 }

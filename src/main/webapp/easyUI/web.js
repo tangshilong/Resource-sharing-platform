@@ -2,7 +2,7 @@
  * Menu.html
  */
 
-//改变tab
+//改变第2个tab的名字
 function updateTab(tabName) {
 	var tab = $('#menu_tab').tabs('getTab', 1); // 取得第2个tab
 	$('#menu_tab').tabs('update', {
@@ -13,7 +13,7 @@ function updateTab(tabName) {
 	});
 }
 
-// 添加一个标签页
+// 把菜单新增修改为菜单更新,并加载要修改的数据
 function updateMenu(menuId) {
 
 	$('#menu_tab').tabs('select', "菜单新增");

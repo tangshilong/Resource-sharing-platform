@@ -12,6 +12,7 @@ import com.smates.dbc2.service.MenuService;
 import com.smates.dbc2.service.UserService;
 import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.CostumMenu;
+import com.smates.dbc2.vo.MenuCheckboxVo;
 
 @Service
 public class MenuServiceImpl implements MenuService{
@@ -74,6 +75,19 @@ public class MenuServiceImpl implements MenuService{
 	public void updateMenu(String menuId, String menuName, String menuUrl, String parentId, Integer order,
 			String permition) {
 		menuDao.updateMenu(new Menu(menuId, menuName, parentId, menuUrl, order, permition, null));
+	}
+	
+	@Override
+	public MenuCheckboxVo formatePo(Menu menu) {
+		MenuCheckboxVo menuCheckboxVo = new MenuCheckboxVo();
+		menuCheckboxVo.setMenuId(menu.getMenuId());
+		menuCheckboxVo.setMenuName(menu.getMenuName());
+		menuCheckboxVo.setMenuUrl(menu.getMenuUrl());
+		menuCheckboxVo.setOrder(menu.getOrder());
+		menuCheckboxVo.setParentId(menu.getParentId());
+		menuCheckboxVo.setSubmenus(menu.getSubmenus());
+		menuCheckboxVo.setPermition(menu.getPermition().split(","));
+		return menuCheckboxVo;
 	}
 
 }

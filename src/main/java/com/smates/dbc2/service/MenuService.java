@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.smates.dbc2.po.Menu;
 import com.smates.dbc2.vo.ComboBoxRow;
+import com.smates.dbc2.vo.MenuCheckboxVo;
 
 /**
  * menu相关service
@@ -70,5 +71,12 @@ public interface MenuService {
 	 * @param permition 菜单权限
 	 */
 	public void updateMenu(String menuId, String menuName, String menuUrl, String parentId, Integer order, String permition);
+	
+	/**
+	 * 转换po格式,让前台checkbox容易识别
+	 * @param menu
+	 * @return
+	 */
+	public MenuCheckboxVo formatePo(Menu menu);
 
 }
