@@ -1,6 +1,8 @@
 package com.smates.dbc2.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -13,18 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.utils.ShiroUtils;
 import com.smates.dbc2.utils.ValidaterUtil;
 import com.smates.dbc2.vo.BaseMsg;
+import com.smates.dbc2.vo.DataGrideRow;
 
 /**
  * 用户相关的请求
  * @author tangShilong
+ * @param <user>
  *
  */
 @Controller
-public class UserController extends BaseController{
+public class UserController<user> extends BaseController{
 	private static Logger logger = Logger.getLogger(UserController.class);
 	
 	/**
@@ -93,19 +98,13 @@ public class UserController extends BaseController{
 	 * @return 创建是否成功
 	 * TODO tangShilong 未完成
 	 */
-	@RequestMapping(value = "createUser",method=RequestMethod.POST)
+	@RequestMapping(value = "saveUser",method=RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg createtUser(String accountNumber,String nickName,String password,
+	public BaseMsg createUser(Integer id,String accountNumber,String nickName,String password,
 	    String eMail,Integer role, String enable){
-		logger.info("add user");
-		User user = userService.getUserByAccountNumber(accountNumber);
 		if(!ValidaterUtil.checkAccountNumber(accountNumber)){
 			logger.info("账号格式错误");
 			return new BaseMsg(false, "wrong accountNumber");
-		}
-		if(user!=null){
-			logger.info("账号已存在，注册失败");
-			return new BaseMsg(false, "accountNumber already exist");
 		}
 		if(!ValidaterUtil.checkPassWord(password)){
 			logger.info("密码格式错误");
@@ -124,10 +123,75 @@ public class UserController extends BaseController{
 		user2.seteMail(eMail);
 		user2.setRole(role);
 		user2.setEnable(enable);
-		user2.setCreateDate(new Date());
 		logger.info(user2.toString());
-		userService.createUser(user2);
-		logger.info("用户创建成功");
-		return new BaseMsg(true, "创建用户成功");
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String time=formatter.format(date);
+		user2.setCreateDate(time);
+  
+		if(id==null){
+			logger.info("add user");
+			User user = userService.getUserByAccountNumber(accountNumber);
+			if(user!=null){
+				logger.info("账号已存在，注册失败");
+				return new BaseMsg(false, "accountNumber already exist");
+			}
+			userService.createUser(user2);
+			logger.info("用户创建成功");
+			return new BaseMsg(true, "操作成功");
+		}else {
+			user2.setId(id);
+			userService.updateUser(user2);
+			return new BaseMsg(true, "用户修改成功");
+		}
 	}
+	
+	/**
+	 * TODO 获取指定页数所有用户信息,返回用户总数
+	 * @return
+	 * TODO tangshilong 未完成					
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "getAllUser",method = RequestMethod.GET)
+	@ResponseBody
+	public DataGrideRow<User> getAllUser(Integer page, Integer rows,String accountNumber,String nickName){
+		logger.info("根据页数行数获取用户信息");
+		List<User>	list = userService.getAllUser(page, rows,accountNumber,nickName);
+		int total = userService.getUserCount();
+		return new DataGrideRow<User>(total,list);
+	}
+	
+	/**
+	 * 根据accountNumber删除用户
+	 * @param accountNumber
+	 * @return
+	 */
+	@RequestMapping(value = "deleteUser",method = RequestMethod.GET)
+	@ResponseBody
+	public BaseMsg deleteUser (String accountNumber){
+		logger.info("开始删除user");
+		userService.deleteUser(accountNumber);
+		logger.info("user删除成功");
+		return new BaseMsg(true, "删除成功");
+	}
+	
+	
+	/**
+	 * 根据accountNumber查找用户
+	 * @param accountNumber
+	 * @return
+	 */
+	@RequestMapping(value = "getUserByAccountNumber",method = RequestMethod.GET)
+	@ResponseBody
+	public User getUserByAccountNumber(String accountNumber){
+		return userService.getUserByAccountNumber(accountNumber);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div style="margin: 20px 0 10px 0;"></div>
-	<div class="easyui-tabs" style="width: auto;">
+	<div id="user_tab" class="easyui-tabs" style="width: auto;">
 		<div title="用戶列表" style="padding: 10px">
 			<div>
 				<div style="margin-bottom: 20px; display: inline;">
@@ -26,15 +26,15 @@
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="dg" style="width: auto; height: auto; margin-top: 20px;"
-				data-options="pagesize:15,rownumbers:true,singleSelect:true,pagination:true,url:'user/getAllUser.do',method:'get'">
+				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllUser.do',method:'get'">
 				<thead>
 					<tr>
-						<th data-options="field:'accountNumber',width:150,align:'center'">用户账号</th>
-						<th data-options="field:'nickName',width:80,align:'center'">用户名称</th>
-						<th data-options="field:'eMail',width:180,align:'center'">用户邮箱</th>
+						<th data-options="field:'accountNumber',width:140,align:'center'">用户账号</th>
+						<th data-options="field:'nickName',width:160,align:'center'">用户名称</th>
+						<th data-options="field:'eMail',width:160,align:'center'">用户邮箱</th>
 						<th data-options="field:'role',width:80,align:'center'">用户权限</th>
 						<th data-options="field:'enable',width:80,align:'center'">用户状态</th>
-						<th data-options="field:'createDate',width:180,align:'center'">创建时间</th>
+						<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
 					</tr>
 				</thead>
 			</table>
@@ -45,8 +45,8 @@
 					<tr>
 						<td>用户账号:</td>
 						<td><input class="easyui-textbox" id="accountNumber"
-							data-options="required:true" name="accountNumber"
-							style="width: 200px; height: 32px"></td>
+							data-options="required:true,validType:'isAccountNumber'" 
+							name="accountNumber"style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>用户昵称:</td>
@@ -56,21 +56,21 @@
 					</tr>
 					<tr>
 						<td>用户密码:</td>
-						<td><input class="easyui-textbox" id="password"
-							data-options="required:true" name="password"
-							style="width: 200px; height: 32px"></td>
+						<td><input type="password" class="easyui-textbox" id="password"
+							data-options="required:true,validType:'isPassword'" 
+							name="password"style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>重输密码:</td>
-						<td><input class="easyui-textbox" id="testPwd"
+						<td><input type="password" class="easyui-textbox" id="testPwd"
 							data-options="required:true" name="testPwd"
 							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>用户邮箱:</td>
 						<td><input class="easyui-textbox" id="eMail"
-							data-options="required:true" name="eMail"
-							style="width: 200px; height: 32px"></td>
+							data-options="required:true,validType:'iseMail'" 
+							name="eMail"style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>用户权限:</td>
@@ -107,8 +107,8 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="easyUI/web.js"></script>
-	<script type="text/javascript" src="easyUI/validate.js"></script>
+	<script type="text/javascript" src="js/user.js"></script>
+	<script type="text/javascript" src="js/validate.js"></script>
 
 </body>
 </html>

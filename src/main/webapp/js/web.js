@@ -55,7 +55,10 @@ $(function() {
 		buttons : [ {
 			iconCls : 'icon-search',
 			handler : function() {
-				alert('search');
+				$('#dg').datagrid('load', {
+					accountNumber : $('#accountNumber').val(),
+					nickName : $('#nickName').val(),
+				});
 			}
 		}, {
 			iconCls : 'icon-remove',
@@ -85,6 +88,7 @@ $(function() {
 				var row = $('#dg').datagrid('getSelected');
 				if (row) {
 					updateMenu(row.menuId);
+					updateUser(row.id);
 				} else {
 					$.messager.alert('提示', "请选中要修改的行", 'info');
 				}
@@ -102,37 +106,3 @@ $(function() {
 $(document).ready(function() {
 	$("#parentId").val("0");
 });
-
-
-/**
- * User.html
- */
-
-//新建用户
-$('#addUser').form({
-	url : 'createUser.do',
-	onSubmit : function() {
-		//密码验证
-		var pwd = $('#password').val();
-		var testpwd = $('#testPwd').val();
-		if(pwd!=testpwd){
-			$.messager.alert('error','两次输入密码不一致');
-			return false;
-		}
-		return $(this).form('validate');
-	},
-	success : function(data) {
-		var obj = eval ("(" + data + ")");
-			$.messager.alert('success',obj.content);
-	}
-});
-
-//查找用户
-$(function() {
-	$("#search_btn_user").click(function() {
-		$('#dg').datagrid('load', {
-			accountNumber : $('#accountNumber').val(),
-			nickName : $('#nickName').val()
-		});
-	})
-})

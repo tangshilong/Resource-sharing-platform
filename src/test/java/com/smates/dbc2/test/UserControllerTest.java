@@ -9,6 +9,7 @@ import com.smates.dbc2.controller.UserController;
 
 public class UserControllerTest {
 	
+	@SuppressWarnings("rawtypes")
 	private static UserController userController;
 	
 	@SuppressWarnings("resource")
@@ -21,7 +22,7 @@ public class UserControllerTest {
 
 	@Test
 	public void testCreateUser(){
-		userController.createtUser("tangng", "汤士龙", "123456", "834848102@qq.com", 1, "可用");
+		userController.createUser(2,"tangng", "汤士龙", "123456", "834848102@qq.com", 1, "可用");
 	}
 	
 }
