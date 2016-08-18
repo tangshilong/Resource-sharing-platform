@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.smates.dbc2.aop.PersonalLog;
 import com.smates.dbc2.po.Menu;
 import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.vo.BaseMsg;
@@ -71,6 +72,7 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping(value = "getAllMenu", method = RequestMethod.GET)
 	@ResponseBody
+	@PersonalLog("getAllMenu")
 	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,
 			int rows) {
 		logger.info("获取所有菜单项");

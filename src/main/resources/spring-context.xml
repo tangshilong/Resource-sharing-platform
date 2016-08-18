@@ -100,7 +100,7 @@
 
 	<!-- memcached -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<bean class="com.mtzn.code.appserver.cache.config.MemcacheConfig"
+	<bean class="com.smates.dbc2.memcache.config.MemcacheConfig"
 		id="memcachedConfig">
 		<property name="ips">
 			<list>
@@ -115,11 +115,9 @@
 		<property name="connectionPoolSize" value="10">
 		</property>
 	</bean>
-	<bean class="com.mtzn.code.appserver.cache.CacheManager"
+	<bean class="com.smates.dbc2.memcache.CacheManager"
 		init-method="init">
 		<property name="cacheConfig" ref="memcachedConfig"></property>
 	</bean>
-
-
 
 </beans>

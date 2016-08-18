@@ -12,13 +12,13 @@ public class MenuTest {
 	
 	public static void Before(){
 		@SuppressWarnings("resource")
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-mvc.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-context.xml");
 		menuController = applicationContext.getBean(MenuController.class);
 	}
 
 	@Test
 	public void testMenuController(){
-//		menuController.getAllMenu(1, null, null);
+		menuController.getAllMenu(1, null, null,10);
 	}
 	
 }

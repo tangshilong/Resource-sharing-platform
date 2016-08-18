@@ -3,6 +3,10 @@ package com.smates.dbc2.vo;
 import com.smates.dbc2.po.Menu;
 
 public class CostumMenu extends Menu {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int pageNo;
 	private int pageSize;
 	private int startCount;

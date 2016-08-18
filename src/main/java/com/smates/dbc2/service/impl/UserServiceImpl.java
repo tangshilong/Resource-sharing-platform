@@ -15,11 +15,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao userMapper;
-	
-//	@Override
-//	public User getUserById(String userId) {
-//		return userMapper.selectByPrimaryKey(userId);
-//	}
 
 	@Override
 	public String getCurrentUserId() {
