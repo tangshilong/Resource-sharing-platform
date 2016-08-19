@@ -72,9 +72,8 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping(value = "getAllMenu", method = RequestMethod.GET)
 	@ResponseBody
-	@PersonalLog("getAllMenu")
 	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,
-			int rows) {
+			 int rows) {
 		logger.info("获取所有菜单项");
 		List<Menu> menus = menuService.getAllMenu(page, menuName, permition, rows);
 		return new DataGrideRow(menuService.countSum(), menus);
@@ -87,6 +86,7 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping("getParentMenu")
 	@ResponseBody
+	@PersonalLog("getAllMenu")
 	public List<ComboBoxRow> getParentMenu() {
 		logger.info("获取所有一级菜单");
 		List<ComboBoxRow> comboBoxRows = menuService.getParentMenu();
