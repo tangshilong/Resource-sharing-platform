@@ -97,6 +97,7 @@
 	</bean>
 
 	<!-- memcached -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<bean class="com.smates.dbc2.memcache.config.MemcacheConfig" id="memcachedConfig">
 		<property name="ips">
 			<list>
