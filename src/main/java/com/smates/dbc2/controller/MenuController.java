@@ -71,6 +71,7 @@ public class MenuController extends BaseController {
 	 *            每页的记录条数
 	 * @return easyUI格式的json
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "getAllMenu", method = RequestMethod.GET)
 	@ResponseBody
 	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,

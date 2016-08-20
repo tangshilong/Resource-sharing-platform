@@ -1,6 +1,6 @@
 package com.smates.dbc2.service.impl;
 
-import java.util.Date;
+import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.smates.dbc2.mapper.UserDao;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.UserService;
+import com.smates.dbc2.vo.CostumUser;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,10 +29,32 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void createUser(User user) {
-		user.setCreateDate(new Date());
-		user.setEnable("0");
-		user.setRole(0);
 		userMapper.insertUser(user);
+	}
+
+	@Override
+	public int getUserCount() {
+		return userMapper.getUserCount();
+	}
+
+	@Override
+	public List<User> getAllUser(Integer page, Integer rows, String accountNumber, String nickName) {
+		CostumUser costumUser = new CostumUser();
+		costumUser.setStartCount((page-1)*rows);	
+		costumUser.setRows(rows);
+		costumUser.setAccountNumber(accountNumber);
+		costumUser.setNickName(nickName);
+		return userMapper.getAllUser(costumUser);
+	}
+
+	@Override
+	public void deleteUser(String accountNumber) {
+		userMapper.deleteUser(accountNumber);
+	}
+
+	@Override
+	public void updateUser(User user2) {
+		userMapper.updateUser(user2);
 	}
 
 }

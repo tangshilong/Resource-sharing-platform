@@ -14,6 +14,20 @@ $.extend($.fn.validatebox.defaults.rules, {
 
 		},
 		message : '请输入正确的电话号码数字!'
+	},
+	isAccountNumber : {
+		validator : function(value,param){
+			return /[A-Za-z0-9]{1,15}$/.test(value);
+		}
+	},
+	isPassword : {
+		validator : function(value,param){
+			return /[A-Za-z0-9!.]{6,20}$/.test(value);
+		}
+	},
+	iseMail : {
+		validator : function(value,param){
+			return /[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/.test(value);
+		}
 	}
-
 });
