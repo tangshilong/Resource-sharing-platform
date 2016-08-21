@@ -9,7 +9,6 @@ import com.smates.dbc2.controller.UserController;
 
 public class UserControllerTest {
 	
-	@SuppressWarnings("rawtypes")
 	private static UserController userController;
 	
 	@SuppressWarnings("resource")

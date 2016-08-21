@@ -28,6 +28,6 @@
 	</div>
 	<!-- container -->
 	
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="bootstrap/jquery.js"></script>
 </body>
 </html>

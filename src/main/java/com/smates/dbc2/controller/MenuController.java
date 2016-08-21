@@ -48,7 +48,6 @@ public class MenuController extends BaseController {
 		if(StringUtils.isEmpty(menuId)){
 			logger.info("添加菜单项");
 			menuService.addMenu(menuName, parentId, menuUrl, order, permition);
-			logger.info("添加成功");
 			return new BaseMsg(true, "菜单添加成功");
 		}else{
 			logger.info("更新菜单项");
@@ -71,14 +70,13 @@ public class MenuController extends BaseController {
 	 *            每页的记录条数
 	 * @return easyUI格式的json
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "getAllMenu", method = RequestMethod.GET)
 	@ResponseBody
-	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,
+	public DataGrideRow<Menu> getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,
 			 int rows) {
 		logger.info("获取所有菜单项");
 		List<Menu> menus = menuService.getAllMenu(page, menuName, permition, rows);
-		return new DataGrideRow(menuService.countSum(), menus);
+		return new DataGrideRow<Menu>(menuService.countSum(), menus);
 	}
 
 	/**

@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smates.dbc2.mapper.MenuDao;
-import com.smates.dbc2.mencache.annotation.CacheKey;
-import com.smates.dbc2.mencache.annotation.CacheRead;
 import com.smates.dbc2.po.Menu;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.MenuService;
@@ -49,8 +47,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	@CacheRead(nameSpace="menu",cachePrefix="getAll")
-	public List<Menu> getAllMenu(@CacheKey int pageNo, @CacheKey String menuName, @CacheKey String permition, @CacheKey int pageSize) {
+	public List<Menu> getAllMenu( int pageNo, String menuName, String permition, int pageSize) {
 		CostumMenu costumMenu = new CostumMenu();
 		costumMenu.setStartCount((pageNo-1)*pageSize);
 		costumMenu.setMenuName(menuName);

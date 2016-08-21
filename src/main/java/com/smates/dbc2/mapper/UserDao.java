@@ -52,18 +52,5 @@ public interface UserDao {
 	 * @param user2
 	 */
 	public void updateUser(User user2);
-	
-	
-//	int deleteByPrimaryKey(String id);
-//
-//	int insert(User record);
-//
-//	int insertSelective(User record);
-//
-//	User selectByPrimaryKey(String id);
-//
-//	int updateByPrimaryKeySelective(User record);
-//
-//	int updateByPrimaryKey(User record);
 
 }

@@ -121,10 +121,10 @@
 		</div>
 		<!-- END wrapper -->
 	
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/waves.js"></script>
-		<script src="js/jquery.app.js"></script>
+		<script src="bootstrap/jquery.min.js"></script>
+		<script src="bootstrap/bootstrap.min.js"></script>
+		<script src="bootstrap/waves.js"></script>
+		<script src="bootstrap/jquery.app.js"></script>
 		
 		<script type="text/javascript">
 			

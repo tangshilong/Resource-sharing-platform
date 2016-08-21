@@ -13,7 +13,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.smates.dbc2.memcache.CacheManager;
 import com.smates.dbc2.po.UserLog;
 import com.smates.dbc2.service.UserLogService;
 import com.smates.dbc2.service.UserService;
@@ -33,7 +32,7 @@ public class PersonalLogAop {
 	@Autowired
 	private UserService userService;
 
-	private static Logger logger = Logger.getLogger(CacheManager.class);
+	private static Logger logger = Logger.getLogger(PersonalLogAop.class);
 
 	@After(value = "@annotation(com.smates.dbc2.aop.PersonalLog)")
 	public void doAfter(JoinPoint joinPoint) {

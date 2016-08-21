@@ -18,10 +18,9 @@ $(function() {
 				if (row) {
 					$.messager.confirm("操作提示", "您确定要删除这条记录吗？", function(data) {
 						if (data) {
-							$.get('deleteUser.do',{
+							$.get('admin/deleteUser.do',{
 								accountNumber:row.accountNumber
 							},function(data){
-//								var obj = eval ("(" + data + ")");
 								$.messager.alert('提示',data.content,'info');
 								$(".pagination-load").trigger("click");
 							})
@@ -39,7 +38,7 @@ $(function() {
 			handler : function() {
 				var row = $('#dg').datagrid('getSelected');
 				if (row) {
-					updateUser(row.id);
+					updateUser(row.accountNumber);
 				} else {
 					$.messager.alert('提示', "请选中要修改的行", 'info');
 				}
@@ -54,7 +53,7 @@ $(function() {
 })
 
 $('#addUser').form({
-	url : 'saveUser.do',
+	url : 'admin/saveUser.do',
 	onSubmit : function() {
 		//密码验证
 		var pwd = $('#password').val();
@@ -71,10 +70,10 @@ $('#addUser').form({
 	}
 });
 
-function updateUser(id) {
+function updateUser(accountNumber) {
 	$('#user_tab').tabs('select', "用户新增");
 	updateUserTab("编辑用户");
-	$('#addUser').form('load', 'saveUser.do?id=' + id);
+	$('#addUser').form('load', 'admin/getUserByAccountNumber.do?accountNumber=' + accountNumber);
 }
 
 //改变tab
