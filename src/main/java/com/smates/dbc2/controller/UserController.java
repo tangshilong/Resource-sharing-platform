@@ -1,7 +1,10 @@
 package com.smates.dbc2.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -96,6 +99,8 @@ public class UserController extends BaseController {
 	 * @param password
 	 * @param eMail
 	 * @return 创建是否成功
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	@RequestMapping(value = "admin/saveUser", method = RequestMethod.POST)
 	@ResponseBody
@@ -115,7 +120,8 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
-		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(), eMail);
+		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
+				eMail);
 		if (id == null) {
 			logger.info("add user");
 			if (userService.getUserByAccountNumber(accountNumber) != null) {

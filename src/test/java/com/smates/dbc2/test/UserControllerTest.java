@@ -21,7 +21,7 @@ public class UserControllerTest {
 
 	@Test
 	public void testCreateUser(){
-		userController.createUser(2,"tangng", "汤士龙", "123456", "834848102@qq.com", 1, "可用");
+		userController.createUser(30,"tangng3333", "汤士龙", "123456", "834848102@qq.com", 1, "可用");
 	}
 	
 }
