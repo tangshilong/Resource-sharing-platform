@@ -254,11 +254,7 @@
 
 
 		<!-- 3rd party -->
-		<dependency>
-			<groupId>com.xiechanglei.code</groupId>
-			<artifactId>xie-cache</artifactId>
-			<version>1.0.2</version>
-		</dependency>
+		
 
 	</dependencies>
 	<build>

@@ -186,11 +186,4 @@ public class UserController<user> extends BaseController{
 		return userService.getUserById(id);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 }

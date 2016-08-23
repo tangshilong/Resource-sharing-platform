@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.smates.dbc2.aop.PersonalLog;
 import com.smates.dbc2.po.Menu;
 import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.vo.BaseMsg;
 import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.DataGrideRow;
+import com.smates.dbc2.vo.MenuCheckboxVo;
 
 @RequestMapping("admin")
 @Controller
@@ -41,11 +43,11 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping(value = "saveMenu", method = RequestMethod.POST)
 	@ResponseBody
+	@PersonalLog("addMenu")
 	public BaseMsg addMenu(String menuId, String menuName, String menuUrl, String parentId, Integer order, String permition) {
 		if(StringUtils.isEmpty(menuId)){
 			logger.info("添加菜单项");
 			menuService.addMenu(menuName, parentId, menuUrl, order, permition);
-			logger.info("添加成功");
 			return new BaseMsg(true, "菜单添加成功");
 		}else{
 			logger.info("更新菜单项");
@@ -68,14 +70,13 @@ public class MenuController extends BaseController {
 	 *            每页的记录条数
 	 * @return easyUI格式的json
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "getAllMenu", method = RequestMethod.GET)
 	@ResponseBody
-	public DataGrideRow getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,
-			int rows) {
+	public DataGrideRow<Menu> getAllMenu(@RequestParam(defaultValue = "1") int page, String menuName, String permition,
+			 int rows) {
 		logger.info("获取所有菜单项");
 		List<Menu> menus = menuService.getAllMenu(page, menuName, permition, rows);
-		return new DataGrideRow(menuService.countSum(), menus);
+		return new DataGrideRow<Menu>(menuService.countSum(), menus);
 	}
 
 	/**
@@ -85,6 +86,7 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping("getParentMenu")
 	@ResponseBody
+	@PersonalLog("getAllMenu")
 	public List<ComboBoxRow> getParentMenu() {
 		logger.info("获取所有一级菜单");
 		List<ComboBoxRow> comboBoxRows = menuService.getParentMenu();
@@ -112,9 +114,11 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping("getMenuById")
 	@ResponseBody
-	public Menu getMenuById(String menuId) {
+	public MenuCheckboxVo getMenuById(String menuId) {
 		logger.info("获取一个菜单,menuId:" + menuId);
-		return menuService.getMenuById(menuId);
+		Menu menu = menuService.getMenuById(menuId);
+		MenuCheckboxVo menuCheckboxVo = menuService.formatePo(menu);
+		return menuCheckboxVo;
 	}
 
 }

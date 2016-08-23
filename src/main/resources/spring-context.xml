@@ -15,11 +15,9 @@
     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
     http://www.springframework.org/schema/tx 
     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-    
+	
 	<!-- 自动扫描 -->
-	<context:component-scan base-package="com.smates.dbc2.*" />
-
-	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:component-scan base-package="com.smates.dbc2" />
 
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
@@ -93,15 +91,14 @@
 				/admin/*.do = roles[1]
 				/logout.do = anon
 				/submit.do = anon
-				/*.do = authc
+				/*.do= authc
 			</value>
 		</property>
 	</bean>
 
 	<!-- memcached -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<bean class="com.mtzn.code.appserver.cache.config.MemcacheConfig"
-		id="memcachedConfig">
+	<bean class="com.smates.dbc2.memcache.config.MemcacheConfig" id="memcachedConfig">
 		<property name="ips">
 			<list>
 				<value>118.178.17.35</value>
@@ -115,11 +112,8 @@
 		<property name="connectionPoolSize" value="10">
 		</property>
 	</bean>
-	<bean class="com.mtzn.code.appserver.cache.CacheManager"
-		init-method="init">
+	<bean class="com.smates.dbc2.memcache.CacheManager" init-method="init">
 		<property name="cacheConfig" ref="memcachedConfig"></property>
 	</bean>
-
-
 
 </beans>

@@ -11,17 +11,11 @@ import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.UserService;
 import com.smates.dbc2.vo.CostumUser;
 
-@SuppressWarnings("rawtypes")
 @Service
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao userMapper;
-	
-//	@Override
-//	public User getUserById(String userId) {
-//		return userMapper.selectByPrimaryKey(userId);
-//	}
 
 	@Override
 	public String getCurrentUserId() {
