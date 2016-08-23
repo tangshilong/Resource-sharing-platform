@@ -66,5 +66,12 @@ public interface UserService<user> {
 	 */
 	public void updateUser(User user2);
 
+	/**
+	 * 根据id查找用户
+	 * @param id
+	 * @return
+	 */
+	public User getUserById(Integer id);
+
 
 }

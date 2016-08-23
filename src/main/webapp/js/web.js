@@ -56,8 +56,8 @@ $(function() {
 			iconCls : 'icon-search',
 			handler : function() {
 				$('#dg').datagrid('load', {
-					accountNumber : $('#accountNumber').val(),
-					nickName : $('#nickName').val(),
+					menuName : $('#menuName').val(),
+					permiton : $('#permiton').val(),
 				});
 			}
 		}, {
@@ -88,7 +88,6 @@ $(function() {
 				var row = $('#dg').datagrid('getSelected');
 				if (row) {
 					updateMenu(row.menuId);
-					updateUser(row.id);
 				} else {
 					$.messager.alert('提示', "请选中要修改的行", 'info');
 				}

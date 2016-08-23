@@ -128,7 +128,6 @@ public class UserController<user> extends BaseController{
 		Date date = new Date();
 		String time=formatter.format(date);
 		user2.setCreateDate(time);
-  
 		if(id==null){
 			logger.info("add user");
 			User user = userService.getUserByAccountNumber(accountNumber);
@@ -166,7 +165,7 @@ public class UserController<user> extends BaseController{
 	 * @param accountNumber
 	 * @return
 	 */
-	@RequestMapping(value = "deleteUser",method = RequestMethod.GET)
+	@RequestMapping(value = "deleteUser",method = RequestMethod.GET)	
 	@ResponseBody
 	public BaseMsg deleteUser (String accountNumber){
 		logger.info("开始删除user");
@@ -177,14 +176,14 @@ public class UserController<user> extends BaseController{
 	
 	
 	/**
-	 * 根据accountNumber查找用户
-	 * @param accountNumber
+	 * 根据id查找用户
+	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "getUserByAccountNumber",method = RequestMethod.GET)
+	@RequestMapping(value = "getUserById",method = RequestMethod.GET)
 	@ResponseBody
-	public User getUserByAccountNumber(String accountNumber){
-		return userService.getUserByAccountNumber(accountNumber);
+	public User getUserById(Integer id){
+		return userService.getUserById(id);
 	}
 	
 	

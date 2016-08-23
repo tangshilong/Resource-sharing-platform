@@ -74,7 +74,7 @@ $('#addUser').form({
 function updateUser(id) {
 	$('#user_tab').tabs('select', "用户新增");
 	updateUserTab("编辑用户");
-	$('#addUser').form('load', 'saveUser.do?id=' + id);
+	$('#addUser').form('load', 'getUserById.do?id=' + id);
 }
 
 //改变tab

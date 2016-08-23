@@ -23,9 +23,8 @@
 	
 				<!-- LOGO -->
 				<div class="topbar-left">
-					<a
-						href="http://www.smates.cn"
-						class="logo"> <i class="zmdi zmdi-group-work icon-c-logo"></i>
+					<a href="http://www.smates.cn" class="logo"> 
+						<!--<i class="zmdi zmdi-group-work icon-c-logo"></i>-->
 						<span>麦特智能</span></a>
 				</div>
 	
@@ -40,14 +39,15 @@
 					</ul>
 	
 					<ul class="nav navbar-nav pull-right">
-						<li class="nav-item dropdown notification-list"><a
-							class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user"
-							data-toggle="dropdown"
-							href="http://view.jqueryfuns.com/%E9%A2%84%E8%A7%88-/2016/7/8/322317b7d044fb1ebce220dc1e72481e/ui-cards.html#"
-							role="button" aria-haspopup="false" aria-expanded="false"> <img
+						<li class="nav-item dropdown notification-list">
+							<a 
+								class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user"
+								data-toggle="dropdown"
+								href="http://view.jqueryfuns.com/%E9%A2%84%E8%A7%88-/2016/7/8/322317b7d044fb1ebce220dc1e72481e/ui-cards.html#"
+								role="button" aria-haspopup="false" aria-expanded="false"> <img
 								src="./Uplon - Responsive Admin Dashboard Template_files/avatar-1.jpg"
 								alt="user" class="img-circle">
-						</a>
+							</a>
 							<div
 								class="dropdown-menu dropdown-menu-right dropdown-arrow profile-dropdown "
 								aria-labelledby="Preview">
@@ -60,7 +60,7 @@
 	
 								<!-- item-->
 								<a href="logout.do" class="dropdown-item notify-item">
-									<i class="zmdi zmdi-power"></i> <span>Logout</span>
+									<!--<i class="zmdi zmdi-power"></i>--> <span>Logout</span>
 								</a>
 							</div></li>
 					</ul>
@@ -109,7 +109,7 @@
 				<!-- Start content -->
 				<div class="content">
 					<div class="container">
-						<iframe id="content_frame" frameborder="no" ></iframe>
+						<iframe id="content_frame" frameborder="no" ></iframe><!--里面可以定义网页-->
 					</div>
 					<!-- container -->
 				</div>
@@ -127,7 +127,6 @@
 		<script src="js/jquery.app.js"></script>
 		
 		<script type="text/javascript">
-			
 			$("#content_frame,.container").height($(window).height()-$(".footer").height()-$(".navbar").height()-70).width("90%");
 			$(".contentlink").click(function(){
 				var menuUrl = this.getAttribute("menuurl");
