@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50022
 File Encoding         : 65001
 
-Date: 2016-08-22 17:01:39
+Date: 2016-08-23 18:53:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,6 +35,7 @@ CREATE TABLE `s_menu` (
 INSERT INTO `s_menu` VALUES ('1000', '系统管理', '0', 'none', '1000', '1');
 INSERT INTO `s_menu` VALUES ('1200', '菜单管理', '1000', '/Menu.html', '1200', '1');
 INSERT INTO `s_menu` VALUES ('1600', '用户管理', '1000', '/User.html', '1400', '1');
+INSERT INTO `s_menu` VALUES ('77d30e58-ba33-1034-b7aa-d1fa71470f76', '七牛云', '1000', '/qniutest.html', '123', '1');
 
 -- ----------------------------
 -- Table structure for s_role
@@ -65,10 +66,11 @@ CREATE TABLE `s_user` (
   `enable` char(10) NOT NULL default '' COMMENT '账户是否可用 是  “可用”  否 “禁用”',
   `createDate` varchar(40) NOT NULL COMMENT '创建时间',
   `e_mail` char(100) default '',
+  `image` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_user
 -- ----------------------------
-INSERT INTO `s_user` VALUES ('1', 'admin', '管理员', 'ce93dc0787c6ba2db2feaac461cc13fa', '1', '禁用', '2016-08-09', '');
+INSERT INTO `s_user` VALUES ('1', 'admin', '管理员', 'ce93dc0787c6ba2db2feaac461cc13fa', '1', '可用', '2016-08-09', 'baijw12@lzu.edu.cn', '598bc9db-97e0-40e4-bf0d-5a11a6c27933.jpg');

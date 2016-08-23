@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -38,32 +39,37 @@ public class QniuHelper {
 
 	/**
 	 * 将文件上传到七牛云
-	 * @param image 文件二进制流
-	 * @param fileName 文件名
-	 * @throws IOException 
+	 * 
+	 * @param image
+	 *            文件二进制流
+	 * @param fileName
+	 *            文件名
+	 * @throws QiniuException
+	 * @throws IOException
 	 */
-	public void uploadFile(byte[] image, String fileName) throws IOException {
+	public void uploadFile(MultipartFile file, String fileName) {
 		try {
 			// 调用put方法上传
-			Response res = uploadManager.put(image, fileName, getUpToken());
+			Response res = uploadManager.put(file.getBytes(), fileName, getUpToken());
 			// 打印返回的信息
 			logger.info("七牛云:" + res.bodyString());
 		} catch (QiniuException e) {
 			Response r = e.response;
 			// 请求失败时打印的异常的信息
-			logger.info(r.bodyString());
 			try {
-				// 响应的文本信息
 				logger.info(r.bodyString());
 			} catch (QiniuException e1) {
-				// ignore
+				e1.printStackTrace();
 			}
+		} catch (Exception e) {
 		}
 	}
 
 	/**
 	 * 删除七牛云上的文件
-	 * @param fileName 文件名
+	 * 
+	 * @param fileName
+	 *            文件名
 	 */
 	public void deleteFile(String fileName) {
 		// 实例化一个BucketManager对象
@@ -71,7 +77,7 @@ public class QniuHelper {
 		try {
 			// 调用delete方法移动文件
 			bucketManager.delete(bucketname, fileName);
-			logger.info("文件"+fileName+"已删除");
+			logger.info("文件" + fileName + "已删除");
 		} catch (QiniuException e) {
 			// 捕获异常信息
 			Response r = e.response;

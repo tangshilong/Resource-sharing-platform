@@ -45,7 +45,8 @@
 			</table>
 		</div>
 		<div title="用户新增" style="padding: 10px">
-			<form id="addUser" method="post">
+			<form id="addUser" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="id" name="id">
 				<table>
 					<tr>
 						<td>用户账号:</td>
@@ -78,6 +79,12 @@
 							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
+						<td>用户头像:</td>
+						<td><input class="easyui-filebox" name="image"
+							data-options="prompt:'选择文件'" style="width: 200px; height: 32px;"></td>
+
+					</tr>
+					<tr>
 						<td>用户权限:</td>
 						<td>
 							<div style="margin-bottom: 40px; display: inline;">
@@ -100,6 +107,7 @@
 						</td>
 
 					</tr>
+					
 					<tr>
 						<td></td>
 						<td><input type="submit" class="easyui-linkbutton" value="提交"

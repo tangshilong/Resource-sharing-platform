@@ -25,8 +25,10 @@ public class User implements Serializable{
     
     private String eMail;
     
+    private String image;
+    
     public User(Integer id, String accountNumber, String nickName, String password, Integer role, String enable,
-			Date createDate, String eMail) {
+			Date createDate, String eMail, String image) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.nickName = nickName;
@@ -35,6 +37,7 @@ public class User implements Serializable{
 		this.enable = enable;
 		this.createDate = createDate;
 		this.eMail = eMail;
+		this.image = image;
 	}
 
 	public Date getCreateDate() {
@@ -105,6 +108,14 @@ public class User implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public User() {

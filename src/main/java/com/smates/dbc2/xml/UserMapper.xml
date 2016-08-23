@@ -41,9 +41,9 @@
   -->
   <insert id = "insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
   insert into s_user 
-  (accountNumber,nickName, password, role, enable, createDate, e_mail)
+  (accountNumber,nickName, password, role, enable, createDate, e_mail, image)
   values 
-  (#{accountNumber},N#{nickName},#{password},#{role},#{enable},#{createDate},#{eMail})
+  (#{accountNumber},#{nickName},#{password},#{role},#{enable},#{createDate},#{eMail},#{image})
   </insert>
   
   <!-- 
@@ -113,123 +113,30 @@
    -->
   <update id="updateUser" parameterType="user">
   	update s_user
-  	set accountNumber = #{accountNumber},nickName=#{nickName},password=#{password},
-  	role=#{role},enable=#{enable},eMail=#{eMail}
+  	<set>
+  		<if test="accountNumber!=null">
+  			accountNumber = #{accountNumber},
+  		</if>
+  		<if test="nickName">
+  			nickName = #{nickName},
+  		</if>
+  		<if test="password">
+  			password = #{password},
+  		</if>
+  		<if test="role">
+  			role = #{role},
+  		</if>
+  		<if test="enable">
+  			enable = #{enable},
+  		</if>
+  		<if test="eMail">
+  			e_mail = #{eMail},
+  		</if>
+  		<if test="image">
+  			image = #{image},
+  		</if>
+  	</set>
   	where id=#{id}
   </update>
-  
-  
-  
-  
-  
-  
-  <!--  自动生成
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-   
-    from s_user
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from s_user
-    where id = #{id,jdbcType=CHAR}
-  </delete>
-  <insert id="insert" parameterType="user" >
-    insert into s_user (id, user_name, password, 
-      role, enable, createdate, e_mail
-      )
-    values (#{id,jdbcType=CHAR}, #{userName,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
-      #{role,jdbcType=CHAR}, #{enable,jdbcType=CHAR}, #{createdate,jdbcType=DATE}, #{eMail,jdbcType=CHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="user" >
-    insert into s_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="userName != null" >
-        user_name,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="role != null" >
-        role,
-      </if>
-      <if test="enable != null" >
-        enable,
-      </if>
-      <if test="createdate != null" >
-        createdate,
-      </if>
-      <if test="eMail != null" >
-        e_mail,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=CHAR},
-      </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=CHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=CHAR},
-      </if>
-      <if test="role != null" >
-        #{role,jdbcType=CHAR},
-      </if>
-      <if test="enable != null" >
-        #{enable,jdbcType=CHAR},
-      </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=DATE},
-      </if>
-      <if test="eMail != null" >
-        #{eMail,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="user" >
-    update s_user
-    <set >
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=CHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=CHAR},
-      </if>
-      <if test="role != null" >
-        role = #{role,jdbcType=CHAR},
-      </if>
-      <if test="enable != null" >
-        enable = #{enable,jdbcType=CHAR},
-      </if>
-      <if test="createdate != null" >
-        createdate = #{createdate,jdbcType=DATE},
-      </if>
-      <if test="eMail != null" >
-        e_mail = #{eMail,jdbcType=CHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="user" >
-    update s_user
-    set user_name = #{userName,jdbcType=CHAR},
-      password = #{password,jdbcType=CHAR},
-      role = #{role,jdbcType=CHAR},
-      enable = #{enable,jdbcType=CHAR},
-      createdate = #{createdate,jdbcType=DATE},
-      e_mail = #{eMail,jdbcType=CHAR}
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  
-  <select id="findAllUser" resultType="user" >
-  	select user_id,
-  	from s_user
-  </select>
-  -->
   
 </mapper>

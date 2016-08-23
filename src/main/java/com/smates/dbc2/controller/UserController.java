@@ -16,9 +16,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.utils.ShiroUtils;
+import com.smates.dbc2.utils.StringUtils;
+import com.smates.dbc2.utils.SysConst;
 import com.smates.dbc2.utils.ValidaterUtil;
 import com.smates.dbc2.vo.BaseMsg;
 import com.smates.dbc2.vo.DataGrideRow;
@@ -88,6 +91,8 @@ public class UserController extends BaseController {
 		modelMap.addAttribute("menulist", menuService.getMenuByRoles());
 		modelMap.addAttribute("userName",
 				userService.getUserByAccountNumber(userService.getCurrentUserId()).getNickName());
+		modelMap.addAttribute("image",
+				SysConst.QNIUYUNURL + userService.getUserByAccountNumber(userService.getCurrentUserId()).getImage());
 		return "Home.ftl";
 	}
 
@@ -104,8 +109,9 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "admin/saveUser", method = RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg createUser(Integer id, String accountNumber, String nickName, String password, String eMail,
-			Integer role, String enable) {
+	public BaseMsg createUser(MultipartFile image, Integer id, String accountNumber, String nickName, String password,
+			String eMail, Integer role, String enable) {
+
 		if (!ValidaterUtil.checkAccountNumber(accountNumber)) {
 			logger.info("账号格式错误");
 			return new BaseMsg(false, "wrong accountNumber");
@@ -120,8 +126,9 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
+		String imageName = StringUtils.formateFileName(image.getOriginalFilename());
 		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
-				eMail);
+				eMail, imageName);
 		if (id == null) {
 			logger.info("add user");
 			if (userService.getUserByAccountNumber(accountNumber) != null) {
@@ -130,9 +137,15 @@ public class UserController extends BaseController {
 			}
 			userService.createUser(user);
 			logger.info("用户创建成功");
+			if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+				qniuHelper.uploadFile(image, imageName);
+			}
 			return new BaseMsg(true, "操作成功");
 		} else {
 			userService.updateUser(user);
+			if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+				qniuHelper.uploadFile(image, imageName);
+			}
 			return new BaseMsg(true, "用户修改成功");
 		}
 	}
