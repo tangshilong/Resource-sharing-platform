@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mysql.fabric.xmlrpc.base.Data;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.utils.ShiroUtils;
 import com.smates.dbc2.utils.ValidaterUtil;
@@ -150,7 +149,6 @@ public class UserController<user> extends BaseController{
 	 * @return
 	 * TODO tangshilong 未完成					
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "getAllUser",method = RequestMethod.GET)
 	@ResponseBody
 	public DataGrideRow<User> getAllUser(Integer page, Integer rows,String accountNumber,String nickName){

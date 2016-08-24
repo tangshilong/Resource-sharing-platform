@@ -131,7 +131,7 @@
   <update id="updateUser" parameterType="user">
   	update s_user
   	set accountNumber = #{accountNumber},nickName=#{nickName},password=#{password},
-  	role=#{role},enable=#{enable},eMail=#{eMail}
+  	role=#{role},enable=#{enable},e_mail=#{eMail}
   	where id=#{id}
   </update>
   
