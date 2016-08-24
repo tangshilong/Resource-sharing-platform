@@ -10,6 +10,7 @@
 1. mybatis作为orm对数据库进行操作
 1. memcache做缓存管理,加快查询较多的操作,从而提高并发,aop实现
 1. mongo和morphia用来收集用户的行为数据并记录,aop实现
+1. easyUI作为前台框架
 
 ###memcache使用(在service层使用)
 ####配置缓存,缓存服务器的ip和端口
@@ -130,4 +131,17 @@ public BaseMsg addMenu(String menuId, String menuName, String menuUrl, String pa
 |----|----|
 |0|普通用户|
 |1|管理员|
+
+###项目进度
+####已完成
++ 登录,注销
++ 对菜单的增删该查
++ 对用户的增删改查
++ 上传用户头像
+####需优化
++ 用户修改时,密码显示问题
++ 登录超时后,无法自动跳转到登录界面
++ 登录时输入验证码
+####未实现
++ 普通用户权限下的自身信息的维护
 
