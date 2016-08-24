@@ -11,6 +11,7 @@
 1. memcache做缓存管理,加快查询较多的操作,从而提高并发,aop实现
 1. mongo和morphia用来收集用户的行为数据并记录,aop实现
 1. easyUI作为前台框架
+1. 使用七牛云作为文件服务器来存储项目中的图片,文本等文件
 
 ###memcache使用(在service层使用)
 ####配置缓存,缓存服务器的ip和端口
@@ -133,6 +134,67 @@ public BaseMsg addMenu(String menuId, String menuName, String menuUrl, String pa
 |----|----|
 |0|普通用户|
 |1|管理员|
+
+###七牛云文件服务器
+####配置(pom.xml)
+```xml
+<!-- 七牛云文件存储 -->
+<dependency>
+	<groupId>com.qiniu</groupId>
+	<artifactId>qiniu-java-sdk</artifactId>
+	<version>[7.0.0, 7.0.99]</version>
+</dependency>
+
+<!-- 上传文件组件 -->
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>servlet-api</artifactId>
+	<version>3.0-alpha-1</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>commons-fileupload</groupId>
+	<artifactId>commons-fileupload</artifactId>
+	<version>1.2.2</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-io</artifactId>
+	<version>1.3.2</version>
+</dependency>
+```
+
+####demo
+#####前台html
+```html
+<form action="qniu.do" method="post" enctype="multipart/form-data">
+	<input type="file" name="image"/>
+	<input type="submit" />
+</form>
+```
+
+#####上传图片
+```java
+@RequestMapping(value = "admin/saveUser", method = RequestMethod.POST)
+@ResponseBody
+public BaseMsg createUser(MultipartFile image) {
+	if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+		qniuHelper.uploadFile(image, "imageName");
+	}
+}
+```
+
+#####删除图片
+```java
+@RequestMapping(value = "admin/saveUser", method = RequestMethod.POST)
+@ResponseBody
+public BaseMsg createUser(MultipartFile image) {
+	if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+		qniuHelper.deleteFile("imageName");
+	}
+}
+```
+
 
 ###项目进度
 ####已完成
