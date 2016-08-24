@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Basic Tabs - jQuery EasyUI Demo</title>
-<link rel="stylesheet" type="text/css"href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
 <script type="text/javascript" src="easyUI/jquery.min.js"></script>
 <script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
@@ -14,8 +15,8 @@
 		<div title="用戶列表" style="padding: 10px">
 			<div>
 				<div style="margin-bottom: 20px; display: inline;">
-					用戶账号: <input class="easyui-textbox" id="accountNumber" name="accountNumber"
-						style="width: 150px; height: 32px">
+					用戶账号: <input class="easyui-textbox" id="accountNumber"
+						name="accountNumber" style="width: 150px; height: 32px">
 				</div>
 				<div style="margin-bottom: 20px; display: inline;">
 					用户名称: <input class="easyui-textbox" id="nickName" name="nickName"
@@ -26,7 +27,7 @@
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="dg" style="width: auto; height: auto; margin-top: 20px;"
-				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllUser.do',method:'get'">
+				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllUser.do',method:'get'">
 				<thead>
 					<tr>
 						<th data-options="field:'accountNumber',width:140,align:'center'">用户账号</th>
@@ -34,20 +35,24 @@
 						<th data-options="field:'eMail',width:160,align:'center'">用户邮箱</th>
 						<th data-options="field:'role',width:80,align:'center'">用户权限</th>
 						<th data-options="field:'enable',width:80,align:'center'">用户状态</th>
-						<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
+						<th
+							data-options="field:'createDate',width:140,align:'center',formatter:function(value,row,index){  
+                         var unixTimestamp = new Date(value);  
+                         return unixTimestamp.toLocaleString();  
+                         }  ">创建时间</th>
 					</tr>
 				</thead>
 			</table>
 		</div>
 		<div title="用户新增" style="padding: 10px">
-			<form id="addUser" method="post">
+			<form id="addUser" method="post" enctype="multipart/form-data">
 				<input type="hidden" id="id" name="id">
 				<table>
 					<tr>
 						<td>用户账号:</td>
 						<td><input class="easyui-textbox" id="accountNumber"
-							data-options="required:true,validType:'isAccountNumber'" 
-							name="accountNumber"style="width: 200px; height: 32px"></td>
+							data-options="required:true,validType:'isAccountNumber'"
+							name="accountNumber" style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>用户昵称:</td>
@@ -57,44 +62,50 @@
 					</tr>
 					<tr>
 						<td>用户密码:</td>
-						<td><input type="password" class="easyui-textbox" id="password"
-							data-options="required:true,validType:'isPassword'" 
-							name="password"style="width: 200px; height: 32px"></td>
+						<td><input type="password" class="easyui-textbox"
+							id="password" data-options="required:true,validType:'isPassword'"
+							name="password" style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>重输密码:</td>
-						<td><input type="password" class="easyui-textbox" id="testPwd"
-							data-options="required:true" name="testPwd"
+						<td><input type="password" class="easyui-textbox"
+							id="testPwd" data-options="required:true" name="testPwd"
 							style="width: 200px; height: 32px"></td>
 					</tr>
 					<tr>
 						<td>用户邮箱:</td>
 						<td><input class="easyui-textbox" id="eMail"
-							data-options="required:true,validType:'iseMail'" 
-							name="eMail"style="width: 200px; height: 32px"></td>
+							data-options="required:true,validType:'iseMail'" name="eMail"
+							style="width: 200px; height: 32px"></td>
+					</tr>
+					<tr>
+						<td>用户头像:</td>
+						<td><input class="easyui-filebox" name="image"
+							data-options="prompt:'选择文件'" style="width: 200px; height: 32px;"></td>
+
 					</tr>
 					<tr>
 						<td>用户权限:</td>
 						<td>
-						<div style="margin-bottom: 40px; display: inline;">
-							<label  for="role0">&nbsp;&nbsp;普通用户</label>
-							<input   type="radio"   value="0"    name="role"  id="role0" checked="checked"/>
-							<label  for="role1">&nbsp;&nbsp;管理员</label>
-							<input   type="radio"   value="1"    name="role"   id="role1"/>
-						</div>
+							<div style="margin-bottom: 40px; display: inline;">
+								<label for="role0">&nbsp;&nbsp;普通用户</label> <input type="radio"
+									value="0" name="role" id="role0" checked="checked" /> <label
+									for="role1">&nbsp;&nbsp;管理员</label> <input type="radio"
+									value="1" name="role" id="role1" />
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>用户状态:</td>
 						<td>
-						<div style="margin-bottom: 40px; display: inline;">
-							<label  for="enable0">&nbsp;&nbsp;可用</label><span>&nbsp;&nbsp;</span>
-							<input   type="radio"   value="可用"    name="enable"  id="enable0" checked="checked"/>
-							<label  for="enable1">&nbsp;&nbsp;禁用&nbsp;</label>
-							<input   type="radio"   value="禁用"    name="enable"   id="enable1"/>
-						</div>
+							<div style="margin-bottom: 40px; display: inline;">
+								<label for="enable0">&nbsp;&nbsp;可用</label><span>&nbsp;&nbsp;</span>
+								<input type="radio" value="可用" name="enable" id="enable0"
+									checked="checked" /> <label for="enable1">&nbsp;&nbsp;禁用&nbsp;</label>
+								<input type="radio" value="禁用" name="enable" id="enable1" />
+							</div>
 						</td>
-						
+
 					</tr>
 					
 					<tr>
@@ -110,6 +121,5 @@
 
 	<script type="text/javascript" src="js/user.js"></script>
 	<script type="text/javascript" src="js/validate.js"></script>
-
 </body>
 </html>

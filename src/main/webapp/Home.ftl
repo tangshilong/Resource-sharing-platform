@@ -23,9 +23,10 @@
 	
 				<!-- LOGO -->
 				<div class="topbar-left">
-					<a href="http://www.smates.cn" class="logo"> 
-						<!--<i class="zmdi zmdi-group-work icon-c-logo"></i>-->
-						<span>麦特智能</span></a>
+					<a	href="http://www.smates.cn"	class="logo"> 
+						<img class="homeIcon" src="images/home.png">
+						<span>麦特智能</span>
+					</a>
 				</div>
 	
 				<nav class="navbar navbar-custom">
@@ -33,12 +34,13 @@
 						<li class="nav-item">
 							<button
 								class="button-menu-mobile open-left waves-light waves-effect">
-								<i class="zmdi zmdi-menu"></i>
+								<img src="images/menu.png">
 							</button>
 						</li>
 					</ul>
 	
 					<ul class="nav navbar-nav pull-right">
+<<<<<<< HEAD
 						<li class="nav-item dropdown notification-list">
 							<a 
 								class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user"
@@ -46,6 +48,13 @@
 								href="http://view.jqueryfuns.com/%E9%A2%84%E8%A7%88-/2016/7/8/322317b7d044fb1ebce220dc1e72481e/ui-cards.html#"
 								role="button" aria-haspopup="false" aria-expanded="false"> <img
 								src="./Uplon - Responsive Admin Dashboard Template_files/avatar-1.jpg"
+=======
+						<li class="nav-item dropdown notification-list"><a
+							class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user"
+							data-toggle="dropdown"
+							role="button" aria-haspopup="false" aria-expanded="false"> <img
+								src="${image}"
+>>>>>>> branch 'master' of https://git.coding.net/bai295188526/dbc2.git
 								alt="user" class="img-circle">
 							</a>
 							<div
@@ -121,10 +130,10 @@
 		</div>
 		<!-- END wrapper -->
 	
-		<script src="bootstrap/jquery.min.js"></script>
-		<script src="bootstrap/bootstrap.min.js"></script>
-		<script src="bootstrap/waves.js"></script>
-		<script src="bootstrap/jquery.app.js"></script>
+		<script src="bootstrap/js/jquery.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/waves.js"></script>
+		<script src="bootstrap/js/jquery.app.js"></script>
 		
 		<script type="text/javascript">
 			$("#content_frame,.container").height($(window).height()-$(".footer").height()-$(".navbar").height()-70).width("90%");

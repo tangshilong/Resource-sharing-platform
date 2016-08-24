@@ -47,7 +47,7 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getAllMenu( int pageNo, String menuName, String permition, int pageSize) {
+	public List<Menu> getAllMenu(int pageNo, String menuName, String permition, int pageSize) {
 		CostumMenu costumMenu = new CostumMenu();
 		costumMenu.setStartCount((pageNo-1)*pageSize);
 		costumMenu.setMenuName(menuName);

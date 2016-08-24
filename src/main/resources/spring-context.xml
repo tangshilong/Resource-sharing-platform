@@ -95,8 +95,11 @@
 			</value>
 		</property>
 	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 	<!-- memcached -->
+	 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<bean class="com.smates.dbc2.memcache.config.MemcacheConfig" id="memcachedConfig">
 		<property name="ips">
@@ -115,5 +118,5 @@
 	<bean class="com.smates.dbc2.memcache.CacheManager" init-method="init">
 		<property name="cacheConfig" ref="memcachedConfig"></property>
 	</bean>
-
+	
 </beans>

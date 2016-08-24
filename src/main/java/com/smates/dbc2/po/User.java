@@ -1,6 +1,7 @@
 package com.smates.dbc2.po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable{
     /**
@@ -20,12 +21,14 @@ public class User implements Serializable{
 
     private String enable;
 
-    private String createDate;
+    private Date createDate;
     
     private String eMail;
     
+    private String image;
+    
     public User(Integer id, String accountNumber, String nickName, String password, Integer role, String enable,
-			String createDate, String eMail) {
+			Date createDate, String eMail) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.nickName = nickName;
@@ -34,14 +37,15 @@ public class User implements Serializable{
 		this.enable = enable;
 		this.createDate = createDate;
 		this.eMail = eMail;
+		this.image = "000.jpg";
 	}
 
-	public String getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
-	    this.createDate = createDate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 
@@ -104,6 +108,14 @@ public class User implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public User() {
