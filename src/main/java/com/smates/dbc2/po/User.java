@@ -28,7 +28,7 @@ public class User implements Serializable{
     private String image;
     
     public User(Integer id, String accountNumber, String nickName, String password, Integer role, String enable,
-			Date createDate, String eMail, String image) {
+			Date createDate, String eMail) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.nickName = nickName;
@@ -37,7 +37,7 @@ public class User implements Serializable{
 		this.enable = enable;
 		this.createDate = createDate;
 		this.eMail = eMail;
-		this.image = image;
+		this.image = "000.jpg";
 	}
 
 	public Date getCreateDate() {

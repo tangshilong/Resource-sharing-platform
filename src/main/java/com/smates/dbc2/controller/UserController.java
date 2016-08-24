@@ -56,13 +56,14 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String submit(String accountNumber, String userpwd) {
+	public String submit(ModelMap modelMap, String accountNumber, String userpwd) {
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(accountNumber, userpwd);
 		try {
 			subject.login(token);
 		} catch (AuthenticationException ae) {
-			logger.info("密码错误");
+			logger.info("账号或密码错误");
+			modelMap.addAttribute("callback", "false");
 			return "Login.ftl";
 		}
 		logger.info("登录成功");
@@ -126,9 +127,20 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
-		String imageName = StringUtils.formateFileName(image.getOriginalFilename());
+		
+		
+		//创建user对象,默认头像
 		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
-				eMail, imageName);
+				eMail);
+		
+		//如果用户上传了头像,则使用用户上传的头像
+		String imageName = null;
+		if(!StringUtils.isEmpty(image.getOriginalFilename())){
+			imageName = StringUtils.formateFileName(image.getOriginalFilename());
+			// 加入图片样式,缩放和大小
+			user.setImage(imageName + SysConst.QNIUYUNSTYLE);
+		}
+		
 		if (id == null) {
 			logger.info("add user");
 			if (userService.getUserByAccountNumber(accountNumber) != null) {

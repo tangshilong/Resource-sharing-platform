@@ -23,10 +23,10 @@
 	
 				<!-- LOGO -->
 				<div class="topbar-left">
-					<a
-						href="http://www.smates.cn"
-						class="logo"> <i class="zmdi zmdi-group-work icon-c-logo"></i>
-						<span>麦特智能</span></a>
+					<a	href="http://www.smates.cn"	class="logo"> 
+						<img class="homeIcon" src="images/home.png">
+						<span>麦特智能</span>
+					</a>
 				</div>
 	
 				<nav class="navbar navbar-custom">
@@ -34,7 +34,7 @@
 						<li class="nav-item">
 							<button
 								class="button-menu-mobile open-left waves-light waves-effect">
-								<i class="zmdi zmdi-menu"></i>
+								<img src="images/menu.png">
 							</button>
 						</li>
 					</ul>
