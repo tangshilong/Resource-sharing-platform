@@ -54,6 +54,7 @@ public List<Menu> getAllMenu(@CacheKey int pageNo, @CacheKey String menuName, @C
 
 ####清缓存
 清除掉namespace下对应的缓存空间
+
 #####deomo
 ```java
 @Override
@@ -126,6 +127,7 @@ public BaseMsg addMenu(String menuId, String menuName, String menuUrl, String pa
 	</property>
 </bean>
 ```
+
 ####项目目前权限说明
 |权限值|权限名|
 |----|----|
@@ -138,10 +140,12 @@ public BaseMsg addMenu(String menuId, String menuName, String menuUrl, String pa
 + 对菜单的增删该查
 + 对用户的增删改查
 + 上传用户头像
+
 ####需优化
 + 用户修改时,密码显示问题
 + 登录超时后,无法自动跳转到登录界面
 + 登录时输入验证码
+
 ####未实现
 + 普通用户权限下的自身信息的维护
 
