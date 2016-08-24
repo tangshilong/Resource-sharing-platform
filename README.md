@@ -12,6 +12,7 @@
 1. mongo和morphia用来收集用户的行为数据并记录,aop实现
 1. easyUI作为前台框架
 1. 使用七牛云作为文件服务器来存储项目中的图片,文本等文件
+1. log4j做日志输出
 
 ###memcache使用(在service层使用)
 ####配置缓存,缓存服务器的ip和端口
@@ -56,7 +57,7 @@ public List<Menu> getAllMenu(@CacheKey int pageNo, @CacheKey String menuName, @C
 ####清缓存
 清除掉namespace下对应的缓存空间
 
-#####deomo
+#####demo
 ```java
 @Override
 @CacheClear(nameSpace="menu")
