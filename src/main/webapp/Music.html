@@ -34,13 +34,8 @@
 							jsonpCallback : "callback",
 							url : data,
 							success : function(result){
-						 	   	 console.log(result);
-						 	   	 //$.messager.alert('url',result);
-						 	   	 $("#musicUrl").attr("value",result.data[0].audition_list[1].url);
-						 	   	 //$.messager.alert('url',musicUrl);
-						 	   	 //console.log(musicUrl);
-						 	     //$("#play-music").attr("src",src);
-						 	     
+						 	  	console.log(result);
+						 	    $("#musicUrl").attr("value",result.data[0].audition_list[1].url);
 						 	   	var str = "";
 								var addr = "";
 								addr += $("#musicUrl").val().toString();

@@ -1,6 +1,9 @@
 package com.smates.dbc2.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.ws.rs.Encoded;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -23,7 +26,8 @@ public class MusicController extends BaseController{
 	@ResponseBody
 	public String searchMusic(String key) throws UnsupportedEncodingException{
 		logger.info("通过关键词查找歌曲");
-		key = new String(key.getBytes("gbk"),"UTF-8");
+		//key = new String(key.getBytes("gbk"),"UTF-8");
+		key = URLEncoder.encode(key,"utf-8");
 		String url = "http://so.ard.iyyin.com/s/song_with_out?q="+ key +"&page=1&size=15";
 		logger.info(url);
 		return url;
