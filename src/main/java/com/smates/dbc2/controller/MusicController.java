@@ -1,5 +1,7 @@
 package com.smates.dbc2.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +17,13 @@ public class MusicController extends BaseController{
 	 * 通过关键词返回url
 	 * @param key
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "searchMusic",method=RequestMethod.GET)
 	@ResponseBody
-	public String searchMusic(String key){
+	public String searchMusic(String key) throws UnsupportedEncodingException{
 		logger.info("通过关键词查找歌曲");
+		key = new String(key.getBytes("gbk"),"UTF-8");
 		String url = "http://so.ard.iyyin.com/s/song_with_out?q="+ key +"&page=1&size=15";
 		logger.info(url);
 		return url;

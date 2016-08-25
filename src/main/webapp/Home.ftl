@@ -40,21 +40,11 @@
 					</ul>
 	
 					<ul class="nav navbar-nav pull-right">
-<<<<<<< HEAD
-						<li class="nav-item dropdown notification-list">
-							<a 
-								class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user"
-								data-toggle="dropdown"
-								href="http://view.jqueryfuns.com/%E9%A2%84%E8%A7%88-/2016/7/8/322317b7d044fb1ebce220dc1e72481e/ui-cards.html#"
-								role="button" aria-haspopup="false" aria-expanded="false"> <img
-								src="./Uplon - Responsive Admin Dashboard Template_files/avatar-1.jpg"
-=======
 						<li class="nav-item dropdown notification-list"><a
 							class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user"
 							data-toggle="dropdown"
 							role="button" aria-haspopup="false" aria-expanded="false"> <img
 								src="${image}"
->>>>>>> branch 'master' of https://git.coding.net/bai295188526/dbc2.git
 								alt="user" class="img-circle">
 							</a>
 							<div
