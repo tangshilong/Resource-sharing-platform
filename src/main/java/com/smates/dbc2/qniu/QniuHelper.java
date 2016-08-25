@@ -11,6 +11,7 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import com.smates.dbc2.utils.SysConst;
 
 /**
  * 使用七牛云实现对文件存储和删除
@@ -83,6 +84,15 @@ public class QniuHelper {
 			Response r = e.response;
 			logger.info(r.toString());
 		}
+	}
+	
+	/**
+	 * 给用户的头像图片加格式,缩放 100px*100px
+	 * @param imageName 图片文件名
+	 * @return
+	 */
+	public static String formateUserHeadIcon(String imageName){
+		return imageName+SysConst.QNIUYUNSTYLE;
 	}
 
 }

@@ -24,9 +24,9 @@ $.extend($.fn.validatebox.defaults.rules, {
 	},
 	isPassword : {
 		validator : function(value,param){
-			return /[A-Za-z0-9!.]{6,20}$/.test(value);
+			return /[A-Za-z0-9!.]{6,40}$/.test(value);
 		},
-		message : '密码不合法，格式为字母和数字的组合,长度在6~20位'
+		message : '密码不合法，格式为字母和数字的组合,长度在6~40位'
 	},
 	iseMail : {
 		validator : function(value,param){

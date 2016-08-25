@@ -11,7 +11,7 @@ public class ValidaterUtil {
 
 	public static Pattern accountNumberPattern = Pattern.compile("^[A-Za-z0-9]{1,15}$");
 
-	public static Pattern passWordPattern = Pattern.compile("^[A-Za-z0-9!.]{6,20}$");
+	public static Pattern passWordPattern = Pattern.compile("^[A-Za-z0-9!.]{6,40}$");
 
 	public static Pattern eMailPattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$");
 	/**

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.smates.dbc2.po.User;
+import com.smates.dbc2.qniu.QniuHelper;
 import com.smates.dbc2.utils.ShiroUtils;
 import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.utils.SysConst;
@@ -98,7 +99,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 创建用户
+	 * 创建用户,id为null是为新增用户,id不为空时为修改用户
 	 * 
 	 * @param accountNumber
 	 * @param nickName
@@ -127,39 +128,46 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
-		
-		
-		//创建user对象,默认头像
+
+		// 创建user对象,默认头像
 		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
 				eMail);
 		
-		//如果用户上传了头像,则使用用户上传的头像
-		String imageName = null;
-		if(!StringUtils.isEmpty(image.getOriginalFilename())){
-			imageName = StringUtils.formateFileName(image.getOriginalFilename());
-			// 加入图片样式,缩放和大小
-			user.setImage(imageName + SysConst.QNIUYUNSTYLE);
-		}
+		User userPo = userService.getUserByAccountNumber(accountNumber);
 		
+		// 加入图片样式,缩放和大小
+		String imageName = null;
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+			imageName = StringUtils.formateFileName(image.getOriginalFilename());
+			user.setImage(QniuHelper.formateUserHeadIcon(imageName));
+		}
+
 		if (id == null) {
 			logger.info("add user");
-			if (userService.getUserByAccountNumber(accountNumber) != null) {
+			if (userPo != null) {
 				logger.info("账号已存在，注册失败");
 				return new BaseMsg(false, "accountNumber already exist");
 			}
 			userService.createUser(user);
-			logger.info("用户创建成功");
-			if (!StringUtils.isEmpty(image.getOriginalFilename())) {
-				qniuHelper.uploadFile(image, imageName);
-			}
-			return new BaseMsg(true, "操作成功");
 		} else {
-			userService.updateUser(user);
-			if (!StringUtils.isEmpty(image.getOriginalFilename())) {
-				qniuHelper.uploadFile(image, imageName);
+			//判断用户是否修改了密码
+			String popwd = userPo.getPassword();
+			if(popwd.equals(password)){
+				user.setPassword(password);
 			}
-			return new BaseMsg(true, "用户修改成功");
+			//如果用户没有修改头像
+			if (StringUtils.isEmpty(image.getOriginalFilename())) {
+				user.setImage(null);
+			}
+			logger.info("update user");
+			userService.updateUser(user);
 		}
+
+		// 如果用户上传了头像,则使用用户上传的头像
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+			qniuHelper.uploadFile(image, imageName);
+		}
+		return new BaseMsg(true, "保存成功");
 	}
 
 	/**
