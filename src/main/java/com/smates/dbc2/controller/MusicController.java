@@ -3,8 +3,6 @@ package com.smates.dbc2.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import javax.ws.rs.Encoded;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
