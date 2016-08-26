@@ -46,7 +46,7 @@
 							role="button" aria-haspopup="false" aria-expanded="false"> <img
 								src="${image}"
 								alt="user" class="img-circle">
-						</a>
+							</a>
 							<div
 								class="dropdown-menu dropdown-menu-right dropdown-arrow profile-dropdown "
 								aria-labelledby="Preview">
@@ -59,7 +59,7 @@
 	
 								<!-- item-->
 								<a href="logout.do" class="dropdown-item notify-item">
-									<i class="zmdi zmdi-power"></i> <span>Logout</span>
+									<!--<i class="zmdi zmdi-power"></i>--> <span>Logout</span>
 								</a>
 							</div></li>
 					</ul>
@@ -108,7 +108,7 @@
 				<!-- Start content -->
 				<div class="content">
 					<div class="container">
-						<iframe id="content_frame" frameborder="no" ></iframe>
+						<iframe id="content_frame" frameborder="no" ></iframe><!--里面可以定义网页-->
 					</div>
 					<!-- container -->
 				</div>
@@ -126,7 +126,6 @@
 		<script src="bootstrap/js/jquery.app.js"></script>
 		
 		<script type="text/javascript">
-			
 			$("#content_frame,.container").height($(window).height()-$(".footer").height()-$(".navbar").height()-70).width("90%");
 			$(".contentlink").click(function(){
 				var menuUrl = this.getAttribute("menuurl");

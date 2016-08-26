@@ -30,6 +30,23 @@
   where accountNumber = #{accountNumber}
   </select>
   
+  <!-- 
+  	des:
+  		根据id查user
+  	example sql：
+  		select *
+	 	 from s_user
+		 where id = 8
+   -->
+  <select id = "getUserById" parameterType="int" resultMap="BaseResultMap">
+  select *
+  from s_user
+  where id = #{value}
+  </select>
+  
+  
+  
+  
   <!--  
   	des:
   		像s_user表中插入数据

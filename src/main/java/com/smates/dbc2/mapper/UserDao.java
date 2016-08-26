@@ -53,4 +53,11 @@ public interface UserDao {
 	 */
 	public void updateUser(User user2);
 
+	/**
+	 * 根据id查找user
+	 * @param id
+	 * @return
+	 */
+	public User getUserById(Integer id);
+	
 }

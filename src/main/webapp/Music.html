@@ -9,22 +9,29 @@
 		<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
 	</head>
 	<body>
-		<div id="input">
-			<form id="input-music" method="get">
-				关键词<input type="text" name="key" id="key" value="hello" />
-				<input type="submit" value="searchMusic" />
-				<input type="hidden" name="musicUrl" id="musicUrl"/>
-				<div id="playmc">
-					<input type="hidden" name="src" id="src" value="http://m5.file.xiami.com/485/23485/2100226190/1774998338_59030550_l.mp3?auth_key=3b2e0157fc69c8ba5e5e7ad8a27db9f1-1472083200-0-null"/>
-					<div id="container">
-					</div>
+		<div style="margin: 20px 0 10px 0;"></div>
+		<div id="music_tab" class="easyui-tabs" style="width: auto;">
+			<div title="查找歌曲" style="padding: 10px">
+				<div id="input" style="margin-bottom: 20px; display: inline;">
+					<form id="input-music" method="get">
+						关键词: <input class="easyui-textbox" style="width: 150px; height: 32px" type="text" name="key" id="key" value="hello" />
+						<input type="submit" style="width: 100px; height: 32px" class="easyui-linkbutton" data-options="iconCls:'icon-search'" value="searchMusic" />
+						<input type="hidden" name="musicUrl" id="musicUrl"/>
+						<div id="playmc">
+							<input type="hidden" name="src" id="src" value="http://m5.file.xiami.com/485/23485/2100226190/1774998338_59030550_l.mp3?auth_key=3b2e0157fc69c8ba5e5e7ad8a27db9f1-1472083200-0-null"/>
+							<div id="container">
+							</div>
+						</div>
+					</form>
 				</div>
-			</form>
+			</div>
+		</div>	
 		<script type="text/javascript">
 		     window.onload = function(){
+		     	var keyword = encodeURI("$('#Key').val()");
 				$('#input-music').form({
 					url : 'searchMusic.do',
-					key : $('#Key').val(),
+					key : keyword,
 					success : function(data){
 						//$.messager.alert('url',data);
 							$.ajax({
@@ -34,13 +41,8 @@
 							jsonpCallback : "callback",
 							url : data,
 							success : function(result){
-						 	   	 console.log(result);
-						 	   	 //$.messager.alert('url',result);
-						 	   	 $("#musicUrl").attr("value",result.data[0].audition_list[1].url);
-						 	   	 //$.messager.alert('url',musicUrl);
-						 	   	 //console.log(musicUrl);
-						 	     //$("#play-music").attr("src",src);
-						 	     
+						 	  	console.log(result);
+						 	    $("#musicUrl").attr("value",result.data[0].audition_list[1].url);
 						 	   	var str = "";
 								var addr = "";
 								addr += $("#musicUrl").val().toString();
