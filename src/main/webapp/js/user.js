@@ -68,6 +68,9 @@ $('#addUser').form({
 function updateUser(accountNumber) {
 	$('#user_tab').tabs('select', "用户新增");
 	updateUserTab("编辑用户");
+	$('#accountNumber').textbox({
+		editable:false
+	});
 	$('#addUser').form('load','admin/getUserByAccountNumber.do?accountNumber=' + accountNumber);
 	$.get("admin/getUserByAccountNumber.do",{"accountNumber":accountNumber},function(data){
 		$("#headicon").attr("src", "http://ocb1neay4.bkt.clouddn.com/"+data.image);
@@ -89,8 +92,8 @@ function updateUserTab(tabName) {
 $(function() {
 	$("#search_btn_user").click(function() {
 		$('#dg').datagrid('load', {
-			accountNumber : $('#accountNumber').val(),
-			nickName : $('#nickName').val()
+			accountNumber : $('#accountNumber_search').val(),
+			nickName : $('#nickName_search').val()
 		});
 	})
 })
@@ -101,7 +104,6 @@ $("#image").change(function() {
 	if (fileUrl) {
 		$("#headicon").attr("src", fileUrl);
 	}
-	alert(fileUrl);
 });
 
 // 建立一個可存取到該file的url
