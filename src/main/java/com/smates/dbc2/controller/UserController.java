@@ -128,6 +128,12 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
+		if(!StringUtils.isEmpty(image.getOriginalFilename())){
+			if (!ValidaterUtil.checkImage(image.getOriginalFilename())) {
+				logger.info("上传的不是图片");
+				return new BaseMsg(false, "图片格式只支持png,jpg,bmp,jpeg,gif");
+			}
+		}
 
 		// 创建user对象,默认头像
 		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
@@ -241,6 +247,13 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
+		if(!StringUtils.isEmpty(image.getOriginalFilename())){
+			if (!ValidaterUtil.checkImage(image.getOriginalFilename())) {
+				logger.info("上传的不是图片");
+				return new BaseMsg(false, "图片格式只支持png,jpg,bmp,jpeg,gif");
+			}
+		}
+		
 
 		// 用户权限下只允许修改,密码,邮箱,昵称和头像
 		String fileName = null;
