@@ -132,9 +132,9 @@ public class UserController extends BaseController {
 		// 创建user对象,默认头像
 		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
 				eMail);
-		
+
 		User userPo = userService.getUserByAccountNumber(accountNumber);
-		
+
 		// 加入图片样式,缩放和大小
 		String imageName = null;
 		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
@@ -150,12 +150,12 @@ public class UserController extends BaseController {
 			}
 			userService.createUser(user);
 		} else {
-			//判断用户是否修改了密码
+			// 判断用户是否修改了密码
 			String popwd = userPo.getPassword();
-			if(popwd.equals(password)){
+			if (popwd.equals(password)) {
 				user.setPassword(password);
 			}
-			//如果用户没有修改头像
+			// 如果用户没有修改头像
 			if (StringUtils.isEmpty(image.getOriginalFilename())) {
 				user.setImage(null);
 			}
@@ -208,6 +208,61 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public User getUserByAccountNumber(String accountNumber) {
 		return userService.getUserByAccountNumber(accountNumber);
+	}
+
+	/**
+	 * 获取当前登录的用户信息
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "getCurrentUser", method = RequestMethod.GET)
+	@ResponseBody
+	public User getCurrentUser() {
+		return userService.getUserByAccountNumber(userService.getCurrentUserId());
+	}
+
+	/**
+	 * 普通用户权限下对信息的修改
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseMsg updateUser(MultipartFile image, Integer id, String accountNumber, String nickName, String password,
+			String eMail) {
+		logger.info("用户自身信息维护");
+		if (!ValidaterUtil.checkPassWord(password)) {
+			logger.info("密码格式错误");
+			return new BaseMsg(false, "password wrong");
+		}
+		if (eMail != null) {
+			if (!ValidaterUtil.checkEMail(eMail)) {
+				logger.info("邮箱格式不正确");
+				return new BaseMsg(false, "wrong e-mail");
+			}
+		}
+
+		// 用户权限下只允许修改,密码,邮箱,昵称和头像
+		String fileName = null;
+		User user = new User(id, null, nickName, ShiroUtils.passwdMD5(password), null, null, null, eMail);
+		User userpo = userService.getUserByAccountNumber(userService.getCurrentUserId());
+		// 密码没有修改
+		if (password.equals(userpo.getPassword())) {
+			user.setPassword(null);
+		}
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+			// 修改头像
+			fileName = StringUtils.formateFileName(image.getOriginalFilename());
+			user.setImage(QniuHelper.formateUserHeadIcon(fileName));
+		} else {
+			// 不修改头像
+			user.setImage(null);
+		}
+		userService.updateUser(user);
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+			qniuHelper.uploadFile(image, fileName);
+		}
+		return new BaseMsg(true, "信息修改成功");
 	}
 
 }

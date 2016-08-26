@@ -134,22 +134,22 @@
   		<if test="accountNumber!=null">
   			accountNumber = #{accountNumber},
   		</if>
-  		<if test="nickName">
+  		<if test="nickName!=null">
   			nickName = #{nickName},
   		</if>
-  		<if test="password">
+  		<if test="password!=null">
   			password = #{password},
   		</if>
-  		<if test="role">
+  		<if test="role!=null">
   			role = #{role},
   		</if>
-  		<if test="enable">
+  		<if test="enable!=null">
   			enable = #{enable},
   		</if>
-  		<if test="eMail">
+  		<if test="eMail!=null">
   			e_mail = #{eMail},
   		</if>
-  		<if test="image">
+  		<if test="image!=null">
   			image = #{image},
   		</if>
   	</set>

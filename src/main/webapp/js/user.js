@@ -1,4 +1,4 @@
-//user.html
+//用户模块
 $(function() {
 	var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of
 	// datagrid

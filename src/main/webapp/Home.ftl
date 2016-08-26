@@ -59,7 +59,13 @@
 	
 								<!-- item-->
 								<a href="logout.do" class="dropdown-item notify-item">
-									<!--<i class="zmdi zmdi-power"></i>--> <span>Logout</span>
+									<img src="images/logout.png" />
+									<span>注销</span>
+								</a>
+								
+								<a class="userinfoform dropdown-item notify-item" href="javascript:void(0)" menuurl="/UserInfoForm.html" >
+									<img src="images/iconfont-myfill.png" />
+									<span>信息维护</span>
 								</a>
 							</div></li>
 					</ul>
@@ -135,6 +141,11 @@
 				$(this).parent().attr("class","active");
 				$(this).parent().parent().attr("style","display: block");
 			});
+			$(".userinfoform").click(function(){
+				var menuUrl = this.getAttribute("menuurl");
+				$("#content_frame").attr("src","${rc.getContextPath()}"+menuUrl);
+			});
+			
 		</script>
 		
 	</body>
