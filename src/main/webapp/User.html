@@ -22,8 +22,8 @@
 						name="accountNumber" style="width: 150px; height: 32px">
 				</div>
 				<div style="margin-bottom: 20px; display: inline;">
-					用户名称: <input class="easyui-textbox" id="nickName_search" name="nickName"
-						style="width: 150px; height: 32px">
+					用户名称: <input class="easyui-textbox" id="nickName_search"
+						name="nickName" style="width: 150px; height: 32px">
 				</div>
 				<a href="#" id="search_btn_user" class="easyui-linkbutton"
 					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
@@ -37,7 +37,6 @@
 						<th data-options="field:'nickName',width:160,align:'center'">用户名称</th>
 						<th data-options="field:'eMail',width:160,align:'center'">用户邮箱</th>
 						<th data-options="field:'role',width:80,align:'center'">用户权限</th>
-						<th data-options="field:'enable',width:80,align:'center'">用户状态</th>
 						<th
 							data-options="field:'createDate',width:140,align:'center',formatter:function(value,row,index){  
                          var unixTimestamp = new Date(value);  
@@ -79,7 +78,8 @@
 						</tr>
 						<tr>
 							<td>用户头像:</td>
-							<td><input type="file" id="image" name="image" style="width: 200px; height: 32px;margin-top:10px;"></td>
+							<td><input type="file" id="image" name="image"
+								style="width: 200px; height: 32px; margin-top: 10px;"></td>
 						</tr>
 						<tr>
 							<td>用户权限:</td>
@@ -92,19 +92,6 @@
 								</div>
 							</td>
 						</tr>
-						<tr>
-							<td>用户状态:</td>
-							<td>
-								<div style="margin-bottom: 40px; display: inline;">
-									<label for="enable0">&nbsp;&nbsp;可用</label><span>&nbsp;&nbsp;</span>
-									<input type="radio" value="可用" name="enable" id="enable0"
-										checked="checked" /> <label for="enable1">&nbsp;&nbsp;禁用&nbsp;</label>
-									<input type="radio" value="禁用" name="enable" id="enable1" />
-								</div>
-							</td>
-
-						</tr>
-
 						<tr>
 							<td></td>
 							<td><input type="submit" class="easyui-linkbutton"

@@ -3,8 +3,8 @@ package com.smates.dbc2.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
-    /**
+public class User implements Serializable {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -12,29 +12,26 @@ public class User implements Serializable{
 	private Integer id;
 
 	private String accountNumber;
-	
-    private String nickName;
 
-    private String password;
+	private String nickName;
 
-    private Integer role;
+	private String password;
 
-    private String enable;
+	private Integer role;
 
-    private Date createDate;
-    
-    private String eMail;
-    
-    private String image;
-    
-    public User(Integer id, String accountNumber, String nickName, String password, Integer role, String enable,
-			Date createDate, String eMail) {
+	private Date createDate;
+
+	private String eMail;
+
+	private String image;
+
+	public User(Integer id, String accountNumber, String nickName, String password, Integer role, Date createDate,
+			String eMail) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.nickName = nickName;
 		this.password = password;
 		this.role = role;
-		this.enable = enable;
 		this.createDate = createDate;
 		this.eMail = eMail;
 		this.image = "000.jpg";
@@ -48,8 +45,6 @@ public class User implements Serializable{
 		this.createDate = createDate;
 	}
 
-
-   
 	public Integer getId() {
 		return id;
 	}
@@ -90,14 +85,6 @@ public class User implements Serializable{
 		this.role = role;
 	}
 
-	public String getEnable() {
-		return enable;
-	}
-
-	public void setEnable(String enable) {
-		this.enable = enable;
-	}
-
 	public String geteMail() {
 		return eMail;
 	}
@@ -109,7 +96,7 @@ public class User implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	public String getImage() {
 		return image;
 	}
@@ -120,11 +107,11 @@ public class User implements Serializable{
 
 	public User() {
 	}
-    
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", accountNumber=" + accountNumber + ", nickName=" + nickName + ", password="
-				+ password + ", role=" + role + ", enable=" + enable + ", createDate=" + createDate + ", eMail=" + eMail
+				+ password + ", role=" + role + ", createDate=" + createDate + ", eMail=" + eMail
 				+ "]";
 	}
 }

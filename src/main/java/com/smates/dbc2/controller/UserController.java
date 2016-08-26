@@ -136,7 +136,7 @@ public class UserController extends BaseController {
 		}
 
 		// 创建user对象,默认头像
-		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, enable, new Date(),
+		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, new Date(),
 				eMail);
 
 		User userPo = userService.getUserByAccountNumber(accountNumber);
@@ -257,7 +257,7 @@ public class UserController extends BaseController {
 
 		// 用户权限下只允许修改,密码,邮箱,昵称和头像
 		String fileName = null;
-		User user = new User(id, null, nickName, ShiroUtils.passwdMD5(password), null, null, null, eMail);
+		User user = new User(id, null, nickName, ShiroUtils.passwdMD5(password), null, null, eMail);
 		User userpo = userService.getUserByAccountNumber(userService.getCurrentUserId());
 		// 密码没有修改
 		if (password.equals(userpo.getPassword())) {

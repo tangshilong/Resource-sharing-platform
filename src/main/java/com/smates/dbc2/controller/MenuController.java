@@ -86,7 +86,6 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping("getParentMenu")
 	@ResponseBody
-	@PersonalLog("getAllMenu")
 	public List<ComboBoxRow> getParentMenu() {
 		logger.info("获取所有一级菜单");
 		List<ComboBoxRow> comboBoxRows = menuService.getParentMenu();
