@@ -14,7 +14,7 @@ public @interface CacheClear {
 	
 	String cachePrefix() default "";
 
-	String defaultKey() default "data";
+	String defaultKey() default "";
 
 	String nameSpace();
 

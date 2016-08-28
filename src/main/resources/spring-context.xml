@@ -99,17 +99,16 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 	<!-- memcached -->
-	<!--  
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<bean class="com.smates.dbc2.memcache.config.MemcacheConfig" id="memcachedConfig">
 		<property name="ips">
 			<list>
-				<value>118.178.17.35</value>
+				<value>115.29.175.47</value>
 			</list>
 		</property>
 		<property name="ports">
 			<list>
-				<value>11211</value>
+				<value>19000</value>
 			</list>
 		</property>
 		<property name="connectionPoolSize" value="10">
@@ -118,5 +117,5 @@
 	<bean class="com.smates.dbc2.memcache.CacheManager" init-method="init">
 		<property name="cacheConfig" ref="memcachedConfig"></property>
 	</bean>
-	-->
+
 </beans>
