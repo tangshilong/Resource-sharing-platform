@@ -26,9 +26,11 @@ public class MenuServiceImpl implements MenuService{
 	@Autowired
 	private UserService userService;
 	
+	
 	@Override
-	public List<Menu> getMenuByRoles() {
-		User user = userService.getUserByAccountNumber(userService.getCurrentUserId());
+	@CacheRead(nameSpace="menu",cachePrefix="getByRoles")
+	public List<Menu> getMenuByRoles(@CacheKey String accountNumber) {
+		User user = userService.getUserByAccountNumber(accountNumber);
 		return menuDao.getMenuByRole(user.getRole());
 	}
 
