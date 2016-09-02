@@ -11,8 +11,8 @@ import java.lang.annotation.Target;
  * @author Administrator
  *
  */
-@Target(value = { ElementType.METHOD })
-@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = { ElementType.METHOD })//描述方法
+@Retention(value = RetentionPolicy.RUNTIME)//保留时间
 public @interface PersonalLog {
 	String value();//用户做了什么
 }

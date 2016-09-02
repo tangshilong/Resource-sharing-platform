@@ -147,7 +147,6 @@ public class UserController extends BaseController {
 			imageName = StringUtils.formateFileName(image.getOriginalFilename());
 			user.setImage(QniuHelper.formateUserHeadIcon(imageName));
 		}
-
 		if (id == null) {
 			logger.info("add user");
 			if (userPo != null) {
