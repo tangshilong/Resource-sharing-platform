@@ -9,7 +9,7 @@
 	<div class="container">
 		<section id="content">
 			<form action="login.do" method="post">
-				<h1>智慧家庭数据库管理</h1>
+				<h1>516资源共享平台</h1>
 				<#if callback?has_content><div class="callback">账号或密码错误</div></#if>
 				<div>
 					<input type="text" placeholder="用户名" required=""

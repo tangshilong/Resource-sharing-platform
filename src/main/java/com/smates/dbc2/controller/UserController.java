@@ -90,7 +90,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("home")
 	public String home(ModelMap modelMap) {
-		modelMap.addAttribute("menulist", menuService.getMenuByRoles(userService.getCurrentUserId()));
+		modelMap.addAttribute("menulist", menuService.getMenuByRoles(userService.getUserByAccountNumber(userService.getCurrentUserId()).getRole()));
 		modelMap.addAttribute("userName",
 				userService.getUserByAccountNumber(userService.getCurrentUserId()).getNickName());
 		modelMap.addAttribute("image",

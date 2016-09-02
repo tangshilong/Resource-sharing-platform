@@ -10,9 +10,7 @@ import com.smates.dbc2.mencache.annotation.CacheClear;
 import com.smates.dbc2.mencache.annotation.CacheKey;
 import com.smates.dbc2.mencache.annotation.CacheRead;
 import com.smates.dbc2.po.Menu;
-import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.MenuService;
-import com.smates.dbc2.service.UserService;
 import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.CostumMenu;
 import com.smates.dbc2.vo.MenuCheckboxVo;
@@ -23,15 +21,10 @@ public class MenuServiceImpl implements MenuService{
 	@Autowired
 	private MenuDao menuDao;
 	
-	@Autowired
-	private UserService userService;
-	
-	
 	@Override
 	@CacheRead(nameSpace="menu",cachePrefix="getByRoles")
-	public List<Menu> getMenuByRoles(@CacheKey String accountNumber) {
-		User user = userService.getUserByAccountNumber(accountNumber);
-		return menuDao.getMenuByRole(user.getRole());
+	public List<Menu> getMenuByRoles(@CacheKey Integer role) {
+		return menuDao.getMenuByRole(role);
 	}
 
 	@Override

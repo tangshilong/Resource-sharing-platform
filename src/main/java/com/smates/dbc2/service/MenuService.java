@@ -17,7 +17,7 @@ public interface MenuService {
 	 * 根据用户权限获取获取菜单,二级菜单在一级菜单下
 	 * @return
 	 */
-	public List<Menu> getMenuByRoles(String accountNumber);
+	public List<Menu> getMenuByRoles(Integer role);
 	
 	/**
 	 * 添加一个菜单
