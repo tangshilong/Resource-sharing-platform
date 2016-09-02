@@ -8,7 +8,7 @@
 			content="控制台管理程序">
 		<meta name="author" content="baijw">
 		<!-- App title -->
-		<title>XXX控制台程序</title>
+		<title>516资源共享</title>
 		<!-- App CSS -->
 		<link href="css/homestyle.css" rel="stylesheet" type="text/css" />
 	</head>
@@ -25,7 +25,7 @@
 				<div class="topbar-left">
 					<a	href="http://www.smates.cn"	class="logo"> 
 						<img class="homeIcon" src="images/home.png">
-						<span>麦特智能</span>
+						<span>Lab516</span>
 					</a>
 				</div>
 	
@@ -122,7 +122,7 @@
 			</div>
 			<!-- End content-page -->
 	
-			<footer class="footer text-right"> 2016 © 安徽麦特智能技术有限公司. </footer>
+			<footer class="footer text-right"> 2016 © 516实验室. </footer>
 		</div>
 		<!-- END wrapper -->
 	

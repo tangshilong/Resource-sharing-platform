@@ -90,7 +90,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("home")
 	public String home(ModelMap modelMap) {
-		modelMap.addAttribute("menulist", menuService.getMenuByRoles());
+		modelMap.addAttribute("menulist", menuService.getMenuByRoles(userService.getUserByAccountNumber(userService.getCurrentUserId()).getRole()));
 		modelMap.addAttribute("userName",
 				userService.getUserByAccountNumber(userService.getCurrentUserId()).getNickName());
 		modelMap.addAttribute("image",
@@ -147,6 +147,7 @@ public class UserController extends BaseController {
 			imageName = StringUtils.formateFileName(image.getOriginalFilename());
 			user.setImage(QniuHelper.formateUserHeadIcon(imageName));
 		}
+
 		if (id == null) {
 			logger.info("add user");
 			if (userPo != null) {
@@ -276,5 +277,4 @@ public class UserController extends BaseController {
 		}
 		return new BaseMsg(true, "信息修改成功");
 	}
-
 }
