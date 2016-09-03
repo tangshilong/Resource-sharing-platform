@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basic Tabs - jQuery EasyUI Demo</title>
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
+<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<div style="margin: 20px 0 10px 0;"></div>
+	<div id="myr_tab" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width: auto;">
+		<div title="我的资源" style="padding: 10px">
+			<div>
+				<div style="margin-bottom: 20px; display: inline;">
+					资源名称: <input class="easyui-textbox" id="name" name="name"
+						style="width: 150px; height: 32px">
+				</div>
+				<div style="margin-bottom: 20px; display: inline;">
+					资源类型: <input class="easyui-textbox" id="type" name="type"
+						style="width: 150px; height: 32px">
+				</div>
+				<a href="#" id="search_btn" class="easyui-linkbutton"
+					data-options="iconCls:'icon-search'" style="width: 80px">查找</a>
+			</div>
+			<div style="height: 10px;"></div>
+			<table id="dg" style="width: auto; height: auto; margin-top: 20px;"
+				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllMenu.do',method:'get'">
+				<thead>
+					<tr>
+						<th data-options="field:'menuId',width:100">资源类型</th>
+						<th data-options="field:'menuName',width:100">资源名称</th>
+						<th data-options="field:'menuUrl',width:80,align:'right'">资源内容</th>
+						<th data-options="field:'permition',width:80,align:'right'">资源描述</th>
+						<th data-options="field:'parentId',width:60,align:'center'">创建时间</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div title="上传资源" style="padding: 10px">
+			
+
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/validate.js"></script>
+
+</body>
+</html>

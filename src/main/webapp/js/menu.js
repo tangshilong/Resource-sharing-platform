@@ -88,7 +88,6 @@ $(function() {
 				var row = $('#dg').datagrid('getSelected');
 				if (row) {
 					updateMenu(row.menuId);
-					updateUser(row.id);
 				} else {
 					$.messager.alert('提示', "请选中要修改的行", 'info');
 				}
