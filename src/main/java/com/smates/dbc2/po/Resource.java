@@ -1,11 +1,9 @@
 package com.smates.dbc2.po;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class BaseResource implements Serializable{
+public class Resource{
 	
-	private static final long serialVersionUID = 1L;
 	private String id;
 	private int type;
 	private String name;
@@ -13,12 +11,14 @@ public class BaseResource implements Serializable{
 	private String describe;
 	private String owner;
 	private Date createTime;
+	private String url;
+	private String permitAccountNum;
 
-	public BaseResource() {
+	public Resource() {
 	}
 
-	public BaseResource(String id, int type, String name, String content, String describe, String owner,
-			Date createTime) {
+	public Resource(String id, int type, String name, String content, String describe, String owner,
+			Date createTime, String url, String permitAccountNum) {
 		this.id = id;
 		this.type = type;
 		this.name = name;
@@ -26,6 +26,9 @@ public class BaseResource implements Serializable{
 		this.describe = describe;
 		this.owner = owner;
 		this.createTime = createTime;
+		this.url = url;
+		this.permitAccountNum = permitAccountNum;
+		
 	}
 
 	public String getId() {
@@ -83,10 +86,26 @@ public class BaseResource implements Serializable{
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getPermitAccountNum() {
+		return permitAccountNum;
+	}
+
+	public void setPermitAccountNum(String permitAccountNum) {
+		this.permitAccountNum = permitAccountNum;
+	}
 
 	@Override
 	public String toString() {
-		return "BaseResource [id=" + id + ", type=" + type + ", name=" + name + ", content=" + content + ", describe="
+		return "Resource [id=" + id + ", type=" + type + ", name=" + name + ", content=" + content + ", describe="
 				+ describe + ", owner=" + owner + ", createTime=" + createTime + "]";
 	}
 	

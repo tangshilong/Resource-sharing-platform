@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.smates.dbc2.qniu.QniuHelper;
 import com.smates.dbc2.service.MenuService;
+import com.smates.dbc2.service.ResourceService;
 import com.smates.dbc2.service.RoleService;
 import com.smates.dbc2.service.UserService;
-import com.smates.dbc2.service.impl.VipServiceImpl;
 
 public class BaseController {
 	
@@ -23,6 +23,6 @@ public class BaseController {
 	public RoleService roleService;
 	
 	@Autowired
-	public VipServiceImpl vipServiceImpl;
+	public ResourceService resourceService;
 	
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smates.dbc2.mapper.ResourceDao">
+	
+	
+	<select id="getResourceByType" resultType="resource" parameterType="CostumResource"> 
+		select * from a_Resource
+			<where>
+				<if test="true">
+					and type = #{type}
+				</if>
+				<if test="resourceName!=null">
+					and name like '%${resourceName}%'
+				</if>
+			</where>
+		limit #{startCount}, #{pageSize}
+	</select>
+	
+	<select id="countSum" resultType="int" parameterType="CostumResource"> 
+		select count(*) from a_Resource
+			<where>
+				<if test="true">
+					and type = #{type}
+				</if>
+				<if test="resourceName!=null">
+					and name like '%${resourceName}%'
+				</if>
+			</where>
+	</select>	
+</mapper>

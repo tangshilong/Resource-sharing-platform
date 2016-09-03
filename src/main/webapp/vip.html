@@ -15,11 +15,7 @@
 		<div title="各类VIP账号" style="padding: 10px">
 			<div>
 				<div style="margin-bottom: 20px; display: inline;">
-					资源名称: <input class="easyui-textbox" id="name" name="name"
-						style="width: 150px; height: 32px">
-				</div>
-				<div style="margin-bottom: 20px; display: inline;">
-					资源类型: <input class="easyui-textbox" id="type" name="type"
+					资源名称: <input class="easyui-textbox" id="resourceName" name="resourceName"
 						style="width: 150px; height: 32px">
 				</div>
 				<a href="#" id="search_btn" class="easyui-linkbutton"
@@ -31,7 +27,6 @@
 				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllVip.do',method:'get'">
 				<thead>
 					<tr>
-						<th field="type" width="80" align="center">资源类型</th>
 						<th field="name" width="150" align="center">资源名称</th>
 						<th field="content" width="200" align="center">资源内容</th>
 						<th field="describe" width="200" align="center">资源描述</th>
@@ -42,5 +37,16 @@
 			</table>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	// 按条件进行查找
+	$(function() {
+		$('#search_btn').click(function() {
+			$('#tt').datagrid('load', {
+				name : $('#resourceName').val()
+			});
+		})
+	})
+	</script>
 </body>
 </html>
