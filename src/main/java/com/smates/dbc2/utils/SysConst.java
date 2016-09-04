@@ -11,4 +11,9 @@ public class SysConst {
 	//七牛云图片处理样式
 	public static final String QNIUYUNSTYLE = "?imageView2/2/w/100/h/100/interlace/0/q/50";
 	
+	//资源type
+	public static final String VIP = "0";
+	public static final String LEARN = "1";
+	public static final String GAME = "2";
+	
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smates.dbc2.mapper.ResourceDao">
+
+	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_Resource WHERE type = 0 AND 
+		NAME LIKE '%1%' LIMIT 0, 10 -->
+	<select id="getResourceByType" resultType="resource"
+		parameterType="CostumResource">
+		select * from a_Resource
+		<where>
+			<if test="true">
+				and type like '%${type}%'
+			</if>
+			<if test="resourceName!=null">
+				and name like '%${resourceName}%'
+			</if>
+		</where>
+		limit #{startCount}, #{pageSize}
+	</select>
+
+	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_Resource WHERE 
+		type = 0 AND NAME LIKE '%1%' -->
+	<select id="countSum" resultType="int" parameterType="CostumResource">
+		select count(*) from a_Resource
+		<where>
+			<if test="true">
+				and type like '%${type}%'
+			</if>
+			<if test="resourceName!=null">
+				and name like '%${resourceName}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 
+		desc:统计某个用户穿上的资源个数
+		example sql:
+		SELECT
+			count(*)
+		FROM
+			a_Resource
+		WHERE
+			type = 0
+		AND NAME LIKE '%%'
+		AND OWNER LIKE '%%'
+	 -->
+	<select id="countMyResource" parameterType="CostumResource"
+		resultType="int">
+		select count(*) from a_Resource
+		<where>
+			<if test="type!=null">
+				and type like '%${type}%'
+			</if>
+			<if test="resourceName!=null">
+				and name like '%${resourceName}%'
+			</if>
+			<if test="accountNum!=null">
+				and owner = #{accountNum}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 
+		desc:查找某个用户的 资源
+		example sql:
+		SELECT
+			*
+		FROM
+			a_Resource
+		WHERE
+			type = 0
+		AND NAME LIKE '%%'
+		AND OWNER = 'baijw'
+		LIMIT 0, 10
+	 -->
+	<select id="getMyResource" parameterType="CostumResource" resultType="resource">
+		select * from a_Resource
+		<where>
+			<if test="type!=null">
+				and type like '%${type}%'
+			</if>
+			<if test="resourceName!=null">
+				and name like '%${resourceName}%'
+			</if>
+			<if test="accountNum!=null">
+				and owner = #{accountNum}
+			</if>
+		</where>
+		limit #{startCount}, #{pageSize}
+	</select>
+
+	<!-- 
+		desc:删除一个资源
+		example sql:
+			delete from a_Resource where id = 4654
+	 -->
+	<delete id="deleteResource" parameterType="string" >
+		delete from a_Resource where id = #{value}
+	</delete>
+
+</mapper>
