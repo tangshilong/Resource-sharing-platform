@@ -1,34 +1,34 @@
 package com.smates.dbc2.vo;
 
 public class CostumResource {
-	private Integer startCount;
-	private Integer pageSize;
+	private int startCount;
+	private int pageSize;
 	private String resourceName;
-	private int type;
-	public CostumResource(Integer page, Integer pageSize, String resourceName, int type) {
-		this.startCount = (page-1)*pageSize;
+	private String type;
+	private String accountNum;
+
+	public CostumResource(int page, int pageSize, String resourceName, String type, String accountNum) {
+		this.startCount = (page - 1) * pageSize;
 		this.pageSize = pageSize;
 		this.resourceName = resourceName;
 		this.type = type;
+		this.accountNum = accountNum;
 	}
 
-	public Integer getStartCount() {
+	public int getStartCount() {
 		return startCount;
 	}
 
-	public void setStartCount(Integer startCount) {
+	public void setStartCount(int startCount) {
 		this.startCount = startCount;
 	}
 
-	public Integer getpageSize() {
+	public int getPageSize() {
 		return pageSize;
 	}
 
-	public void setpageSize(Integer pageSize) {
+	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
-	}
-
-	public CostumResource() {
 	}
 
 	public String getResourceName() {
@@ -39,12 +39,20 @@ public class CostumResource {
 		this.resourceName = resourceName;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
-	
+
+	public String getAccountNum() {
+		return accountNum;
+	}
+
+	public void setAccountNum(String accountNum) {
+		this.accountNum = accountNum;
+	}
+
 }

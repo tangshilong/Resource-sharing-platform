@@ -27,25 +27,22 @@
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="dg" style="width: auto; height: auto; margin-top: 20px;"
-				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'admin/getAllMenu.do',method:'get'">
+				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getMyResource.do',method:'get'">
 				<thead>
 					<tr>
-						<th data-options="field:'menuId',width:100">资源类型</th>
-						<th data-options="field:'menuName',width:100">资源名称</th>
-						<th data-options="field:'menuUrl',width:80,align:'right'">资源内容</th>
-						<th data-options="field:'permition',width:80,align:'right'">资源描述</th>
-						<th data-options="field:'parentId',width:60,align:'center'">创建时间</th>
+						<th data-options="field:'id',width:100">资源id</th>
+						<th data-options="field:'type',width:100">资源类型</th>
+						<th data-options="field:'name',width:150">资源名称</th>
+						<th data-options="field:'content',width:200,align:'right'">资源内容</th>
+						<th data-options="field:'describe',width:200,align:'right'">资源描述</th>
+						<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
 					</tr>
 				</thead>
 			</table>
 		</div>
-		<div title="上传资源" style="padding: 10px">
-			
-
-		</div>
 	</div>
 
-	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/myResource.js"></script>
 	<script type="text/javascript" src="js/validate.js"></script>
 
 </body>
