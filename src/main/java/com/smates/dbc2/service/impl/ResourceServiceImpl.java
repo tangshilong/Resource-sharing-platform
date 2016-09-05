@@ -46,5 +46,10 @@ public class ResourceServiceImpl implements ResourceService {
 		resourceDao.deleteResource(id);
 	}
 
+	@Override
+	public List<Resource> getAllLearn(Integer page, Integer rows, String name) {
+		return resourceDao.getResourceByType(new CostumResource(page, rows, name, SysConst.LEARN, null));
+	}
+
 
 }

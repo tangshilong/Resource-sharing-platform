@@ -40,6 +40,15 @@ public interface ResourceService {
 	 * @param id 资源id
 	 */
 	public void deleteResource(String id);
+
+	/**
+	 * 获取所有learn资源
+	 * @param page
+	 * @param rows
+	 * @param name
+	 * @return
+	 */
+	public List<Resource> getAllLearn(Integer page, Integer rows, String name);
 	
 
 }

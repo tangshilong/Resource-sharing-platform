@@ -56,4 +56,18 @@ public class ResourceController extends BaseController{
 		return new BaseMsg(true, "资源删除成功");
 	}
 	
+	/**
+	 * 获取所有learn资源
+	 * @param page
+	 * @param rows
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping(value="getAllStudy",method=RequestMethod.GET)
+	@ResponseBody
+	public DataGrideRow<Resource> getAllStudy(@RequestParam(defaultValue = "1") Integer page, Integer rows, String name){
+		logger.info("访问learn资源");
+		logger.info(page+","+ rows +","+ name);
+		return new DataGrideRow<Resource>(resourceService.countSum(name, SysConst.LEARN), resourceService.getAllLearn(page,rows,name));
+	}
 }
