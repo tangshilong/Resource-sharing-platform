@@ -42,13 +42,23 @@ public interface ResourceService {
 	public void deleteResource(String id);
 
 	/**
-	 * 获取所有learn资源
+	 * 获取符合条件的learn资源
 	 * @param page
 	 * @param rows
 	 * @param name
 	 * @return
 	 */
 	public List<Resource> getAllLearn(Integer page, Integer rows, String name);
+
+	/**
+	 * 获取符合条件的game资源
+	 * @param page
+	 * @param rows
+	 * @param name
+	 * @param descirbe
+	 * @return
+	 */
+	public List<Resource> getAllGame(Integer page, Integer rows, String name, String descirbe);
 	
 
 }

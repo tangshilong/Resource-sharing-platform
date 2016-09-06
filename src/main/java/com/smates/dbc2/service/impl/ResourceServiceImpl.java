@@ -51,5 +51,10 @@ public class ResourceServiceImpl implements ResourceService {
 		return resourceDao.getResourceByType(new CostumResource(page, rows, name, SysConst.LEARN, null));
 	}
 
+	@Override
+	public List<Resource> getAllGame(Integer page, Integer rows, String name, String descirbe) {
+		return resourceDao.getResourceByType(new CostumResource(page, rows, name, SysConst.GAME, null));
+	}
+
 
 }

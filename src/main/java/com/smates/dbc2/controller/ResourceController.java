@@ -57,7 +57,7 @@ public class ResourceController extends BaseController{
 	}
 	
 	/**
-	 * 获取所有learn资源
+	 * 获取符合条件的learn资源
 	 * @param page
 	 * @param rows
 	 * @param name
@@ -69,5 +69,21 @@ public class ResourceController extends BaseController{
 		logger.info("访问learn资源");
 		logger.info(page+","+ rows +","+ name);
 		return new DataGrideRow<Resource>(resourceService.countSum(name, SysConst.LEARN), resourceService.getAllLearn(page,rows,name));
+	}
+	
+	/**
+	 * 获取符合条件的Game资源
+	 * @param page
+	 * @param rows
+	 * @param name
+	 * @param descirbe
+	 * @return
+	 */
+	@RequestMapping(value="getAllGame",method=RequestMethod.POST)
+	@ResponseBody
+	public DataGrideRow<Resource> getAllGame(@RequestParam(defaultValue = "1") Integer page,Integer rows, String name, String descirbe){
+		logger.info("访问game资源");
+		logger.info(page+","+ rows +","+ name + "," + descirbe);
+		return new DataGrideRow<Resource>(resourceService.countSum(name, SysConst.GAME), resourceService.getAllGame(page,rows,name,descirbe));
 	}
 }

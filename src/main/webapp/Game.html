@@ -10,29 +10,32 @@
 </head>
 <body>
 	<div style="margin: 20px 0 10px 0;"></div>
-	<div id="Learn_tab" class="easyui-tabs" style="width: auto;">
-		<div title="资源列表" style="padding: 10px">
+	<div id="Game_tab" class="easyui-tabs" style="width: auto;">
+		<div title="账号列表" style="padding: 10px">
 			<div>
 				<div style="margin-bottom: 20px; display: inline;">
-					资源名称: <input class="easyui-textbox" id="name" name="name"
+					账号名称: <input class="easyui-textbox" id="name" name="name"
 						style="width: 150px; height: 32px">
 				</div>
-				<a href="#" id="search_btn_user" class="easyui-linkbutton"
+				<div style="margin-bottom: 20px; display: inline;">
+					账号描述: <input class="easyui-textbox" id="describe" name="describe"
+						style="width: 150px; height: 32px">
+				</div>
+				<a href="#" id="search_btn" class="easyui-linkbutton"
 					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
-				<a href="#" id="search_btn_download" class="easyui-linkbutton"
-					data-options="iconCls:'icon-save'" style="width: 80px">Download</a>
+				<a href="#" id="password_btn" class="easyui-linkbutton"
+					data-options="iconCls:'icon-search'" style="width: 80px">查看密码</a>	
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;"
-				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllStudy.do',method:'get'">
+				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllGame.do',method:'post'">
 				<thead>
 					<tr>
-						<th data-options="field:'name',width:140,align:'center'">资源名称</th>
-						<th data-options="field:'content',width:160,align:'center'">资源内容</th>
-						<th data-options="field:'describe',width:160,align:'center'">资源描述</th>
-						<th data-options="field:'owner',width:80,align:'center'">资源拥有者</th>
+						<th data-options="field:'name',width:140,align:'center'">账号名称</th>
+						<th data-options="field:'content',width:160,align:'center'">账号</th>
+						<th data-options="field:'describe',width:160,align:'center'">账号描述</th>
+						<th data-options="field:'owner',width:80,align:'center'">账号拥有者</th>
 						<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
-						<th data-options="field:'url',width:140,align:'center'">附件地址</th>
 					</tr>
 				</thead>
 			</table>
@@ -41,9 +44,10 @@
 	<script type="text/javascript">
 	// 按条件进行查找
 		$(function() {
-			$('#search_btn_user').click(function() {
+			$('#search_btn').click(function() {
 				$('#dg').datagrid('load', {
-					name : $('#name').val()
+					id : $('#id').val(),
+					describe : $('describe').val()
 				});
 			})
 		})
