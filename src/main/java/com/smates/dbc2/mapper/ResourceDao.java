@@ -3,6 +3,7 @@ package com.smates.dbc2.mapper;
 import java.util.List;
 
 import com.smates.dbc2.po.Resource;
+import com.smates.dbc2.vo.CostumGame;
 import com.smates.dbc2.vo.CostumResource;
 
 public interface ResourceDao {
@@ -39,5 +40,19 @@ public interface ResourceDao {
 	 * @param id 资源id
 	 */
 	public void deleteResource(String id);
+
+	/**
+	 * 获取符合条件的game资源
+	 * @param costumGame
+	 * @return
+	 */
+	public List<Resource> getGameResource(CostumGame costumGame);
+
+	/**
+	 * 统计符合条件游戏资源个数
+	 * @param costumGame
+	 * @return
+	 */
+	public int countGame(CostumGame costumGame);
 	
 }

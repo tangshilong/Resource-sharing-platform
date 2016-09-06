@@ -24,7 +24,7 @@
 				<a href="#" id="search_btn" class="easyui-linkbutton"
 					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
 				<a href="#" id="password_btn" class="easyui-linkbutton"
-					data-options="iconCls:'icon-search'" style="width: 80px">查看密码</a>	
+					data-options="iconCls:'icon-search'" style="width: 80px">查看账号</a>	
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;"
@@ -32,7 +32,6 @@
 				<thead>
 					<tr>
 						<th data-options="field:'name',width:140,align:'center'">账号名称</th>
-						<th data-options="field:'content',width:160,align:'center'">账号</th>
 						<th data-options="field:'describe',width:160,align:'center'">账号描述</th>
 						<th data-options="field:'owner',width:80,align:'center'">账号拥有者</th>
 						<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
@@ -46,8 +45,8 @@
 		$(function() {
 			$('#search_btn').click(function() {
 				$('#dg').datagrid('load', {
-					id : $('#id').val(),
-					describe : $('describe').val()
+					name : $('#name').val(),
+					describe : $('#describe').val()
 				});
 			})
 		})

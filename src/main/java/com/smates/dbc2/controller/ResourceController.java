@@ -81,9 +81,10 @@ public class ResourceController extends BaseController{
 	 */
 	@RequestMapping(value="getAllGame",method=RequestMethod.POST)
 	@ResponseBody
-	public DataGrideRow<Resource> getAllGame(@RequestParam(defaultValue = "1") Integer page,Integer rows, String name, String descirbe){
+	public DataGrideRow<Resource> getAllGame(@RequestParam(defaultValue = "1") Integer page,Integer rows, String name, String describe){
 		logger.info("访问game资源");
-		logger.info(page+","+ rows +","+ name + "," + descirbe);
-		return new DataGrideRow<Resource>(resourceService.countSum(name, SysConst.GAME), resourceService.getAllGame(page,rows,name,descirbe));
+		logger.info(page+","+ rows +","+ name + "," + describe);
+		logger.info(resourceService.countGame(name,describe,SysConst.GAME));
+		return new DataGrideRow<Resource>(resourceService.countGame(name,describe,SysConst.GAME), resourceService.getAllGame(page,rows,name,describe));
 	}
 }

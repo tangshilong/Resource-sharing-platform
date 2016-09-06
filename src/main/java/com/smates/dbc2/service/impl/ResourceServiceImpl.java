@@ -10,6 +10,7 @@ import com.smates.dbc2.po.Resource;
 import com.smates.dbc2.service.ResourceService;
 import com.smates.dbc2.service.UserService;
 import com.smates.dbc2.utils.SysConst;
+import com.smates.dbc2.vo.CostumGame;
 import com.smates.dbc2.vo.CostumResource;
 
 @Service
@@ -52,8 +53,13 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public List<Resource> getAllGame(Integer page, Integer rows, String name, String descirbe) {
-		return resourceDao.getResourceByType(new CostumResource(page, rows, name, SysConst.GAME, null));
+	public List<Resource> getAllGame(Integer page, Integer rows, String name, String describe) {
+		return resourceDao.getGameResource(new CostumGame(page, rows, name, SysConst.GAME,null,describe));
+	}
+
+	@Override
+	public int countGame(String name, String describe, String type) {
+		return resourceDao.countGame(new CostumGame(0, 0, name, type,null,describe));
 	}
 
 

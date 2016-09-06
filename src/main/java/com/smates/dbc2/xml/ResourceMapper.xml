@@ -19,6 +19,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		limit #{startCount}, #{pageSize}
 	</select>
+	
+	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_Resource WHERE type = 0 AND 
+		NAME LIKE '%1%' LIMIT 0, 10 -->
+	<select id="getGameResource" resultType="resource"
+		parameterType="CostumGame">
+		select * from a_Resource a
+		<where>
+			<if test="true">
+				and a.type like '%${type}%'
+			</if>
+			<if test="resourceName!=null">
+				and a.name like '%${resourceName}%'
+			</if>
+			<if test="describe!=null">
+				and a.describe like '%${describe}%'
+			</if>
+		</where>
+		limit #{startCount}, #{pageSize}
+	</select>
 
 	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_Resource WHERE 
 		type = 0 AND NAME LIKE '%1%' -->
@@ -30,6 +49,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="resourceName!=null">
 				and name like '%${resourceName}%'
+			</if>
+		</where>
+	</select>
+	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_Resource WHERE 
+		type = 0 AND NAME LIKE '%1%' -->
+	<select id="countGame" resultType="int" parameterType="CostumGame">
+		select count(*) from a_Resource a
+		<where>
+			<if test="true">
+				and a.type like '%${type}%'
+			</if>
+			<if test="resourceName!=null">
+				and a.name like '%${resourceName}%'
+			</if>
+			<if test="describe!=null">
+				and a.describe like '%${describe}%'
 			</if>
 		</where>
 	</select>

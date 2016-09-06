@@ -23,6 +23,15 @@ public interface ResourceService {
 	public int countSum(String resourceName, String type);
 	
 	/**
+	 * 统计查到游戏资源个数
+	 * @param name
+	 * @param describe
+	 * @param game
+	 * @return
+	 */
+	public int countGame(String name, String describe, String type);
+	
+	/**
 	 * 统计某个用户资源个数
 	 * @return
 	 */
@@ -59,6 +68,7 @@ public interface ResourceService {
 	 * @return
 	 */
 	public List<Resource> getAllGame(Integer page, Integer rows, String name, String descirbe);
+
 	
 
 }
