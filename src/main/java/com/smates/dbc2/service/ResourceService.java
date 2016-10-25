@@ -69,6 +69,27 @@ public interface ResourceService {
 	 */
 	public List<Resource> getAllGame(Integer page, Integer rows, String name, String descirbe);
 
+	/**
+	 * 根据资源id查找有权限的账户
+	 * @param id
+	 * @return
+	 */
+	public String getPermitAccountNumById(int id);
+
+	/**
+	 * 根据资源id获得内容
+	 * @param id
+	 */
+	public String getContentById(int id);
+
+	/**
+	 * 根据账号获取id
+	 * 
+	 * @param accountNumber
+	 * @return
+	 */
+	public int getIdByAccountNum(String accountNumber);
+
 	
 
 }

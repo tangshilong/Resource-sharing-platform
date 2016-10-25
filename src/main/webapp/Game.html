@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Basic Tabs - jQuery EasyUI Demo</title>
-<link rel="stylesheet" type="text/css"href="easyUI/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
-<script type="text/javascript" src="easyUI/jquery.min.js"></script>
-<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
-</head>
-<body>
-	<div style="margin: 20px 0 10px 0;"></div>
-	<div id="Game_tab" class="easyui-tabs" style="width: auto;">
-		<div title="账号列表" style="padding: 10px">
-			<div>
-				<div style="margin-bottom: 20px; display: inline;">
-					账号名称: <input class="easyui-textbox" id="name" name="name"
-						style="width: 150px; height: 32px">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Basic Tabs - jQuery EasyUI Demo</title>
+		<link rel="stylesheet" type="text/css" href="easyUI/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
+		<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+		<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+		<div style="margin: 20px 0 10px 0;"></div>
+		<div id="Game_tab" class="easyui-tabs" style="width: auto;">
+			<div title="账号列表" style="padding: 10px">
+				<div>
+					<div style="margin-bottom: 20px; display: inline;">
+						账号名称: <input class="easyui-textbox" id="name" name="name" style="width: 150px; height: 32px">
+					</div>
+					<div style="margin-bottom: 20px; display: inline;">
+						账号描述: <input class="easyui-textbox" id="describe" name="describe" style="width: 150px; height: 32px">
+					</div>
+					<a href="#" id="search_btn" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
+					<a href="#" id="password_btn" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width: 80px">查看账号</a>
 				</div>
-				<div style="margin-bottom: 20px; display: inline;">
-					账号描述: <input class="easyui-textbox" id="describe" name="describe"
-						style="width: 150px; height: 32px">
-				</div>
-				<a href="#" id="search_btn" class="easyui-linkbutton"
-					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
-				<a href="#" id="password_btn" class="easyui-linkbutton"
-					data-options="iconCls:'icon-search'" style="width: 80px">查看账号</a>	
+				<div style="height: 10px;"></div>
+				<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;" data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllGame.do',method:'post'">
+					<thead>
+						<tr>
+							<th data-options="field:'id',width:140,align:'center',hidden:'hidden'">id</th>
+							<th data-options="field:'name',width:140,align:'center'">账号名称</th>
+							<th data-options="field:'describe',width:300,align:'center'">账号描述</th>
+							<th data-options="field:'owner',width:80,align:'center'">账号拥有者</th>
+							<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
+						</tr>
+					</thead>
+				</table>
 			</div>
-			<div style="height: 10px;"></div>
-			<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;"
-				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllGame.do',method:'post'">
-				<thead>
-					<tr>
-						<th data-options="field:'name',width:140,align:'center'">账号名称</th>
-						<th data-options="field:'describe',width:160,align:'center'">账号描述</th>
-						<th data-options="field:'owner',width:80,align:'center'">账号拥有者</th>
-						<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/game.js"></script>
-</body>
-</html> 
+        </div>
+        
+			<div id="dlg" class="easyui-dialog" title="账号信息" style="width:330px;height:150px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+				<form id="fm" method="post">
+					<div >
+						<input name="content" class="easyui-textbox" style="width: 280px; height: 90px">
+					</div>
+				</form>
+			</div>
+		
+		<script type="text/javascript" src="js/game.js"></script>
+	</body>
+
+</html>

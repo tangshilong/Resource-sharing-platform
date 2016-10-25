@@ -34,12 +34,12 @@ public class ResourceServiceImpl implements ResourceService {
 	
 	@Override
 	public int countMyResource(String resourceName, String type) {
-		return resourceDao.countMyResource(new CostumResource(0, 0, resourceName, type, userService.getCurrentUserId()));
+		return resourceDao.countMyResource(new CostumResource(0, 0, resourceName, type, userService.getCurrentUserActNum()));
 	}
 	
 	@Override
 	public List<Resource> getMyResource(int page, int rows, String type, String name) {
-		return resourceDao.getMyResource(new CostumResource(page, rows, name, type, userService.getCurrentUserId()));
+		return resourceDao.getMyResource(new CostumResource(page, rows, name, type, userService.getCurrentUserActNum()));
 	}
 
 	@Override
@@ -60,6 +60,21 @@ public class ResourceServiceImpl implements ResourceService {
 	@Override
 	public int countGame(String name, String describe, String type) {
 		return resourceDao.countGame(new CostumGame(0, 0, name, type,null,describe));
+	}
+
+	@Override
+	public String getPermitAccountNumById(int id) {
+		return resourceDao.getPermitAccountNumById(id);
+	}
+
+	@Override
+	public String getContentById(int id) {
+		return resourceDao.getContentById(id);
+	}
+
+	@Override
+	public int getIdByAccountNum(String accountNumber) {
+		return resourceDao.getIdByAccountNum(accountNumber);
 	}
 
 

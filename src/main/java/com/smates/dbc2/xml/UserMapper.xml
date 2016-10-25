@@ -13,7 +13,8 @@
 		<result column="e_mail" property="eMail" jdbcType="CHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, accountNumber,nickName, password, role, createDate, e_mail
+		id, accountNumber,nickName, password, role, createDate,
+		e_mail
 	</sql>
 
 	<!-- des: 根据accountNumber查找user example sql: select * from s_user where 
@@ -22,7 +23,8 @@
 		parameterType="java.lang.String">
 		select *
 		from s_user
-		where accountNumber = #{accountNumber}
+		where accountNumber =
+		#{accountNumber}
 	</select>
 
 	<!-- des: 根据id查user example sql： select * from s_user where id = 8 -->
@@ -33,6 +35,18 @@
 	</select>
 
 
+	<!-- des: 获取所有用户名称 example sql： select a.nickname from s_user a -->
+	<select id="getAllUserName" resultType="String">
+		select a.nickname
+		from
+		s_user a
+	</select>
+
+	<!-- des: 获取所有用户 example sql： select * from s_user -->
+	<select id="getUser" resultMap="BaseResultMap">
+		select *
+		from s_user
+	</select>
 
 
 	<!-- des: 像s_user表中插入数据 example sql: insert into s_user (accountNumber,nickName, 
@@ -40,7 +54,8 @@
 	<insert id="insertUser" parameterType="user" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into s_user
-		(accountNumber,nickName, password, role, createDate, e_mail, image)
+		(accountNumber,nickName, password, role,
+		createDate, e_mail, image)
 		values
 		(#{accountNumber},#{nickName},#{password},#{role},#{createDate},#{eMail},#{image})
 	</insert>
@@ -75,7 +90,8 @@
 	<delete id="deleteUser" parameterType="String">
 		delete
 		from s_user
-		where accountNumber = #{value}
+		where
+		accountNumber = #{value}
 	</delete>
 
 	<!-- des: 根据用户id更新用户信息 examp sql： UPDATE s_user SET accountNumber = "xiaohua", 

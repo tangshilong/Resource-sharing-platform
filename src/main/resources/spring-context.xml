@@ -103,7 +103,7 @@
 	<bean class="com.smates.dbc2.memcache.config.MemcacheConfig" id="memcachedConfig">
 		<property name="ips">
 			<list>
-				<value>115.29.175.47</value>
+				<value>115.159.216.190</value>
 			</list>
 		</property>
 		<property name="ports">

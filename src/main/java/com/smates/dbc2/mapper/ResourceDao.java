@@ -54,5 +54,27 @@ public interface ResourceDao {
 	 * @return
 	 */
 	public int countGame(CostumGame costumGame);
+
+	/**
+	 * 根据资源id查找允许使用的账户
+	 * @param id
+	 * @return
+	 */
+	public String getPermitAccountNumById(int id);
+
+	/**
+	 * 根据资源id查找账号密码内容
+	 * @param id
+	 * @return
+	 */
+	public String getContentById(int id);
+
+	/**
+	 * 根据accountnumber获取id
+	 * 
+	 * @param accountNumber
+	 * @return
+	 */
+	public int getIdByAccountNum(String accountNumber);
 	
 }

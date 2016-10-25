@@ -90,11 +90,11 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("home")
 	public String home(ModelMap modelMap) {
-		modelMap.addAttribute("menulist", menuService.getMenuByRoles(userService.getUserByAccountNumber(userService.getCurrentUserId()).getRole()));
+		modelMap.addAttribute("menulist", menuService.getMenuByRoles(userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getRole()));
 		modelMap.addAttribute("userName",
-				userService.getUserByAccountNumber(userService.getCurrentUserId()).getNickName());
+				userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getNickName());
 		modelMap.addAttribute("image",
-				SysConst.QNIUYUNURL + userService.getUserByAccountNumber(userService.getCurrentUserId()).getImage());
+				SysConst.QNIUYUNURL + userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getImage());
 		return "Home.ftl";
 	}
 
@@ -224,7 +224,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "getCurrentUser", method = RequestMethod.GET)
 	@ResponseBody
 	public User getCurrentUser() {
-		return userService.getUserByAccountNumber(userService.getCurrentUserId());
+		return userService.getUserByAccountNumber(userService.getCurrentUserActNum());
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class UserController extends BaseController {
 		// 用户权限下只允许修改,密码,邮箱,昵称和头像
 		String fileName = null;
 		User user = new User(id, null, nickName, ShiroUtils.passwdMD5(password), null, null, eMail);
-		User userpo = userService.getUserByAccountNumber(userService.getCurrentUserId());
+		User userpo = userService.getUserByAccountNumber(userService.getCurrentUserActNum());
 		// 密码没有修改
 		if (password.equals(userpo.getPassword())) {
 			user.setPassword(null);

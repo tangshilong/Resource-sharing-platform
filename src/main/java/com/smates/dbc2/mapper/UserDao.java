@@ -59,5 +59,19 @@ public interface UserDao {
 	 * @return
 	 */
 	public User getUserById(Integer id);
+
+	/**
+	 * 获取所有用户名称
+	 * 
+	 * @return
+	 */
+	public List<String> getAllUserName();
+
+	/**
+	 * 获取所有用户
+	 * 
+	 * @return
+	 */
+	public List<User> getUser();
 	
 }

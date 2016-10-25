@@ -5,7 +5,7 @@ import java.util.Date;
 public class Resource{
 	
 	private String id;
-	private int type;
+	private String type;
 	private String name;
 	private String content;
 	private String describe;
@@ -17,7 +17,7 @@ public class Resource{
 	public Resource() {
 	}
 
-	public Resource(String id, int type, String name, String content, String describe, String owner,
+	public Resource(String id, String type, String name, String content, String describe, String owner,
 			Date createTime, String url, String permitAccountNum) {
 		this.id = id;
 		this.type = type;
@@ -39,11 +39,11 @@ public class Resource{
 		this.id = id;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

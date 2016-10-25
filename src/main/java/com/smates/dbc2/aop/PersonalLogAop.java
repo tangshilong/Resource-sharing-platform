@@ -42,7 +42,7 @@ public class PersonalLogAop {
 		PersonalLog personalLog = method.getAnnotation(PersonalLog.class);
 		Object[] args = joinPoint.getArgs();
 		Map<String, String> paraMap = buildParamMap(parameterNames, args);
-		userLogService.addUserLog(new UserLog(personalLog.value(), userService.getCurrentUserId(), paraMap, new Date()));
+		userLogService.addUserLog(new UserLog(personalLog.value(), userService.getCurrentUserActNum(), paraMap, new Date()));
 		logger.info("用户行为日志成功");
 	}
 

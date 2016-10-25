@@ -4,11 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smates.dbc2.mapper.ResourceDao">
 
-	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_Resource WHERE type = 0 AND 
+	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_resource WHERE type = 0 AND 
 		NAME LIKE '%1%' LIMIT 0, 10 -->
 	<select id="getResourceByType" resultType="resource"
 		parameterType="CostumResource">
-		select * from a_Resource
+		select * from a_resource
 		<where>
 			<if test="true">
 				and type like '%${type}%'
@@ -20,11 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{startCount}, #{pageSize}
 	</select>
 	
-	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_Resource WHERE type = 0 AND 
+	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_resource WHERE type = 0 AND 
 		NAME LIKE '%1%' LIMIT 0, 10 -->
 	<select id="getGameResource" resultType="resource"
 		parameterType="CostumGame">
-		select * from a_Resource a
+		select * from a_resource a
 		<where>
 			<if test="true">
 				and a.type like '%${type}%'
@@ -39,10 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{startCount}, #{pageSize}
 	</select>
 
-	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_Resource WHERE 
+	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_resource WHERE 
 		type = 0 AND NAME LIKE '%1%' -->
 	<select id="countSum" resultType="int" parameterType="CostumResource">
-		select count(*) from a_Resource
+		select count(*) from a_resource
 		<where>
 			<if test="true">
 				and type like '%${type}%'
@@ -52,10 +52,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
-	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_Resource WHERE 
+	<!-- desc:统计符合查找条件的记录总数 example sql: SELECT count(*) FROM a_resource WHERE 
 		type = 0 AND NAME LIKE '%1%' -->
 	<select id="countGame" resultType="int" parameterType="CostumGame">
-		select count(*) from a_Resource a
+		select count(*) from a_resource a
 		<where>
 			<if test="true">
 				and a.type like '%${type}%'
@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			count(*)
 		FROM
-			a_Resource
+			a_resource
 		WHERE
 			type = 0
 		AND NAME LIKE '%%'
@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	<select id="countMyResource" parameterType="CostumResource"
 		resultType="int">
-		select count(*) from a_Resource
+		select count(*) from a_resource
 		<where>
 			<if test="type!=null">
 				and type like '%${type}%'
@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			*
 		FROM
-			a_Resource
+			a_resource
 		WHERE
 			type = 0
 		AND NAME LIKE '%%'
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT 0, 10
 	 -->
 	<select id="getMyResource" parameterType="CostumResource" resultType="resource">
-		select * from a_Resource
+		select * from a_resource
 		<where>
 			<if test="type!=null">
 				and type like '%${type}%'
@@ -125,14 +125,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		limit #{startCount}, #{pageSize}
 	</select>
+	
+	<!-- 
+		desc:根据资源id查出有权限的账户信息
+		example sql:
+			select permitAccountNum 
+			from a_resource a
+			where a.id = 1
+	 -->
+	<select id="getPermitAccountNumById" parameterType="int" resultType="string">
+	select permitAccountNum 
+	from a_resource a
+	where a.id = #{value}
+	</select>
 
+	<!-- 
+		desc:根据资源id获取资源账号密码内容
+		example sql:
+			select content
+			from a_resource a
+			where a.id = 1
+	 -->
+	<select id="getContentById" parameterType="int" resultType="string">
+	select content
+	from a_resource a
+	where a.id = #{value}
+	</select>
+
+	<!-- 
+		desc:根据accountnumber获取id
+		example sql：
+			select id
+			from s_user a
+			where a.accountNumber = 'tangshilong'
+	 -->
+	<select id="getIdByAccountNum" parameterType="string" resultType="int">
+	select id
+	from s_user a
+	where a.accountNumber = #{value}
+	</select>
+	
 	<!-- 
 		desc:删除一个资源
 		example sql:
-			delete from a_Resource where id = 4654
+			delete from a_resource where id = 4654
 	 -->
 	<delete id="deleteResource" parameterType="string" >
-		delete from a_Resource where id = #{value}
+		delete from a_resource where id = #{value}
 	</delete>
 
 </mapper>

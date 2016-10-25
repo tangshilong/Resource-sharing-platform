@@ -30,6 +30,5 @@
 	</div>
 	<!-- container -->
 	
-	<script type="text/javascript" src="bootstrap/jquery.js"></script>
 </body>
 </html>

@@ -13,11 +13,11 @@ import com.smates.dbc2.po.User;
 public interface UserService {
 
 	/**
-	 * 获取当前登录的用户
+	 * 获取当前登录用户accountnumber
 	 * 
 	 * @return
 	 */
-	public String getCurrentUserId();
+	public String getCurrentUserActNum();
 
 	/**
 	 * 根据accountNumber查找user
@@ -73,5 +73,19 @@ public interface UserService {
 	 * @return
 	 */
 	public User getUserById(Integer id);
+
+	/**
+	 * 获取所有用户名称
+	 * 
+	 * @return
+	 */
+	public List<String> getAllUserName();
+
+	/**
+	 * 获取所有用户
+	 * 
+	 * @return
+	 */
+	public List<User> getAllUser();
 
 }

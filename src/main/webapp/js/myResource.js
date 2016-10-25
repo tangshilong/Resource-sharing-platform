@@ -3,7 +3,7 @@ $(function() {
 	$("#search_btn").click(function() {
 		$('#dg').datagrid('load', {
 			name : $('#name').val(),
-			type : $('#type').val()
+			type : $('#type').combobox("getValue")
 		});
 	})
 })
@@ -18,7 +18,7 @@ $(function() {
 			handler : function() {
 				$('#dg').datagrid('load', {
 					name : $('#name').val(),
-					type : $('#type').val()
+					type : $('#type').combobox("getValue")
 				});
 			}
 		}, {
@@ -61,3 +61,4 @@ $(function() {
 		} ]
 	});
 })
+

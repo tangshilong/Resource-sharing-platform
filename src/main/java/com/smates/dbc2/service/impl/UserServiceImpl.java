@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	private UserDao userMapper;
 
 	@Override
-	public String getCurrentUserId() {
+	public String getCurrentUserActNum() {
 		return SecurityUtils.getSubject().getPrincipal().toString();
 	}
 
@@ -60,6 +60,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(Integer id) {
 		return userMapper.getUserById(id);
+	}
+
+	@Override
+	public List<String> getAllUserName() {
+		return userMapper.getAllUserName();
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		return userMapper.getUser();
 	}
 
 }
