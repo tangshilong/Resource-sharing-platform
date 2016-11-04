@@ -62,3 +62,12 @@ $(function() {
 	});
 })
 
+// 提交表单
+$('#addResource').form({
+	url : 'addResource.do',
+	success : function(data) {
+		var obj = eval("(" + data + ")");
+		$.messager.alert('success', obj.content);
+	}
+});
+
