@@ -30,7 +30,10 @@
 						<th field="content" width="200" align="center">资源内容</th>
 						<th field="describe" width="200" align="center">资源描述</th>
 						<th field="owner" width="100" align="center">资源拥有者</th>
-						<th field="createTime" width="100" align="center">创建时间</th>
+						<th data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
+                         var unixTimestamp = new Date(value);  
+                         return unixTimestamp.toLocaleString();  
+                         }">创建时间</th>
 					</tr>
 				</thead>
 			</table>

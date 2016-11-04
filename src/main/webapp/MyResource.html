@@ -38,13 +38,16 @@
 							<th data-options="field:'name',width:150,align:'center'">资源名称</th>
 							<th data-options="field:'content',width:200,align:'center'">资源内容</th>
 							<th data-options="field:'describe',width:200,align:'center'">资源描述</th>
-							<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
+							<th data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
+                         var unixTimestamp = new Date(value);  
+                         return unixTimestamp.toLocaleString();  
+                         }">创建时间</th>
 						</tr>
 					</thead>
 				</table>
 			</div>
 			<div title="资源新增" style="padding: 10px">
-				<form id="addUser" method="post">
+				<form id="addResource" method="post" enctype= multipart/form-data>
 					<input type="hidden" id="id" name="id">
 					<table>
 						<tr>
@@ -70,21 +73,8 @@
 							<td><textarea id="describe" name="describe" style="width: 193px; height: 32px"></textarea></td>
 						</tr>
 						<tr>
-							<td>URL:</td>
-							<td><input class="easyui-textbox" id="url" name="url" style="width: 200px; height: 32px"></td>
-						</tr>
-						<tr>
-							<td>允许查看:</td>
-							<td>
-								<select id="permitAccountNum" class="easyui-combobox" name="permitAccountNum" data-options="  
-										url:'getAllUserName.do',  
-										editable:false,
-										required:true,  
-										textField:'nickname',  
-										multiple:true,  
-										panelHeight:'100'">			
-									</select>
-							</td>
+							<td>资源上传:</td>
+							<td><input type="file" id="image" name="url" style="width: 193px; height: 32px;margin-top:10px;"></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -97,7 +87,6 @@
 		</div>
 
 		<script type="text/javascript" src="js/myResource.js"></script>
-		<script type="text/javascript" src="js/validate.js"></script>
 
 	</body>
 

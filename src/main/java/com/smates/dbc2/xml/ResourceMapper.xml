@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		limit #{startCount}, #{pageSize}
 	</select>
-	
+
 	<!-- desc:对某类资源查找 example sql: SELECT * FROM a_resource WHERE type = 0 AND 
 		NAME LIKE '%1%' LIMIT 0, 10 -->
 	<select id="getGameResource" resultType="resource"
@@ -69,18 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<!-- 
-		desc:统计某个用户穿上的资源个数
-		example sql:
-		SELECT
-			count(*)
-		FROM
-			a_resource
-		WHERE
-			type = 0
-		AND NAME LIKE '%%'
-		AND OWNER LIKE '%%'
-	 -->
+	<!-- desc:统计某个用户穿上的资源个数 example sql: SELECT count(*) FROM a_resource WHERE 
+		type = 0 AND NAME LIKE '%%' AND OWNER LIKE '%%' -->
 	<select id="countMyResource" parameterType="CostumResource"
 		resultType="int">
 		select count(*) from a_resource
@@ -96,21 +86,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
-	
-	<!-- 
-		desc:查找某个用户的 资源
-		example sql:
-		SELECT
-			*
-		FROM
-			a_resource
-		WHERE
-			type = 0
-		AND NAME LIKE '%%'
-		AND OWNER = 'baijw'
-		LIMIT 0, 10
-	 -->
-	<select id="getMyResource" parameterType="CostumResource" resultType="resource">
+
+	<!-- desc:查找某个用户的 资源 example sql: SELECT * FROM a_resource WHERE type = 
+		0 AND NAME LIKE '%%' AND OWNER = 'baijw' LIMIT 0, 10 -->
+	<select id="getMyResource" parameterType="CostumResource"
+		resultType="resource">
 		select * from a_resource
 		<where>
 			<if test="type!=null">
@@ -125,53 +105,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		limit #{startCount}, #{pageSize}
 	</select>
-	
-	<!-- 
-		desc:根据资源id查出有权限的账户信息
-		example sql:
-			select permitAccountNum 
-			from a_resource a
-			where a.id = 1
-	 -->
-	<select id="getPermitAccountNumById" parameterType="int" resultType="string">
-	select permitAccountNum 
-	from a_resource a
-	where a.id = #{value}
+
+	<!-- desc:根据资源id查出有权限的账户信息 example sql: select permitAccountNum from a_resource 
+		a where a.id = 1 -->
+	<select id="getPermitAccountNumById" parameterType="int"
+		resultType="string">
+		select permitAccountNum
+		from a_resource a
+		where a.id =
+		#{value}
 	</select>
 
-	<!-- 
-		desc:根据资源id获取资源账号密码内容
-		example sql:
-			select content
-			from a_resource a
-			where a.id = 1
-	 -->
+	<!-- desc:根据资源id获取资源账号密码内容 example sql: select content from a_resource a 
+		where a.id = 1 -->
 	<select id="getContentById" parameterType="int" resultType="string">
-	select content
-	from a_resource a
-	where a.id = #{value}
+		select content
+		from a_resource a
+		where a.id = #{value}
 	</select>
 
-	<!-- 
-		desc:根据accountnumber获取id
-		example sql：
-			select id
-			from s_user a
-			where a.accountNumber = 'tangshilong'
-	 -->
-	<select id="getIdByAccountNum" parameterType="string" resultType="int">
-	select id
-	from s_user a
-	where a.accountNumber = #{value}
+	<!-- desc:根据accountnumber获取id example sql： select id from s_user a where 
+		a.accountNumber = 'tangshilong' -->
+	<select id="getIdByAccountNum" parameterType="string"
+		resultType="int">
+		select id
+		from s_user a
+		where a.accountNumber = #{value}
 	</select>
-	
-	<!-- 
-		desc:删除一个资源
-		example sql:
-			delete from a_resource where id = 4654
-	 -->
-	<delete id="deleteResource" parameterType="string" >
-		delete from a_resource where id = #{value}
+
+	<!-- desc:删除一个资源 example sql: delete from a_resource where id = 4654 -->
+	<delete id="deleteResource" parameterType="string">
+		delete from
+		a_resource
+		where id = #{value}
 	</delete>
+
+	<!-- 加入新的资源记录 -->
+	<insert id="addResource" parameterType="Resource">
+		<selectKey keyProperty="id" order="BEFORE" resultType="String">
+			select UUID()
+		</selectKey>
+		insert into a_resource
+		value(#{id},#{type},#{name},#{content},#{describe},#{owner},#{createTime},#{url},#{permitAccountNum})
+	</insert>
 
 </mapper>

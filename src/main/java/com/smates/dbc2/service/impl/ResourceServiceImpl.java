@@ -1,5 +1,6 @@
 package com.smates.dbc2.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,10 @@ public class ResourceServiceImpl implements ResourceService {
 		return resourceDao.getIdByAccountNum(accountNumber);
 	}
 
+	@Override
+	public void addResource(String type, String name, String content, String describe, String owner, Date createTime,
+			String url, String permitAccountNum) {
+		resourceDao.addResource(new Resource(null, type, name, content, describe, owner, createTime, url, permitAccountNum));
+	}
 
 }

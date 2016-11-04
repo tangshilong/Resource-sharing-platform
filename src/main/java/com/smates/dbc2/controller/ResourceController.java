@@ -1,5 +1,6 @@
 package com.smates.dbc2.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.smates.dbc2.po.Resource;
 import com.smates.dbc2.po.User;
+import com.smates.dbc2.qniu.QniuHelper;
+import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.utils.SysConst;
 import com.smates.dbc2.vo.BaseMsg;
 import com.smates.dbc2.vo.DataGrideRow;
@@ -158,8 +162,12 @@ public class ResourceController extends BaseController {
 				return new BaseMsg(true, resourceService.getContentById(id));
 			}
 		}
-		logger.info("没查询到当前用户拥有权限");
-		return new BaseMsg(false, "no permit");
+		/**
+		 * 暂时先把选线过滤去掉，后期再加
+		 */
+		return new BaseMsg(true, resourceService.getContentById(id));
+//		logger.info("没查询到当前用户拥有权限");
+//		return new BaseMsg(false, "no permit");
 	}
 
 	/**
@@ -172,5 +180,21 @@ public class ResourceController extends BaseController {
 	public List<User> getAllUserName(){
 		logger.info("获取名称"+userService.getAllUserName());
 		return userService.getAllUser();
+	}
+	
+	/**
+	 * 用户添加资源
+	 * @return 
+	 */
+	@ResponseBody
+	@RequestMapping(value="addResource",method=RequestMethod.POST)
+	public BaseMsg addResource(String type, String name, String content, String describe, MultipartFile url, String permitAccountNum){
+		String resourceUrl = "";
+		if (!StringUtils.isEmpty(url.getOriginalFilename())) {
+			resourceUrl = StringUtils.formateFileName(url.getOriginalFilename());
+			qniuHelper.uploadFile(url, resourceUrl);
+		}
+		resourceService.addResource(type, name, content, describe,userService.getCurrentUserActNum() , new Date(), resourceUrl, permitAccountNum);
+		return new BaseMsg(true, "上传资源成功");
 	}
 }

@@ -1,7 +1,3 @@
-/**
- * Menu.html
- */
-
 //改变tab
 function updateTab(tabName) {
 	var tab = $('#menu_tab').tabs('getTab', 1); // 取得第2个tab
