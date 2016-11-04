@@ -77,4 +77,10 @@ public interface ResourceDao {
 	 */
 	public int getIdByAccountNum(String accountNumber);
 	
+	/**
+	 * 用户上传资源
+	 * @param resource
+	 */
+	public void addResource(Resource resource);
+	
 }

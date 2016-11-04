@@ -63,16 +63,12 @@
 		<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	
-	
-
 	<!-- 配置SESSION超时，单位是分钟 -->
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
-	
-	<welcome-file-list>  
-        <welcome-file>login.do</welcome-file>  
-    </welcome-file-list>   
+	<welcome-file-list>
+		<welcome-file>login.do</welcome-file>
+	</welcome-file-list>
 
 </web-app>

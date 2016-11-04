@@ -25,14 +25,20 @@
 					<a href="#" id="password_btn" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width: 80px">查看账号</a>
 				</div>
 				<div style="height: 10px;"></div>
-				<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;" data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllGame.do',method:'post'">
+				<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;" data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllGame.do',method:'post',formatter:function(value,row,index){  
+                         var unixTimestamp = new Date(value);  
+                         return unixTimestamp.toLocaleString();  
+                         }">
 					<thead>
 						<tr>
 							<th data-options="field:'id',width:140,align:'center',hidden:'hidden'">id</th>
 							<th data-options="field:'name',width:140,align:'center'">账号名称</th>
 							<th data-options="field:'describe',width:300,align:'center'">账号描述</th>
 							<th data-options="field:'owner',width:80,align:'center'">账号拥有者</th>
-							<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
+							<th data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
+                         var unixTimestamp = new Date(value);  
+                         return unixTimestamp.toLocaleString();  
+                         }">创建时间</th>
 						</tr>
 					</thead>
 				</table>

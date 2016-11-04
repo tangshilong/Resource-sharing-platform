@@ -19,7 +19,7 @@
 				</div>
 				<a href="#" id="search_btn_user" class="easyui-linkbutton"
 					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
-				<a href="#" id="search_btn_download" class="easyui-linkbutton"
+				<a href="javascript:download()" id="search_btn_download" class="easyui-linkbutton"
 					data-options="iconCls:'icon-save'" style="width: 80px">Download</a>
 			</div>
 			<div style="height: 10px;"></div>
@@ -31,7 +31,10 @@
 						<th data-options="field:'content',width:160,align:'center'">资源内容</th>
 						<th data-options="field:'describe',width:160,align:'center'">资源描述</th>
 						<th data-options="field:'owner',width:80,align:'center'">资源拥有者</th>
-						<th data-options="field:'createDate',width:140,align:'center'">创建时间</th>
+						<th data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
+                         var unixTimestamp = new Date(value);  
+                         return unixTimestamp.toLocaleString();  
+                         }">创建时间</th>
 						<th data-options="field:'url',width:140,align:'center'">附件地址</th>
 					</tr>
 				</thead>
@@ -47,6 +50,15 @@
 				});
 			})
 		})
+	
+	    function download(){
+			var row = $('#dg').datagrid('getSelected');
+			if (row) {
+				location.href="http://ocb1neay4.bkt.clouddn.com/"+row.url;
+			} else {
+				$.messager.alert('提示', "请选中要下载的资源", 'info');
+			}
+		}
 	</script>
 </body>
 </html> 
