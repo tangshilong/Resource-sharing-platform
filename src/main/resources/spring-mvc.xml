@@ -91,7 +91,7 @@
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.InternalResourceView" />
 	</bean>
-
+	
 	<!-- 防止json返回出现中文出现乱码 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">
@@ -100,6 +100,5 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
-
+	
 </beans>

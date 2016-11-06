@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.smates.dbc2.po.Resource;
 import com.smates.dbc2.po.User;
-import com.smates.dbc2.qniu.QniuHelper;
 import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.utils.SysConst;
 import com.smates.dbc2.vo.BaseMsg;
@@ -39,7 +38,6 @@ public class ResourceController extends BaseController {
 	@ResponseBody
 	public DataGrideRow<Resource> getAllVip(@RequestParam(defaultValue = "1") Integer page, Integer rows, String name) {
 		logger.info("访问vip账号资源");
-		logger.info(page + "," + rows + "," + name);
 		return new DataGrideRow<Resource>(resourceService.countSum(name, SysConst.VIP),
 				resourceService.getAllVip(page, rows, name));
 	}
@@ -54,7 +52,6 @@ public class ResourceController extends BaseController {
 	public DataGrideRow<Resource> getMyResource(@RequestParam(defaultValue = "1") Integer page, Integer rows,
 			String name, String type) {
 		logger.info("获取我的资源");
-		logger.info(page + "," + rows + "," + name + "," + type);
 		return new DataGrideRow<Resource>(resourceService.countMyResource(name, type),
 				turnType(resourceService.getMyResource(page, rows, type, name)));
 	}
@@ -146,22 +143,22 @@ public class ResourceController extends BaseController {
 	 */
 	@RequestMapping(value = "getContentById", method = RequestMethod.POST)
 	@ResponseBody
-	public BaseMsg getContentById(int id) {
-		logger.info("开始查询权限");
-		String accountNumber = userService.getCurrentUserActNum();
-		logger.info("accountNumber" + "=" + accountNumber);
-		int loginId = resourceService.getIdByAccountNum(accountNumber);
-		logger.info("loginid =" + loginId);
-		String permitAccountNum = resourceService.getPermitAccountNumById(id);
-		logger.info("permitAccountNum" + "=" + permitAccountNum);
-		String[] permitNum = permitAccountNum.split("\\,");
-		for (int i = 0; i < permitNum.length; i++) {
-			logger.info("i" + "=" + i + "," + "permitNumLength" + "=" + permitNum.length);
-			logger.info(permitNum[i]);
-			if (String.valueOf(loginId).equals(permitNum[i])) {
-				return new BaseMsg(true, resourceService.getContentById(id));
-			}
-		}
+	public BaseMsg getContentById(String id) {
+//		logger.info("开始查询权限");
+//		String accountNumber = userService.getCurrentUserActNum();
+//		logger.info("accountNumber" + "=" + accountNumber);
+//		int loginId = resourceService.getIdByAccountNum(accountNumber);
+//		logger.info("loginid =" + loginId);
+//		String permitAccountNum = resourceService.getPermitAccountNumById(id);
+//		logger.info("permitAccountNum" + "=" + permitAccountNum);
+//		String[] permitNum = permitAccountNum.split("\\,");
+//		for (int i = 0; i < permitNum.length; i++) {
+//			logger.info("i" + "=" + i + "," + "permitNumLength" + "=" + permitNum.length);
+//			logger.info(permitNum[i]);
+//			if (String.valueOf(loginId).equals(permitNum[i])) {
+//				return new BaseMsg(true, resourceService.getContentById(id));
+//			}
+//		}
 		/**
 		 * 暂时先把选线过滤去掉，后期再加
 		 */

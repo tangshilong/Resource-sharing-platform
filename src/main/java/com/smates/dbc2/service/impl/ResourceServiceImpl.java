@@ -64,17 +64,17 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public String getPermitAccountNumById(int id) {
+	public String getPermitAccountNumById(String id) {
 		return resourceDao.getPermitAccountNumById(id);
 	}
 
 	@Override
-	public String getContentById(int id) {
+	public String getContentById(String id) {
 		return resourceDao.getContentById(id);
 	}
 
 	@Override
-	public int getIdByAccountNum(String accountNumber) {
+	public String getIdByAccountNum(String accountNumber) {
 		return resourceDao.getIdByAccountNum(accountNumber);
 	}
 
