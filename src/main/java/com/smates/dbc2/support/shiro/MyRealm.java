@@ -1,7 +1,6 @@
 package com.smates.dbc2.support.shiro;
 
 import javax.annotation.PostConstruct;
-import org.apache.log4j.Logger;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,8 +27,6 @@ import com.smates.dbc2.utils.SysConst;
  *
  */
 public class MyRealm extends AuthorizingRealm {
-
-	private static Logger logger = Logger.getLogger(MyRealm.class);
 
 	@Autowired
 	private UserService userService;

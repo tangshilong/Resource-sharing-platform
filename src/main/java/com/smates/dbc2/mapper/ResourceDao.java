@@ -60,14 +60,14 @@ public interface ResourceDao {
 	 * @param id
 	 * @return
 	 */
-	public String getPermitAccountNumById(int id);
+	public String getPermitAccountNumById(String id);
 
 	/**
 	 * 根据资源id查找账号密码内容
 	 * @param id
 	 * @return
 	 */
-	public String getContentById(int id);
+	public String getContentById(String id);
 
 	/**
 	 * 根据accountnumber获取id
@@ -75,7 +75,7 @@ public interface ResourceDao {
 	 * @param accountNumber
 	 * @return
 	 */
-	public int getIdByAccountNum(String accountNumber);
+	public String getIdByAccountNum(String accountNumber);
 	
 	/**
 	 * 用户上传资源

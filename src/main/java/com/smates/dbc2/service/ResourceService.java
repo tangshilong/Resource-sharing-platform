@@ -86,14 +86,14 @@ public interface ResourceService {
 	 * @param id
 	 * @return
 	 */
-	public String getPermitAccountNumById(int id);
+	public String getPermitAccountNumById(String id);
 
 	/**
 	 * 根据资源id获得内容
 	 * 
 	 * @param id
 	 */
-	public String getContentById(int id);
+	public String getContentById(String id);
 
 	/**
 	 * 根据账号获取id
@@ -101,7 +101,7 @@ public interface ResourceService {
 	 * @param accountNumber
 	 * @return
 	 */
-	public int getIdByAccountNum(String accountNumber);
+	public String getIdByAccountNum(String accountNumber);
 
 	/**
 	 * 用户上传资源
