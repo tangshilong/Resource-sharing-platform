@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.smates.dbc2.aop.PersonalLog;
 import com.smates.dbc2.po.Resource;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.utils.StringUtils;
@@ -143,6 +144,7 @@ public class ResourceController extends BaseController {
 	 */
 	@RequestMapping(value = "getContentById", method = RequestMethod.POST)
 	@ResponseBody
+	@PersonalLog("getContentById")
 	public BaseMsg getContentById(String id) {
 //		logger.info("开始查询权限");
 //		String accountNumber = userService.getCurrentUserActNum();

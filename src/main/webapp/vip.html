@@ -3,22 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Basic Tabs - jQuery EasyUI Demo</title>
-<link rel="stylesheet" type="text/css"href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
 <script type="text/javascript" src="easyUI/jquery.min.js"></script>
 <script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
 </head>
 <body>
-	<div id="_tab" class="easyui-tabs"
-		data-options="tools:'#tab-tools'" style="width: auto;">
+	<div id="_tab" class="easyui-tabs" data-options="tools:'#tab-tools'"
+		style="width: auto;">
 		<div title="各类VIP账号" style="padding: 10px">
 			<div>
 				<div style="margin-bottom: 20px; display: inline;">
-					资源名称: <input class="easyui-textbox" id="resourceName" name="resourceName"
-						style="width: 150px; height: 32px">
+					资源名称: <input class="easyui-textbox" id="resourceName"
+						name="resourceName" style="width: 150px; height: 32px">
 				</div>
 				<a href="#" id="search_btn" class="easyui-linkbutton"
-					data-options="iconCls:'icon-search'" style="width: 80px">查找</a>
+					data-options="iconCls:'icon-search'" style="width: 80px">查找</a> <a
+					href="#" id="password_btn" class="easyui-linkbutton"
+					data-options="iconCls:'icon-search'" style="width: 80px">查看内容</a>
 			</div>
 			<div style="height: 10px;"></div>
 			<table id="tt" class="easyui-datagrid"
@@ -27,10 +30,10 @@
 				<thead>
 					<tr>
 						<th field="name" width="150" align="center">资源名称</th>
-						<th field="content" width="200" align="center">资源内容</th>
 						<th field="describe" width="200" align="center">资源描述</th>
 						<th field="owner" width="100" align="center">资源拥有者</th>
-						<th data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
+						<th
+							data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
                          var unixTimestamp = new Date(value);  
                          return unixTimestamp.toLocaleString();  
                          }">创建时间</th>
@@ -39,16 +42,42 @@
 			</table>
 		</div>
 	</div>
-	
+
+	<div id="dlg" class="easyui-dialog" title="账号信息"
+		style="width: 330px; height: 150px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<form id="fm" method="post">
+			<div>
+				<input name="content" class="easyui-textbox"
+					style="width: 280px; height: 90px">
+			</div>
+		</form>
+	</div>
+
 	<script type="text/javascript">
-	// 按条件进行查找
-	$(function() {
-		$('#search_btn').click(function() {
-			$('#tt').datagrid('load', {
-				name : $('#resourceName').val()
-			});
+		$('#password_btn').click(function() {
+			var row = $('#tt').datagrid('getSelected');
+
+			if (row) {
+				$.post("getContentById.do", {
+					id : row.id
+				}, function(data) {
+					$("#fm").form("load", {
+						content : data.content
+					});
+				}, "JSON");
+				$('#dlg').dialog('open');
+			}
 		})
-	})
+
+		// 按条件进行查找
+		$(function() {
+			$('#search_btn').click(function() {
+				$('#tt').datagrid('load', {
+					name : $('#resourceName').val()
+				});
+			})
+		})
 	</script>
 </body>
 </html>
