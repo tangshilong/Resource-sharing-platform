@@ -18,6 +18,8 @@ $(function() {
 				});
 			}, "JSON");
 			$('#dlg').dialog('open');
+		}else{
+			$.messager.alert('提示', "请选中查看的资源", 'info');
 		}
 	})
 })
