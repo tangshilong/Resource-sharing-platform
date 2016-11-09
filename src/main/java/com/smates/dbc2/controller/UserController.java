@@ -71,6 +71,76 @@ public class UserController extends BaseController {
 		return "redirect:home.do";
 	}
 
+	@RequestMapping(value = "register", method = RequestMethod.GET)
+	public String register() {
+		return "Register.ftl";
+	}
+	
+	@RequestMapping(value = "register", method = RequestMethod.POST)
+	public String Register(ModelMap modelMap, String accountNumber, String nickname, String password, String repwd,
+			String email, MultipartFile image) {
+		if (!password.equals(repwd)) {
+			logger.info(password + "+" + repwd);;
+			modelMap.addAttribute("callback", "Two passwords are not consistent !");
+			return "Register.ftl";
+		}
+		User user = userService.getUserByAccountNumber(accountNumber);
+		if (user != null) {
+		    modelMap.addAttribute("callback", "username is already exit !");
+			return "Register.ftl";
+		}
+		if (!ValidaterUtil.checkAccountNumber(accountNumber)) {
+			logger.info("账号格式错误");
+		    modelMap.addAttribute("callback", "accountNumber can't be used !");
+			return "Register.ftl";
+		}
+		if (!ValidaterUtil.checkPassWord(password)) {
+			logger.info("密码格式错误");
+			modelMap.addAttribute("callback", "password can't be used !");
+			return "Register.ftl";
+		}
+		if (email != null) {
+			if (!ValidaterUtil.checkEMail(email)) {
+				logger.info("邮箱格式不正确");
+				modelMap.addAttribute("callback", "email can't be used !");
+				return "Register.ftl";
+			}
+		}
+		logger.info("图片");
+		//检测是否上传图片，图片格式是否正确		
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
+			if (!ValidaterUtil.checkImage(image.getOriginalFilename())) {
+				logger.info("上传的不是图片");
+				modelMap.addAttribute("callback", "the file can't be used !");
+				return "Register.ftl";
+			}
+		} 
+		logger.info("图片");
+		String fileName;
+		fileName = StringUtils.formateFileName(image.getOriginalFilename());//获取图片名称
+		// 加入图片样式,缩放和大小
+		logger.info("插入用户");
+		User user2 = new User();
+		user2.setAccountNumber(accountNumber);
+		user2.setCreateDate(new Date());
+		user2.seteMail(email);
+		user2.setNickName(nickname);
+		user2.setPassword(ShiroUtils.passwdMD5(password));
+		user2.setRole(0);
+		if (StringUtils.isEmpty(image.getOriginalFilename())) {//如果头像为空则使用默认头像
+			user2.setImage(null);
+		}else{
+			user2.setImage(QniuHelper.formateUserHeadIcon(fileName));
+		}
+		userService.createUser(user2);
+		logger.info("上传图片");
+		qniuHelper.uploadFile(image, fileName);//上传图片
+		logger.info("上传图片成功");
+		modelMap.addAttribute("callback", "create user seccess !");
+		return "redirect:login.do";
+
+	}
+
 	/**
 	 * 登出
 	 * 
@@ -90,11 +160,12 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("home")
 	public String home(ModelMap modelMap) {
-		modelMap.addAttribute("menulist", menuService.getMenuByRoles(userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getRole()));
+		modelMap.addAttribute("menulist", menuService
+				.getMenuByRoles(userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getRole()));
 		modelMap.addAttribute("userName",
 				userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getNickName());
-		modelMap.addAttribute("image",
-				SysConst.QNIUYUNURL + userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getImage());
+		modelMap.addAttribute("image", SysConst.QNIUYUNURL
+				+ userService.getUserByAccountNumber(userService.getCurrentUserActNum()).getImage());
 		return "Home.ftl";
 	}
 
@@ -128,7 +199,7 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
-		if(!StringUtils.isEmpty(image.getOriginalFilename())){
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
 			if (!ValidaterUtil.checkImage(image.getOriginalFilename())) {
 				logger.info("上传的不是图片");
 				return new BaseMsg(false, "图片格式只支持png,jpg,bmp,jpeg,gif");
@@ -136,8 +207,7 @@ public class UserController extends BaseController {
 		}
 
 		// 创建user对象,默认头像
-		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, new Date(),
-				eMail);
+		User user = new User(id, accountNumber, nickName, ShiroUtils.passwdMD5(password), role, new Date(), eMail);
 
 		User userPo = userService.getUserByAccountNumber(accountNumber);
 
@@ -247,13 +317,12 @@ public class UserController extends BaseController {
 				return new BaseMsg(false, "wrong e-mail");
 			}
 		}
-		if(!StringUtils.isEmpty(image.getOriginalFilename())){
+		if (!StringUtils.isEmpty(image.getOriginalFilename())) {
 			if (!ValidaterUtil.checkImage(image.getOriginalFilename())) {
 				logger.info("上传的不是图片");
 				return new BaseMsg(false, "图片格式只支持png,jpg,bmp,jpeg,gif");
 			}
 		}
-		
 
 		// 用户权限下只允许修改,密码,邮箱,昵称和头像
 		String fileName = null;

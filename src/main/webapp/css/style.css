@@ -174,9 +174,14 @@ form:after {
 	border: 1px solid #ed1c24;
 	outline: none;
 }
+
+#accountNumber { background-position: 10px 10px !important }
+#nickname { background-position: 10px 10px !important }
+#repwd { background-position: 10px -53px !important }
+#eMail { background-position: 10px 10px !important }
 #username { background-position: 10px 10px !important }
 #password { background-position: 10px -53px !important }
-#content form input[type="submit"],#content form input[type="reset"] {
+#content form input[type="submit"],#content form input[type="reset"],#content form input[type="button"]  {
 	background: rgb(254,231,154);
 	background: -moz-linear-gradient(top,  rgba(254,231,154,1) 0%, rgba(254,193,81,1) 100%);
 	background: -webkit-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
@@ -200,12 +205,12 @@ form:after {
 	float: left;
 	font: bold 15px Helvetica, Arial, sans-serif;
 	height: 35px;
-	margin: 20px 45px 50px 15px;
+	margin: 10px 30px 10px 30px;
 	position: relative;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 	width: 120px;
 }
-#content form input[type="submit"]:hover,#content form input[type="reset"]:hover {
+#content form input[type="submit"]:hover,#content form input[type="reset"]:hover,#content form input[type="button"] :hover {
 	background: rgb(254,193,81);
 	background: -moz-linear-gradient(top,  rgba(254,193,81,1) 0%, rgba(254,231,154,1) 100%);
 	background: -webkit-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
@@ -214,13 +219,15 @@ form:after {
 	background: linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fec151', endColorstr='#fee79a',GradientType=0 );
 }
-#content form div a {
-	color: #004a80;
+
+.link {
+	color: #777;
     float: right;
-    font-size: 12px;
-    margin: 30px 15px 0 0;
-    text-decoration: underline;
+    font-size: 17px;
+    margin: 0 0 8px 0;
+    text-decoration: underline;	
 }
+
 .button {
 	background: rgb(247,249,250);
 	background: -moz-linear-gradient(top,  rgba(247,249,250,1) 0%, rgba(240,240,240,1) 100%);
@@ -267,3 +274,22 @@ form:after {
 	background-color: #CFD5D9;
 }
 
+.image {
+	position:relative;
+	height: 47px;
+	width: 340px;
+	margin: 0 auto;
+}
+
+.image-choose {
+	position:absolute;
+	top: 3px;
+	right: 0;
+}
+
+.image-word {
+	position:absolute;
+	color: #777;
+    font-size: 17px;
+	margin: 15px 0 0 40px;
+}
