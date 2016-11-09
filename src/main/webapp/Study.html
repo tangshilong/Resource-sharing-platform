@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Basic Tabs - jQuery EasyUI Demo</title>
-<link rel="stylesheet" type="text/css"href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
 <script type="text/javascript" src="easyUI/jquery.min.js"></script>
 <script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
@@ -19,11 +20,14 @@
 				</div>
 				<a href="#" id="search_btn_user" class="easyui-linkbutton"
 					data-options="iconCls:'icon-search'" style="width: 80px">Search</a>
-				<a href="javascript:download()" id="search_btn_download" class="easyui-linkbutton"
-					data-options="iconCls:'icon-save'" style="width: 80px">Download</a>
+				<a href="#" id="password_btn" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width: 80px">查看内容</a>
+				<a href="javascript:download()" id="search_btn_download"
+					class="easyui-linkbutton" data-options="iconCls:'icon-save'"
+					style="width: 80px">Download</a>
 			</div>
 			<div style="height: 10px;"></div>
-			<table id="dg" class="easyui-datagrid" style="width: auto; height: auto; margin-top: 20px;"
+			<table id="dg" class="easyui-datagrid"
+				style="width: auto; height: auto; margin-top: 20px;"
 				data-options="pagesize:10,rownumbers:true,singleSelect:true,pagination:true,url:'getAllStudy.do',method:'get'">
 				<thead>
 					<tr>
@@ -31,7 +35,8 @@
 						<th data-options="field:'content',width:160,align:'center'">资源内容</th>
 						<th data-options="field:'describe',width:250,align:'center'">资源描述</th>
 						<th data-options="field:'owner',width:80,align:'center'">资源拥有者</th>
-						<th data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
+						<th
+							data-options="field:'createTime',width:200,align:'center',formatter:function(value,row,index){  
                          var unixTimestamp = new Date(value);  
                          return unixTimestamp.toLocaleString();  
                          }">创建时间</th>
@@ -41,8 +46,36 @@
 			</table>
 		</div>
 	</div>
+
+	<div id="dlg" class="easyui-dialog" title="账号信息"
+		style="width: 330px; height: 150px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<form id="fm" method="post">
+			<div>
+				<input name="content" class="easyui-textbox"
+					style="width: 280px; height: 90px">
+			</div>
+		</form>
+	</div>
 	<script type="text/javascript">
-	// 按条件进行查找
+		$('#password_btn').click(function() {
+			var row = $('#dg').datagrid('getSelected');
+
+			if (row) {
+				$.post("getContentById.do", {
+					id : row.id
+				}, function(data) {
+					$("#fm").form("load", {
+						content : data.content
+					});
+				}, "JSON");
+				$('#dlg').dialog('open');
+			}else{
+				$.messager.alert('提示', "请选中查看的资源", 'info');
+			}
+		})
+
+		// 按条件进行查找
 		$(function() {
 			$('#search_btn_user').click(function() {
 				$('#dg').datagrid('load', {
@@ -50,15 +83,15 @@
 				});
 			})
 		})
-	
-	    function download(){
+
+		function download() {
 			var row = $('#dg').datagrid('getSelected');
 			if (row) {
-				location.href="http://ocb1neay4.bkt.clouddn.com/"+row.url;
+				location.href = "http://ocb1neay4.bkt.clouddn.com/" + row.url;
 			} else {
 				$.messager.alert('提示', "请选中要下载的资源", 'info');
 			}
 		}
 	</script>
 </body>
-</html> 
+</html>
