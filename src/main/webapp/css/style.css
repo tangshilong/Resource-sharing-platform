@@ -178,7 +178,7 @@ form:after {
 #accountNumber { background-position: 10px 10px !important }
 #nickname { background-position: 10px 10px !important }
 #repwd { background-position: 10px -53px !important }
-#eMail { background-position: 10px 10px !important }
+#email { background-position: 10px 10px !important }
 #username { background-position: 10px 10px !important }
 #password { background-position: 10px -53px !important }
 #content form input[type="submit"],#content form input[type="reset"],#content form input[type="button"]  {

@@ -82,27 +82,32 @@ public class UserController extends BaseController {
 		if (!password.equals(repwd)) {
 			logger.info(password + "+" + repwd);;
 			modelMap.addAttribute("callback", "Two passwords are not consistent !");
+			callback(modelMap, accountNumber, nickname, password, repwd, email);
 			return "Register.ftl";
 		}
 		User user = userService.getUserByAccountNumber(accountNumber);
 		if (user != null) {
 		    modelMap.addAttribute("callback", "username is already exit !");
+			callback(modelMap, accountNumber, nickname, password, repwd, email);
 			return "Register.ftl";
 		}
-		if (!ValidaterUtil.checkAccountNumber(accountNumber)) {
+		if (!ValidaterUtil.checkAccountNumber(accountNumber)) {//1-15位大小写字母和数字
 			logger.info("账号格式错误");
-		    modelMap.addAttribute("callback", "accountNumber can't be used !");
+		    modelMap.addAttribute("callback", "accountNumber can't be used !(^[A-Za-z0-9]{1,15}$)");
+			callback(modelMap, accountNumber, nickname, password, repwd, email);
 			return "Register.ftl";
 		}
-		if (!ValidaterUtil.checkPassWord(password)) {
+		if (!ValidaterUtil.checkPassWord(password)) {//6-40位大小写 字母数字 .!的组合
 			logger.info("密码格式错误");
-			modelMap.addAttribute("callback", "password can't be used !");
+			modelMap.addAttribute("callback", "password can't be used !(^[A-Za-z0-9!.]{6,40}$)");
+			callback(modelMap, accountNumber, nickname, password, repwd, email);
 			return "Register.ftl";
 		}
 		if (email != null) {
 			if (!ValidaterUtil.checkEMail(email)) {
 				logger.info("邮箱格式不正确");
 				modelMap.addAttribute("callback", "email can't be used !");
+				callback(modelMap, accountNumber, nickname, password, repwd, email);
 				return "Register.ftl";
 			}
 		}
@@ -139,6 +144,25 @@ public class UserController extends BaseController {
 		modelMap.addAttribute("callback", "create user seccess !");
 		return "redirect:login.do";
 
+	}
+
+	/**
+	 * 注册返回值
+	 * 
+	 * @param modelMap
+	 * @param accountNumber
+	 * @param nickname
+	 * @param password
+	 * @param repwd
+	 * @param email
+	 */
+	private void callback(ModelMap modelMap, String accountNumber, String nickname, String password, String repwd,
+			String email) {
+		modelMap.addAttribute("accountNumber", accountNumber);
+		modelMap.addAttribute("nickname", nickname);
+		modelMap.addAttribute("password", password);
+		modelMap.addAttribute("repwd", repwd);
+		modelMap.addAttribute("email", email);
 	}
 
 	/**

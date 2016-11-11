@@ -16,19 +16,39 @@
 						<div class="callback">${callback}</div>
 					</#if>
 					<div>
-						<input type="text" placeholder="AccountNumber" required="" id="accountNumber" name="accountNumber" />
+						<#if accountNumber?has_content>
+						<input type="text" value=${accountNumber} id="accountNumber" name="accountNumber" />
+						<#else>
+						<input type="text" placeholder="请输入账号(1-15位大小写字母和数字的组合)" id="accountNumber" name="accountNumber" />
+						</#if>
 					</div>
 					<div>
-						<input type="text" placeholder="Nickname" required="" id="nickname" name="nickname" />
+						<#if nickname?has_content>
+						<input type="text" value=${nickname} id="nickname" name="nickname" />
+						<#else>
+						<input type="text" placeholder="请输入昵称" required="" id="nickname" name="nickname" />
+						</#if>
 					</div>
 					<div>
-						<input type="password" placeholder="Password" required="" id="password" name="password" />
+						<#if password?has_content>
+						<input type="password" value=${password} id="password" name="password" />
+						<#else>
+						<input type="password" placeholder="请输入密码（6-40位大小写字母,数字和“.!”的组合）" id="password" name="password" />
+						</#if>
 					</div>
 					<div>
-						<input type="password" placeholder="Password" required="" id="repwd" name="repwd" />
+						<#if repwd?has_content>
+						<input type="password" value=${repwd} id="repwd" name="repwd" />
+						<#else>
+						<input type="password" placeholder="请再次输入" id="repwd" name="repwd" />
+						</#if>
 					</div>
 					<div>
-						<input type="text" placeholder="E-mail" required="" id="eMail" name="email" />
+						<#if email?has_content>
+						<input type="text" value=${email} id="email" name="email" />
+						<#else>
+						<input type="text" placeholder="请输入邮箱" id="email" name="email" />
+						</#if>
 					</div>
 					<div class="image">
 						<div class="image-word">选择头像</div>
@@ -46,8 +66,17 @@
 			<!-- content -->
 		</div>
 		<!-- container -->
-
-		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>\
+		<script type="text/javascript" src="js/validate.js"></script>
+		<script type="text/javascript">
+			function checkTel() {
+				var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+				if(!myreg.test($("#password").val())) {
+					alert('请输入有效的手机号码！');
+					return false;
+				}
+			}
+		</script>
 	</body>
 
 </html>
