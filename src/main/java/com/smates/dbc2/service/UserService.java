@@ -3,6 +3,7 @@ package com.smates.dbc2.service;
 import java.util.List;
 
 import com.smates.dbc2.po.User;
+import com.smates.dbc2.vo.ComboBoxRow;
 
 /**
  * 用户相关service
@@ -87,5 +88,12 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> getAllUser();
+
+	/**
+	 * 获取所有用户id和nickname
+	 * 
+	 * @return
+	 */
+	public List<ComboBoxRow> getUserList();
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.smates.dbc2.mapper.UserDao;
 import com.smates.dbc2.po.User;
 import com.smates.dbc2.service.UserService;
+import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.CostumUser;
 
 @Service
@@ -70,6 +71,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUser() {
 		return userMapper.getUser();
+	}
+
+	@Override
+	public List<ComboBoxRow> getUserList() {
+		return userMapper.getUserList();
 	}
 
 }

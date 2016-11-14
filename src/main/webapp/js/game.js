@@ -8,9 +8,8 @@ $(function() {
 
 	$('#password_btn').click(function() {
 		var row = $('#dg').datagrid('getSelected');
-
 		if (row) {
-			$.post("getContentById.do", {
+			$.post("getPwdById.do", {
 				id : row.id
 			}, function(data) {
 				$("#fm").form("load", {

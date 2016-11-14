@@ -65,9 +65,13 @@ $(function() {
 // 提交表单
 $('#addResource').form({
 	url : 'addResource.do',
+	onSubmit : function() {
+		var chestr = $('#userlist').combobox('getValues');
+		document.getElementById("permitAccountNumber").value = chestr;
+		return true;
+	},
 	success : function(data) {
 		var obj = eval("(" + data + ")");
 		$.messager.alert('success', obj.content);
 	}
 });
-

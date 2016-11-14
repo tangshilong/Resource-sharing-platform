@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.smates.dbc2.mapper.UserDao">
 
+	<resultMap type="com.smates.dbc2.vo.ComboBoxRow" id="ComboBoxRowMap">
+		<id column="id" property="id" />
+		<result column="nickName" property="text" />
+	</resultMap>
+
 	<resultMap id="BaseResultMap" type="user">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="accountNumber" property="accountNumber"
@@ -16,6 +21,12 @@
 		id, accountNumber,nickName, password, role, createDate,
 		e_mail
 	</sql>
+
+	<!-- des: 查找所有用户id和用户昵称 sql: select id,nickName from s_user -->
+	<select id="getUserList" resultMap="ComboBoxRowMap">
+		select id,nickName
+		from s_user
+	</select>
 
 	<!-- des: 根据accountNumber查找user example sql: select * from s_user where 
 		accountNumber = admin -->

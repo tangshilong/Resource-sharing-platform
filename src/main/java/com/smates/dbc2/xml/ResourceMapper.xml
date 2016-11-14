@@ -127,7 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- desc:根据accountnumber获取id example sql： select id from s_user a where 
 		a.accountNumber = 'tangshilong' -->
 	<select id="getIdByAccountNum" parameterType="string"
-		resultType="String">
+		resultType="int">
 		select id
 		from s_user a
 		where a.accountNumber = #{value}

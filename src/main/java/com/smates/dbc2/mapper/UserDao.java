@@ -3,6 +3,7 @@ package com.smates.dbc2.mapper;
 import java.util.List;
 
 import com.smates.dbc2.po.User;
+import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.CostumUser;
 
 public interface UserDao {
@@ -73,5 +74,12 @@ public interface UserDao {
 	 * @return
 	 */
 	public List<User> getUser();
+
+	/**
+	 * 获取所有用户id和nickname
+	 * 
+	 * @return
+	 */
+	public List<ComboBoxRow> getUserList();
 	
 }

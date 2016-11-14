@@ -75,7 +75,7 @@ public interface ResourceDao {
 	 * @param accountNumber
 	 * @return
 	 */
-	public String getIdByAccountNum(String accountNumber);
+	public int getIdByAccountNum(String accountNumber);
 	
 	/**
 	 * 用户上传资源

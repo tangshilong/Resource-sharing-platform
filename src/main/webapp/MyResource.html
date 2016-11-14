@@ -47,7 +47,7 @@
 				</table>
 			</div>
 			<div title="资源新增" style="padding: 10px">
-				<form id="addResource" method="post" enctype= multipart/form-data>
+				<form id="addResource" method="post" enctype=multipart/form-data>
 					<input type="hidden" id="id" name="id">
 					<table>
 						<tr>
@@ -77,6 +77,26 @@
 							<td><input type="file" id="image" name="url" style="width: 193px; height: 32px;margin-top:10px;"></td>
 						</tr>
 						<tr>
+							<td>用户列表:</td>
+							<td><input class="easyui-combobox" name="userlist" id="userlist" multiple="multiple" style="width: 200px; height: 32px;" data-options="
+							url: 'admin/getUserList.do',
+							required:true,
+							method: 'get',
+							valueField:'id',
+							textField:'text',
+							groupField:'group',
+							onLoadSuccess:function(){
+											$('#userlist').combo('textbox').attr('readonly', 'readonly');
+                                            $('#userlist').combobox('setValue','0');
+                                        }
+						    "></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="hidden" name="permitAccountNumber" id="permitAccountNumber" value="" />
+							</td>
+						</tr>
+						<tr>
 							<td></td>
 							<td><input type="submit" class="easyui-linkbutton" value="提交" style="width: 100px; height: 32px;" /></td>
 						</tr>
@@ -87,7 +107,6 @@
 		</div>
 
 		<script type="text/javascript" src="js/myResource.js"></script>
-
 	</body>
 
 </html>

@@ -137,63 +137,79 @@ public class ResourceController extends BaseController {
 	}
 
 	/**
-	 * 根据资源id查找当前用户是否拥有查看权限
+	 * 根据资源id查找当前用户是否拥有查看账号密码权限（游戏资源）
 	 * 
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "getContentById", method = RequestMethod.POST)
+	@RequestMapping(value = "getPwdById", method = RequestMethod.POST)
+	@ResponseBody
+	@PersonalLog("getPwdById")
+	public BaseMsg getPwdById(String id) {
+		logger.info("开始查询权限");
+		String accountNumber = userService.getCurrentUserActNum();
+		logger.info("accountNumber" + "=" + accountNumber);
+		int loginId = resourceService.getIdByAccountNum(accountNumber);
+		logger.info("loginid =" + loginId);
+		String permitAccountNum = resourceService.getPermitAccountNumById(id);
+		logger.info("permitAccountNum" + "=" + permitAccountNum);
+		if(permitAccountNum == null){
+			return new BaseMsg(false, "no permit");
+		}
+		String[] permitNum = permitAccountNum.split("\\,");
+		for (int i = 0; i < permitNum.length; i++) {
+			logger.info("i" + "=" + i + "," + "permitNumLength" + "=" + permitNum.length);
+			logger.info(permitNum[i]);
+			if (String.valueOf(loginId).equals(permitNum[i])) {
+				return new BaseMsg(true, resourceService.getContentById(id));
+			}
+		}
+		logger.info("没查询到当前用户拥有权限");
+		return new BaseMsg(false, "no permit");
+	}
+	
+    /**
+     * 根据资源id获取资源内容
+     * 
+     * @param id
+     * @return
+     */
+	@RequestMapping(value="getContentById",method=RequestMethod.POST)
 	@ResponseBody
 	@PersonalLog("getContentById")
-	public BaseMsg getContentById(String id) {
-//		logger.info("开始查询权限");
-//		String accountNumber = userService.getCurrentUserActNum();
-//		logger.info("accountNumber" + "=" + accountNumber);
-//		int loginId = resourceService.getIdByAccountNum(accountNumber);
-//		logger.info("loginid =" + loginId);
-//		String permitAccountNum = resourceService.getPermitAccountNumById(id);
-//		logger.info("permitAccountNum" + "=" + permitAccountNum);
-//		String[] permitNum = permitAccountNum.split("\\,");
-//		for (int i = 0; i < permitNum.length; i++) {
-//			logger.info("i" + "=" + i + "," + "permitNumLength" + "=" + permitNum.length);
-//			logger.info(permitNum[i]);
-//			if (String.valueOf(loginId).equals(permitNum[i])) {
-//				return new BaseMsg(true, resourceService.getContentById(id));
-//			}
-//		}
-		/**
-		 * 暂时先把选线过滤去掉，后期再加
-		 */
+	public BaseMsg getContentById(String id){
 		return new BaseMsg(true, resourceService.getContentById(id));
-//		logger.info("没查询到当前用户拥有权限");
-//		return new BaseMsg(false, "no permit");
 	}
-
+	
 	/**
 	 * 获取所有用户名称
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value="getAllUserName",method=RequestMethod.POST)
+	@RequestMapping(value = "getAllUserName", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> getAllUserName(){
-		logger.info("获取名称"+userService.getAllUserName());
+	public List<User> getAllUserName() {
+		logger.info("获取名称" + userService.getAllUserName());
 		return userService.getAllUser();
 	}
-	
+
 	/**
 	 * 用户添加资源
-	 * @return 
+	 * 
+	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="addResource",method=RequestMethod.POST)
-	public BaseMsg addResource(String type, String name, String content, String describe, MultipartFile url, String permitAccountNum){
+	@RequestMapping(value = "addResource", method = RequestMethod.POST)
+	public BaseMsg addResource(String type, String name, String content, String describe, MultipartFile url,
+			String permitAccountNumber) {
+		logger.info(permitAccountNumber);
 		String resourceUrl = "";
 		if (!StringUtils.isEmpty(url.getOriginalFilename())) {
 			resourceUrl = StringUtils.formateFileName(url.getOriginalFilename());
 			qniuHelper.uploadFile(url, resourceUrl);
 		}
-		resourceService.addResource(type, name, content, describe,userService.getCurrentUserActNum() , new Date(), resourceUrl, permitAccountNum);
+		resourceService.addResource(type, name, content, describe, userService.getCurrentUserActNum(), new Date(),
+				resourceUrl, permitAccountNumber);
 		return new BaseMsg(true, "上传资源成功");
 	}
 }

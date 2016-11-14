@@ -74,7 +74,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public String getIdByAccountNum(String accountNumber) {
+	public int getIdByAccountNum(String accountNumber) {
 		return resourceDao.getIdByAccountNum(accountNumber);
 	}
 

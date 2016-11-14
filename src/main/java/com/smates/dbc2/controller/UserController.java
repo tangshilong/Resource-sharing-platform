@@ -25,6 +25,7 @@ import com.smates.dbc2.utils.StringUtils;
 import com.smates.dbc2.utils.SysConst;
 import com.smates.dbc2.utils.ValidaterUtil;
 import com.smates.dbc2.vo.BaseMsg;
+import com.smates.dbc2.vo.ComboBoxRow;
 import com.smates.dbc2.vo.DataGrideRow;
 
 /**
@@ -310,6 +311,20 @@ public class UserController extends BaseController {
 		return userService.getUserByAccountNumber(accountNumber);
 	}
 
+	/**
+	 * 获取所有用户id和nickname
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "admin/getUserList", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ComboBoxRow> getUserList(){
+		logger.info("获取所有用户id和nickname");
+		List<ComboBoxRow> comboBoxRows = userService.getUserList();
+		comboBoxRows.add(new ComboBoxRow("0", "无"));// 添加无上级菜单选项
+		return comboBoxRows;
+	}
+	
 	/**
 	 * 获取当前登录的用户信息
 	 * 
