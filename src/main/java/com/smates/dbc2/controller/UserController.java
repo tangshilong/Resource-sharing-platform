@@ -316,7 +316,7 @@ public class UserController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "admin/getUserList", method = RequestMethod.GET)
+	@RequestMapping(value = "getUserList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ComboBoxRow> getUserList(){
 		logger.info("获取所有用户id和nickname");
