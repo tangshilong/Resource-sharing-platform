@@ -13,7 +13,7 @@ public class ValidaterUtil {
 
 	public static Pattern passWordPattern = Pattern.compile("^[A-Za-z0-9!.]{6,40}$");
 
-	public static Pattern eMailPattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$");
+	public static Pattern eMailPattern = Pattern.compile("^[a-zA-Z0-9_-.]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$");
 	
 	public static Pattern imagePattern = Pattern.compile("(?i).+?\\.(jpg|gif|bmp|png|jpeg|JPG|GIF|BMP|PNG|JPEG)");
 	/**
