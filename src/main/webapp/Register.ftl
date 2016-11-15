@@ -66,17 +66,5 @@
 			<!-- content -->
 		</div>
 		<!-- container -->
-		<script type="text/javascript" src="js/jquery.js"></script>\
-		<script type="text/javascript" src="js/validate.js"></script>
-		<script type="text/javascript">
-			function checkTel() {
-				var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-				if(!myreg.test($("#password").val())) {
-					alert('请输入有效的手机号码！');
-					return false;
-				}
-			}
-		</script>
 	</body>
-
 </html>
