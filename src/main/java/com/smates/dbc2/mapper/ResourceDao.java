@@ -82,5 +82,20 @@ public interface ResourceDao {
 	 * @param resource
 	 */
 	public void addResource(Resource resource);
+
+	/**
+	 * 根据资源id获取资源
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Resource getResourceById(String id);
+
+	/**
+	 * 根据资源id更新资源
+	 * 
+	 * @param resource
+	 */
+	public void updateResource(Resource resource);
 	
 }

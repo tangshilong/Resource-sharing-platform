@@ -84,4 +84,26 @@ public class ResourceServiceImpl implements ResourceService {
 		resourceDao.addResource(new Resource(null, type, name, content, describe, owner, createTime, url, permitAccountNum));
 	}
 
+	@Override
+	public Resource getResourceById(String id) {
+		return resourceDao.getResourceById(id);
+	}
+
+	@Override
+	public void updateResource(String id, String type, String name, String content, String describe,
+			String owner, Date date, String resourceUrl, String permitAccountNumber) {
+		Resource resource = new Resource();
+		resource.setId(id);
+		resource.setType(type);
+		resource.setName(name);
+		resource.setContent(content);
+		resource.setDescribe(describe);
+		resource.setOwner(owner);
+		resource.setCreateTime(date);
+		resource.setUrl(resourceUrl);
+		resource.setPermitAccountNum(permitAccountNumber);
+		System.out.println(type+"+"+content+"+"+date+"+"+describe+"+"+id+"+"+name+"+"+owner+"+"+permitAccountNumber+"+"+resourceUrl);
+		resourceDao.updateResource(resource);
+	}
+
 }

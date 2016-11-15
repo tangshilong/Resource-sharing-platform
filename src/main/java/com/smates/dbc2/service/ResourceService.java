@@ -111,4 +111,28 @@ public interface ResourceService {
 	public void addResource(String type, String name, String content, String describe, String owner,
 			Date createTime, String url, String permitAccountNum);
 
+	/**
+	 * 根于资源id获取资源
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Resource getResourceById(String id);
+
+	/**
+	 * 更新资源
+	 * 
+	 * @param id
+	 * @param type
+	 * @param name
+	 * @param content
+	 * @param describe
+	 * @param owner
+	 * @param date
+	 * @param resourceUrl
+	 * @param permitAccountNumber
+	 */
+	public void updateResource(String id, String type, String name, String content, String describe,
+			String owner, Date date, String resourceUrl, String permitAccountNumber);
+
 }

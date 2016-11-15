@@ -153,7 +153,7 @@ public class ResourceController extends BaseController {
 		logger.info("loginid =" + loginId);
 		String permitAccountNum = resourceService.getPermitAccountNumById(id);
 		logger.info("permitAccountNum" + "=" + permitAccountNum);
-		if(permitAccountNum == null){
+		if (permitAccountNum == null) {
 			return new BaseMsg(false, "no permit");
 		}
 		String[] permitNum = permitAccountNum.split("\\,");
@@ -167,20 +167,20 @@ public class ResourceController extends BaseController {
 		logger.info("没查询到当前用户拥有权限");
 		return new BaseMsg(false, "no permit");
 	}
-	
-    /**
-     * 根据资源id获取资源内容
-     * 
-     * @param id
-     * @return
-     */
-	@RequestMapping(value="getContentById",method=RequestMethod.POST)
+
+	/**
+	 * 根据资源id获取资源内容
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "getContentById", method = RequestMethod.POST)
 	@ResponseBody
 	@PersonalLog("getContentById")
-	public BaseMsg getContentById(String id){
+	public BaseMsg getContentById(String id) {
 		return new BaseMsg(true, resourceService.getContentById(id));
 	}
-	
+
 	/**
 	 * 获取所有用户名称
 	 * 
@@ -200,16 +200,31 @@ public class ResourceController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "addResource", method = RequestMethod.POST)
-	public BaseMsg addResource(String type, String name, String content, String describe, MultipartFile url,
+	public BaseMsg addResource(String id, String type, String name, String content, String describe, MultipartFile url,
 			String permitAccountNumber) {
-		logger.info(permitAccountNumber);
 		String resourceUrl = "";
 		if (!StringUtils.isEmpty(url.getOriginalFilename())) {
 			resourceUrl = StringUtils.formateFileName(url.getOriginalFilename());
 			qniuHelper.uploadFile(url, resourceUrl);
 		}
-		resourceService.addResource(type, name, content, describe, userService.getCurrentUserActNum(), new Date(),
-				resourceUrl, permitAccountNumber);
-		return new BaseMsg(true, "上传资源成功");
+		if (StringUtils.isEmpty(id)) {
+			logger.info("新增资源");
+			resourceService.addResource(type, name, content, describe, userService.getCurrentUserActNum(), new Date(),
+					resourceUrl, permitAccountNumber);
+			return new BaseMsg(true, "上传资源成功");
+		} else {
+			logger.info("编辑资源");
+			logger.info(userService.getCurrentUserActNum());
+			resourceService.updateResource(id, type, name, content, describe, userService.getCurrentUserActNum(), new Date(),
+					resourceUrl, permitAccountNumber);
+			return new BaseMsg(true, "资源更新成功");
+		}
 	}
+
+	@RequestMapping(value = "admin/getResourceById", method = RequestMethod.GET)
+	@ResponseBody
+	public Resource getResourceById(String id) {
+		return resourceService.getResourceById(id);
+	}
+
 }

@@ -48,7 +48,7 @@ $(function() {
 			handler : function() {
 				var row = $('#dg').datagrid('getSelected');
 				if (row) {
-					updateMenu(row.menuId);
+					updateResource(row.id);
 				} else {
 					$.messager.alert('提示', "请选中要修改的行", 'info');
 				}
@@ -73,5 +73,25 @@ $('#addResource').form({
 	success : function(data) {
 		var obj = eval("(" + data + ")");
 		$.messager.alert('success', obj.content);
+		updateTab("资源新增");
+		document.getElementById("id").value="";
 	}
 });
+
+function updateResource(id) {
+	$('#myr_tab').tabs('select', "资源新增");
+	updateTab("编辑资源");
+	$('#addResource').form('load', 'admin/getResourceById.do?id=' + id);
+
+}
+
+//改变tab
+function updateTab(tabName) {
+	var tab = $('#myr_tab').tabs('getTab', 1); // 取得第2个tab
+	$('#myr_tab').tabs('update', {
+		tab : tab,
+		options : {
+			title : tabName
+		}
+	});
+}

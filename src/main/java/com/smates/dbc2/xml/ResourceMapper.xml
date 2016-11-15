@@ -149,4 +149,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		value(#{id},#{type},#{name},#{content},#{describe},#{owner},#{createTime},#{url},#{permitAccountNum})
 	</insert>
 
+	<!-- desc:根据资源id获取资源 example sql： select * from a_resource where id = "4a08af4f-a889-11e6-9dc4-00163e0d48c0" -->
+	<select id="getResourceById" parameterType="String" resultType="Resource">
+		select *
+		from a_resource
+		where id = #{value}
+	</select>
+
+	<update id="updateResource" parameterType="Resource">
+		update a_resource
+		<set>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="describe != null">
+				`describe` = #{describe},
+			</if>
+			<if test="owner != null">
+				owner = #{owner},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime},
+			</if>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="permitAccountNum != null">
+				permitAccountNum = #{permitAccountNum},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
 </mapper>
