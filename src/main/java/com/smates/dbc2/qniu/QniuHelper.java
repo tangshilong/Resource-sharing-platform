@@ -16,7 +16,7 @@ import com.smates.dbc2.utils.SysConst;
 /**
  * 使用七牛云实现对文件存储和删除
  * 
- * @author baijw12
+ * @author baijw12  账号：295188526@qq.com 密码：xiaodong123*
  *
  */
 @Service

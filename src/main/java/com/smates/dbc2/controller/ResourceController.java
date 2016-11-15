@@ -94,6 +94,10 @@ public class ResourceController extends BaseController {
 	@ResponseBody
 	public BaseMsg deleteResource(String id) {
 		logger.info("删除资源,id:" + id);
+		String url = resourceService.getResourceById(id).getUrl();
+		if(url!=null){
+			qniuHelper.deleteFile(url);
+		}
 		resourceService.deleteResource(id);
 		return new BaseMsg(true, "资源删除成功");
 	}
@@ -214,7 +218,6 @@ public class ResourceController extends BaseController {
 			return new BaseMsg(true, "上传资源成功");
 		} else {
 			logger.info("编辑资源");
-			logger.info(userService.getCurrentUserActNum());
 			resourceService.updateResource(id, type, name, content, describe, userService.getCurrentUserActNum(), new Date(),
 					resourceUrl, permitAccountNumber);
 			return new BaseMsg(true, "资源更新成功");

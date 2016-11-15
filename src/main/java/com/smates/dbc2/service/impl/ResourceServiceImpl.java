@@ -102,7 +102,6 @@ public class ResourceServiceImpl implements ResourceService {
 		resource.setCreateTime(date);
 		resource.setUrl(resourceUrl);
 		resource.setPermitAccountNum(permitAccountNumber);
-		System.out.println(type+"+"+content+"+"+date+"+"+describe+"+"+id+"+"+name+"+"+owner+"+"+permitAccountNumber+"+"+resourceUrl);
 		resourceDao.updateResource(resource);
 	}
 
