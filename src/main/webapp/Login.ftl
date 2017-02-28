@@ -10,22 +10,23 @@
 	<body>
 		<div class="container">
 			<section id="content">
-				<form action="login.do" method="post">
+				<form action="login.do" method="post" autocomplete="new-password">
 					<h1>516资源共享平台</h1>
 					<#if callback?has_content>
 						<div class="callback">账号或密码错误</div>
 					</#if>
 					<div>
-						<input type="text" placeholder="用户名" required="" id="username" name="accountNumber" />
+						<input type="text" placeholder="用户名" autocomplete="new-password" id="username" name="accountNumber" />
 					</div>
 					<div>
-						<input type="password" placeholder="密码" required="" id="password" name="userpwd" />
+					<input type="password" style="display: none;" />
+						<input type="password" placeholder="密码" autocomplete="new-password" id="password" name="userpwd" />
 					</div>
 					<div>
 						<input type="submit" value="登录" />
 						<input type="reset" />
 						<div>
-							<a href="register.do" class="link" >注册</a>
+							<a href="register.do" class="link">注册</a>
 						</div>
 					</div>
 				</form>

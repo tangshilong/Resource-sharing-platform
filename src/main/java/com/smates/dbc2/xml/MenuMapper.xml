@@ -17,7 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="order_no" property="order" />
 		<result column="permition" property="permition" />
 
-
 		<!-- 映射到对象集合中 -->
 		<collection property="submenus" ofType="menu">
 			<id column="sub_menu_id" property="menuId" />

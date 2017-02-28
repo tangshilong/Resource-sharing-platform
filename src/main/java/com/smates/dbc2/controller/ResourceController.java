@@ -223,11 +223,29 @@ public class ResourceController extends BaseController {
 			return new BaseMsg(true, "资源更新成功");
 		}
 	}
-
+	
+	/**
+	 * 根据id获取资源
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "admin/getResourceById", method = RequestMethod.GET)
 	@ResponseBody
 	public Resource getResourceById(String id) {
 		return resourceService.getResourceById(id);
+	}
+	
+	/**
+	 * 获取upToken
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "getUpToken",method = RequestMethod.POST)
+	@ResponseBody
+	public BaseMsg getUpToken(){
+		logger.info("获取token" + qniuHelper.getUpToken());
+		return new BaseMsg(true, qniuHelper.getUpToken());
 	}
 
 }

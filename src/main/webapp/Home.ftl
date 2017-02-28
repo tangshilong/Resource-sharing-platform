@@ -101,10 +101,6 @@
 						<!-- Sidebar -->
 						<div class="clearfix"></div>
 					</div>
-					<div class="slimScrollBar"
-						style="width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 397.884px; visibility: visible; background: rgb(220, 220, 220);"></div>
-					<div class="slimScrollRail"
-						style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
 				</div>
 			</div>
 			<!-- Left Sidebar End -->
